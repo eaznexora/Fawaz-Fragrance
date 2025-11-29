@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -744,7 +745,7 @@
       <div class="footer-badges">
         <div class="badge">🔒 Secure Shopping</div>
         <div class="badge">🚚 Free Shipping ₹999+</div>
-        <div class="badge">↩ Easy Returns</div>
+        <div class="badge">↩️ Easy Returns</div>
       </div>
     </div>
   </div>
@@ -758,14 +759,14 @@ function generateOrderNumber() {
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
 
-  const datePart = ${yyyy}${mm}${dd};
-  const key = fwz_order_${datePart};
+  const datePart = `${yyyy}${mm}${dd}`;
+  const key = `fwz_order_${datePart}`;
 
   let lastNo = parseInt(localStorage.getItem(key) || "0");
   lastNo++;
   localStorage.setItem(key, lastNo);
 
-  return FWZ-${datePart}-${String(lastNo).padStart(5, '0')};
+  return `FWZ-${datePart}-${String(lastNo).padStart(5, '0')}`;
 }
 
 
@@ -865,7 +866,7 @@ function renderCart() {
     qtyDiv.append(dec, qtyNum, inc);
 
     const priceSpan = document.createElement('span');
-    priceSpan.textContent = ₹${item.price * item.qty};
+    priceSpan.textContent = `₹${item.price * item.qty}`;
 
     row.append(imgEl, nameSpan, qtyDiv, priceSpan);
     cartItemsEl.appendChild(row);
@@ -883,13 +884,13 @@ function renderCart() {
   if (shipping > 0) {
     const sNote = document.createElement('div');
     sNote.className = 'cart-shipping-note';
-    sNote.textContent = Includes ₹${shipping} of Shipping Charges;
+    sNote.textContent = `Includes ₹${shipping} of Shipping Charges`;
     cartItemsEl.appendChild(sNote);
   }
 
   // ==== ORIGINAL TOTAL ====
   if (cartTotalEl) {
-    cartTotalEl.textContent = Total: ₹${originalTotalWithShipping};
+    cartTotalEl.textContent = `Total: ₹${originalTotalWithShipping}`;
   }
 
   // ==== DISCOUNTED TOTAL ====
@@ -900,7 +901,7 @@ function renderCart() {
     discountedEl.className = 'discounted-total';
     cartTotalEl.insertAdjacentElement('afterend', discountedEl);
   }
-  discountedEl.textContent = Discounted Total: ₹${discountedTotalWithShipping};
+  discountedEl.textContent = `Discounted Total: ₹${discountedTotalWithShipping}`;
 
   // ==== FREE SHIPPING PROGRESS ====
   let progressEl = document.getElementById('freeShippingProgress');
@@ -915,8 +916,8 @@ function renderCart() {
 
   progressEl.textContent =
     amountNeeded > 0
-    ? ₹${amountNeeded} away from free shipping
-    : You have free shipping!;
+    ? `₹${amountNeeded} away from free shipping`
+    : `You have free shipping!`;
 
   // ==== UPDATE CART COUNT ====
   if (cartCountEl) {
@@ -930,7 +931,7 @@ function renderCart() {
   // ==== STICKY CHECKOUT UPDATE ====
   if (stickyCheckout) {
     if (cart.length > 0 && originalTotalWithShipping > 0) {
-      stickyCheckout.textContent = Checkout (₹${originalTotalWithShipping});
+      stickyCheckout.textContent = `Checkout (₹${originalTotalWithShipping})`;
       stickyCheckout.style.display = 'block';
     } else {
       stickyCheckout.style.display = 'none';
@@ -1034,7 +1035,7 @@ function renderCart() {
     const alertProductDetails = document.getElementById('alertProductDetails');
     
     alertProductName.textContent = productName;
-    alertProductDetails.textContent = Quantity: ${quantity} • Volume: ${volume} • Price: ₹${price};
+    alertProductDetails.textContent = `Quantity: ${quantity} • Volume: ${volume} • Price: ₹${price}`;
     
     overlay.classList.add('show');
     
@@ -1182,7 +1183,7 @@ document.getElementById('cartPanel').addEventListener('click', (event) => {
 
     const avg = revs.length ? (revs.reduce((s,r)=> s + (r.rating||0),0)/revs.length) : 0;
     avgStars.textContent = renderStars(avg);
-    avgText.textContent = ${avg.toFixed(1)} out of 5 · ${revs.length} review${revs.length===1?'':'s'};
+    avgText.textContent = `${avg.toFixed(1)} out of 5 · ${revs.length} review${revs.length===1?'':'s'}`;
   }
 
   // Generate 5–8 fake reviews and render
@@ -1240,35 +1241,35 @@ document.getElementById('confirmPayBtn').addEventListener('click', () => {
 
   // MESSAGE BUILDER (NO BROKEN SYMBOLS)
   let msg = "";
-  msg += *🧾 ORDER CONFIRMATION*\n\n;
-  msg += *Order Number:* ${orderNumber}\n\n;
+  msg += `*🧾 ORDER CONFIRMATION*\n\n`;
+  msg += `*Order Number:* ${orderNumber}\n\n`;
 
-  msg += *👤 Customer:* ${name}\n;
-  msg += *📞 Phone:* ${phone}\n;
-  msg += *✉ Email:* ${email}\n\n;
+  msg += `*👤 Customer:* ${name}\n`;
+  msg += `*📞 Phone:* ${phone}\n`;
+  msg += `*✉️ Email:* ${email}\n\n`;
 
-  msg += *🏠 Address:*\n;
-  msg += ${flat}\n;
-  msg += ${street}, ${landmark}\n;
-  msg += ${city}, ${state} - ${zipcode}\n;
-  msg += ${country}\n\n;
+  msg += `*🏠 Address:*\n`;
+  msg += `${flat}\n`;
+  msg += `${street}, ${landmark}\n`;
+  msg += `${city}, ${state} - ${zipcode}\n`;
+  msg += `${country}\n\n`;
 
 
-  msg += ────────────────────────\n\n;
-  msg += *🧴 Order Details:*\n;
+  msg += `────────────────────────\n\n`;
+  msg += `*🧴 Order Details:*\n`;
 
   cart.forEach(item => {
     const disc = Math.round(item.price * (1 - DISCOUNT_RATE));
-    msg += • ${item.qty} × ${item.name} — ₹${disc * item.qty}\n;
+    msg += `• ${item.qty} × ${item.name} — ₹${disc * item.qty}\n`;
   });
 
-  msg += \n────────────────────────\n\n;
-  msg += *💵 Total Payable:* ₹${finalTotal}\n\n;
-  msg += 🙏 Thank you for shopping with *Fawaz Fragrance*;
+  msg += `\n────────────────────────\n\n`;
+  msg += `*💵 Total Payable:* ₹${finalTotal}\n\n`;
+  msg += `🙏 Thank you for shopping with *Fawaz Fragrance*`;
 
   // SEND WHATSAPP MESSAGE
   window.open(
-    https://wa.me/9004263544?text=${encodeURIComponent(msg)},
+    `https://wa.me/9004263544?text=${encodeURIComponent(msg)}`,
     "_blank"
   );
 });
@@ -1299,9 +1300,9 @@ function updateStickyVisibility() {
   if (!isCartOpen && cart && cart.length > 0 && finalTotal > 0) {
     // show sticky and update its text
     sticky.style.display = 'block';
-    sticky.textContent = Checkout (₹${finalTotal});
+    sticky.textContent = `Checkout (₹${finalTotal})`;
     // optional: keep accessible title
-    sticky.setAttribute('aria-label', Checkout, total ₹${finalTotal});
+    sticky.setAttribute('aria-label', `Checkout, total ₹${finalTotal}`);
   } else {
     sticky.style.display = 'none';
   }
@@ -1316,3 +1317,4 @@ document.getElementById('stickyCheckout').addEventListener('click', () => {
 
 </body>
 </html>
+
