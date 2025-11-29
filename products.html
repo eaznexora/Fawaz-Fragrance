@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Products Fawaz Fragrance</title>
+  <title>Fawaz Fragrance</title>
 
     <!-- Favicon -->
   <link rel="icon" href="Favicon.png" type="image/png">
@@ -746,7 +746,7 @@
       <div class="footer-badges">
         <div class="badge">🔒 Secure Shopping</div>
         <div class="badge">🚚 Free Shipping ₹999+</div>
-        <div class="badge">↩ Easy Returns</div>
+        <div class="badge">↩️ Easy Returns</div>
       </div>
     </div>
   </div>
@@ -760,14 +760,14 @@ function generateOrderNumber() {
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
 
-  const datePart = ${yyyy}${mm}${dd};
-  const key = fwz_order_${datePart};
+  const datePart = `${yyyy}${mm}${dd}`;
+  const key = `fwz_order_${datePart}`;
 
   let lastNumber = parseInt(localStorage.getItem(key) || "0");
   lastNumber++;
   localStorage.setItem(key, lastNumber.toString());
 
-  return FWZ-${datePart}-${String(lastNumber).padStart(5, '0')};
+  return `FWZ-${datePart}-${String(lastNumber).padStart(5, '0')}`;
 }
 
 
@@ -807,7 +807,7 @@ function goToDetails(imgElement) {
     const img = parent.getAttribute("data-img");
     const desc = parent.getAttribute("data-desc");
 
-    window.location.href = product-details.html?name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&img=${encodeURIComponent(img)}&desc=${encodeURIComponent(desc)};
+    window.location.href = `product-details.html?name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&img=${encodeURIComponent(img)}&desc=${encodeURIComponent(desc)}`;
 }  
 
 (function(){
@@ -849,7 +849,7 @@ function goToDetails(imgElement) {
     
     if (category) {
       // Find and click the corresponding category button
-      const categoryBtn = qs([data-category="${category}"]);
+      const categoryBtn = qs(`[data-category="${category}"]`);
       if (categoryBtn) {
         // Remove active from all buttons
         qsa('.categories button').forEach(b => b.classList.remove('active'));
@@ -951,7 +951,7 @@ function renderCart() {
     qtyDiv.append(dec, qtyNum, inc);
 
     const priceSpan = document.createElement('span');
-    priceSpan.textContent = ₹${item.price * item.qty};
+    priceSpan.textContent = `₹${item.price * item.qty}`;
     priceSpan.style.fontWeight = '700';
 
     row.append(img, nameSpan, qtyDiv, priceSpan);
@@ -970,13 +970,13 @@ function renderCart() {
   if (shipping > 0) {
     const shipNote = document.createElement('div');
     shipNote.className = 'cart-shipping-note';
-    shipNote.textContent = Includes ₹${shipping} of Shipping Charges;
+    shipNote.textContent = `Includes ₹${shipping} of Shipping Charges`;
     cartItemsEl.appendChild(shipNote);
   }
 
   // ==== ORIGINAL TOTAL ====
   if (cartTotalEl) {
-    cartTotalEl.textContent = Total: ₹${originalTotalWithShipping};
+    cartTotalEl.textContent = `Total: ₹${originalTotalWithShipping}`;
   }
 
   // ==== DISCOUNTED TOTAL BELOW ORIGINAL ====
@@ -987,7 +987,7 @@ function renderCart() {
     discountedEl.className = 'discounted-total';
     cartTotalEl.insertAdjacentElement('afterend', discountedEl);
   }
-  discountedEl.textContent = Discounted Total: ₹${discountedTotalWithShipping};
+  discountedEl.textContent = `Discounted Total: ₹${discountedTotalWithShipping}`;
 
   // ==== FREE SHIPPING PROGRESS ====
   let progressEl = document.getElementById('freeShippingProgress');
@@ -1002,8 +1002,8 @@ function renderCart() {
 
   progressEl.textContent =
     amountNeeded > 0
-    ? ₹${amountNeeded} away from free shipping
-    : You have free shipping!;
+    ? `₹${amountNeeded} away from free shipping`
+    : `You have free shipping!`;
 
   // ==== UPDATE CART COUNT ====
   if (cartCountEl) {
@@ -1018,7 +1018,7 @@ function renderCart() {
   // ==== UPDATE STICKY CHECKOUT ====
   if (stickyCheckout) {
     if (cart.length > 0 && originalTotalWithShipping > 0) {
-      stickyCheckout.textContent = Checkout (₹${originalTotalWithShipping});
+      stickyCheckout.textContent = `Checkout (₹${originalTotalWithShipping})`;
       stickyCheckout.style.display = 'block';
     } else {
       stickyCheckout.style.display = 'none';
@@ -1185,31 +1185,31 @@ if (confirmPayBtn) {
     const orderNumber = generateOrderNumber();
 
     let msg = "";
-    msg += *🧾 ORDER CONFIRMATION*\n\n;
-    msg += *Order Number:* ${orderNumber}\n\n;
-    msg += *👤 Customer:* ${name}\n;
-    msg += *📞 Phone:* ${phone}\n;
-    msg += *✉ Email:* ${email}\n\n;
-    msg += *🏠 Address:*\n;
-    msg += ${flat}\n;
-    msg += ${street}, ${landmark}\n;
-    msg += ${city}, ${state} - ${zipcode}\n;
-    msg += ${country}\n\n;
+    msg += `*🧾 ORDER CONFIRMATION*\n\n`;
+    msg += `*Order Number:* ${orderNumber}\n\n`;
+    msg += `*👤 Customer:* ${name}\n`;
+    msg += `*📞 Phone:* ${phone}\n`;
+    msg += `*✉️ Email:* ${email}\n\n`;
+    msg += `*🏠 Address:*\n`;
+    msg += `${flat}\n`;
+    msg += `${street}, ${landmark}\n`;
+    msg += `${city}, ${state} - ${zipcode}\n`;
+    msg += `${country}\n\n`;
 
-    msg += ────────────────────────\n\n;
-    msg += *🧴 Order Details:*\n;
+    msg += `────────────────────────\n\n`;
+    msg += `*🧴 Order Details:*\n`;
 
     cart.forEach(item => {
       const discounted = Math.round(item.price * (1 - DISCOUNT_RATE));
-      msg += • ${item.qty} × ${item.name} — ₹${discounted * item.qty}\n;
+      msg += `• ${item.qty} × ${item.name} — ₹${discounted * item.qty}\n`;
     });
 
-    msg += \n────────────────────────\n;
-    msg += *💵 Total Payable:* ₹${finalTotal}\n\n;
-    msg += 🙏 Thank you for shopping with *Fawaz Fragrance*;
+    msg += `\n────────────────────────\n`;
+    msg += `*💵 Total Payable:* ₹${finalTotal}\n\n`;
+    msg += `🙏 Thank you for shopping with *Fawaz Fragrance*`;
 
     window.open(
-      https://wa.me/9004263544?text=${encodeURIComponent(msg)},
+      `https://wa.me/9004263544?text=${encodeURIComponent(msg)}`,
       "_blank"
     );
   });
@@ -1275,3 +1275,4 @@ window.addEventListener('resize', handleStickyCheckoutVisibility);
 
 </body>
 </html>
+
