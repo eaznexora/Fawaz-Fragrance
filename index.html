@@ -722,7 +722,7 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
       <div class="footer-badges">
         <div class="badge">🔒 Secure Shopping</div>
         <div class="badge">🚚 Free Shipping ₹999+</div>
-        <div class="badge">↩ Easy Returns</div>
+        <div class="badge">↩️ Easy Returns</div>
       </div>
     </div>
   </div>
@@ -739,10 +739,10 @@ function generateOrderNumber() {
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
 
-  const datePart = ${yyyy}${mm}${dd};
+  const datePart = `${yyyy}${mm}${dd}`;
 
   // Load last order number for today
-  const key = fwz_order_${datePart};
+  const key = `fwz_order_${datePart}`;
   let lastNumber = parseInt(localStorage.getItem(key) || "0");
 
   lastNumber += 1; // increment
@@ -751,7 +751,7 @@ function generateOrderNumber() {
 
   const padded = String(lastNumber).padStart(5, '0');
 
-  return FWZ-${datePart}-${padded};
+  return `FWZ-${datePart}-${padded}`;
 }
 
 
@@ -795,7 +795,7 @@ function goToDetails(img) {
     img: image
   });
 
-  window.location.href = product-details.html?${params.toString()};
+  window.location.href = `product-details.html?${params.toString()}`;
 }
 
 (function(){
@@ -939,7 +939,7 @@ if (cart.length === 0) {
     qtyDiv.append(dec, qtyNum, inc);
 
     const priceSpan = document.createElement('span');
-    priceSpan.textContent = ₹${item.price * item.qty};
+    priceSpan.textContent = `₹${item.price * item.qty}`;
     priceSpan.style.fontWeight = '700';
 
     row.append(img, nameSpan, qtyDiv, priceSpan);
@@ -958,13 +958,13 @@ if (cart.length === 0) {
   if (shipping > 0) {
     const shipNote = document.createElement('div');
     shipNote.className = 'cart-shipping-note';
-    shipNote.textContent = Includes ₹${shipping} of Shipping Charges;
+    shipNote.textContent = `Includes ₹${shipping} of Shipping Charges`;
     cartItemsEl.appendChild(shipNote);
   }
 
   // ==== ORIGINAL TOTAL (as your UI shows) ====
   if (cartTotalEl) {
-    cartTotalEl.textContent = Total: ₹${originalTotalWithShipping};
+    cartTotalEl.textContent = `Total: ₹${originalTotalWithShipping}`;
   }
 
   // ==== DISCOUNTED TOTAL (below the Total) ====
@@ -975,7 +975,7 @@ if (cart.length === 0) {
     discountedEl.className = 'discounted-total';
     cartTotalEl.insertAdjacentElement('afterend', discountedEl);
   }
-  discountedEl.textContent = Discounted Total: ₹${discountedTotalWithShipping};
+  discountedEl.textContent = `Discounted Total: ₹${discountedTotalWithShipping}`;
 
   // ==== FREE SHIPPING PROGRESS ====
   let progressEl = document.getElementById('freeShippingProgress');
@@ -990,8 +990,8 @@ if (cart.length === 0) {
 
   progressEl.textContent =
     amountNeeded > 0
-    ? ₹${amountNeeded} away from free shipping
-    : You have free shipping!;
+    ? `₹${amountNeeded} away from free shipping`
+    : `You have free shipping!`;
 
   // ==== UPDATE CART COUNT ====
   if (cartCountEl) {
@@ -1011,7 +1011,7 @@ if (cartBtn) {
   // ==== UPDATE STICKY CHECKOUT BUTTON ====
   if (stickyCheckout) {
     if (cart.length > 0 && originalTotalWithShipping > 0) {
-      stickyCheckout.textContent = Checkout (₹${originalTotalWithShipping});
+      stickyCheckout.textContent = `Checkout (₹${originalTotalWithShipping})`;
     } else {
       stickyCheckout.style.display = 'none';
     }
@@ -1046,7 +1046,7 @@ if (cartBtn) {
   // ========== NAVIGATION FUNCTIONALITY ==========
   function navigateToCategory(category) {
     console.log('Navigating to category:', category);
-    window.location.href = products.html?category=${encodeURIComponent(category)};
+    window.location.href = `products.html?category=${encodeURIComponent(category)}`;
   }
 
   // ========== COLLECTIONS SLIDER ==========
@@ -1072,7 +1072,7 @@ if (cartBtn) {
       if (isAutoPlaying && !isDragging){
         pos += speed;
         if (pos >= halfWidth) pos -= halfWidth;
-        track.style.transform = translateX(-${pos}px);
+        track.style.transform = `translateX(-${pos}px)`;
       }
       raf = requestAnimationFrame(step);
     }
@@ -1096,7 +1096,7 @@ if (cartBtn) {
         hasMovedSignificantly = true;
         pos = dragStart - dx;
         pos = ((pos % halfWidth) + halfWidth) % halfWidth;
-        track.style.transform = translateX(-${pos}px);
+        track.style.transform = `translateX(-${pos}px)`;
       }
     }
 
@@ -1173,7 +1173,7 @@ if (cartBtn) {
       if (Math.abs(dx) > 10) {
         pos = dragStart - dx;
         pos = ((pos % halfWidth) + halfWidth) % halfWidth;
-        track.style.transform = translateX(-${pos}px);
+        track.style.transform = `translateX(-${pos}px)`;
       }
       e.preventDefault();
     }, { passive: false });
@@ -1207,7 +1207,7 @@ if (cartBtn) {
     function recalc(){
       halfWidth = Math.max(1, track.scrollWidth / 2);
       pos = pos % halfWidth;
-      track.style.transform = translateX(-${pos}px);
+      track.style.transform = `translateX(-${pos}px)`;
     }
     
     window.addEventListener('resize', recalc);
@@ -1372,34 +1372,34 @@ function handleWhatsAppCheckout() {
   // BUILD CLEAN WHATSAPP MESSAGE
   let msg = "";
 
-  msg += *🧾 ORDER CONFIRMATION*\n\n;
-  msg += *Order Number:* ${orderNumber}\n\n;
+  msg += `*🧾 ORDER CONFIRMATION*\n\n`;
+  msg += `*Order Number:* ${orderNumber}\n\n`;
 
-  msg += *👤 Customer:* ${name}\n;
-  msg += *📞 Phone:* ${phone}\n;
-  msg += *✉ Email:* ${email}\n\n;
+  msg += `*👤 Customer:* ${name}\n`;
+  msg += `*📞 Phone:* ${phone}\n`;
+  msg += `*✉️ Email:* ${email}\n\n`;
 
- msg += *🏠 Address:*\n;
- msg += ${flat}\n;
- msg += ${street}, ${landmark}\n;
- msg += ${city}, ${state} - ${zipcode}\n;
- msg += ${country}\n\n;
+ msg += `*🏠 Address:*\n`;
+ msg += `${flat}\n`;
+ msg += `${street}, ${landmark}\n`;
+ msg += `${city}, ${state} - ${zipcode}\n`;
+ msg += `${country}\n\n`;
 
-  msg += ────────────────────────\n\n;
-  msg += *🧴 Order Details:*\n;
+  msg += `────────────────────────\n\n`;
+  msg += `*🧴 Order Details:*\n`;
 
   cart.forEach(item => {
     const discPrice = Math.round(item.price * (1 - DISCOUNT_RATE));
-    msg += • ${item.qty} × ${item.name} — ₹${discPrice * item.qty}\n;
+    msg += `• ${item.qty} × ${item.name} — ₹${discPrice * item.qty}\n`;
   });
 
-  msg += \n────────────────────────\n\n;
-  msg += *💵 Total Payable:* ₹${finalTotal}\n\n;
-  msg += 🙏 Thank you for shopping with *Fawaz Fragrance*;
+  msg += `\n────────────────────────\n\n`;
+  msg += `*💵 Total Payable:* ₹${finalTotal}\n\n`;
+  msg += `🙏 Thank you for shopping with *Fawaz Fragrance*`;
 
   // SEND
   window.open(
-    https://wa.me/9004263544?text=${encodeURIComponent(msg)},
+    `https://wa.me/9004263544?text=${encodeURIComponent(msg)}`,
     "_blank"
   );
 }
@@ -1471,3 +1471,5 @@ function handleWhatsAppCheckout() {
 
 </body>
 </html>
+
+
