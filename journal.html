@@ -319,6 +319,317 @@
   color: var(--gold);
 }
 
+
+
+
+/* ========================= */
+/* FIX FOOTER 4 COLUMN LAYOUT */
+/* ========================= */
+
+/* 4 equal columns */
+.footer-links {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(200px, 1fr)) !important;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Titles consistent */
+.footer-column h4 {
+  font-size: 18px !important;
+  margin-bottom: 16px !important;
+}
+
+/* Align newsletter input/buttons */
+.newsletter-form {
+  display: flex !important;
+  width: 100% !important;
+}
+
+/* Prevent horizontal phone slide */
+footer, .footer-links, .footer-content {
+  overflow-x: hidden !important;
+}
+
+/* Responsive */
+@media(max-width:850px) {
+  .footer-links {
+    grid-template-columns: repeat(2,1fr) !important;
+  }
+}
+
+@media(max-width:500px) {
+  .footer-links {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+  }
+}
+
+
+
+
+/* ======== FINAL FOOTER FIXES ======== */
+
+/* Restore black bottom bar */
+.footer-bottom {
+  background: #000 !important;
+}
+
+/* Newsletter visibility fix */
+.newsletter-form {
+  display: flex !important;
+  width: 100% !important;
+}
+
+.newsletter-input,
+.newsletter-btn {
+  height: 48px !important;
+  font-size: 15px !important;
+}
+
+/* Social icons match gold style */
+.social-link i {
+  color: var(--gold) !important;
+  width: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* Better alignment */
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* Mobile alignment fixes */
+@media(max-width:600px) {
+  .footer-column {
+    text-align: center !important;
+  }
+
+  .social-link {
+    justify-content: center !important;
+  }
+
+  .contact-info p {
+    text-align: center !important;
+  }
+
+  .newsletter-form {
+    flex-direction: column !important;
+  }
+
+  .newsletter-input {
+    border-radius: 6px !important;
+    margin-bottom: 10px;
+  }
+
+  .newsletter-btn {
+    border-radius: 6px !important;
+  }
+}
+
+
+
+
+/* =============================
+   FINAL FOOTER FIXES (Stable)
+   ============================= */
+
+/* 1️⃣ Remove black background completely */
+.footer-bottom {
+  background: transparent !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* 2️⃣ Customer Service spacing & alignment */
+.contact-info p {
+  margin-bottom: 12px !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 3️⃣ Make Customer Service icons gold like Connect */
+.contact-info i {
+  color: var(--gold) !important;
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+
+/* 4️⃣ Newsletter input & button full width visible */
+.footer-column .newsletter-form {
+  display: flex !important;
+  width: 100% !important;
+  max-width: 420px !important;
+}
+
+.footer-column .newsletter-input {
+  flex: 1;
+  border-radius: 8px 0 0 8px;
+  padding: 14px 18px;
+  font-size: 15px;
+}
+
+.footer-column .newsletter-btn {
+  border-radius: 0 8px 8px 0;
+  padding: 14px 22px;
+  font-size: 15px;
+  background: var(--gold);
+  color: #fff;
+  border: none;
+}
+
+/* 5️⃣ Make entire fourth column align same height */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 60px;
+  align-items: start;
+}
+
+/* 6️⃣ Mobile fixes */
+@media(max-width:780px) {
+
+  .footer-links {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+
+  .social-link {
+    justify-content: center;
+  }
+
+  .contact-info p {
+    justify-content: center;
+  }
+
+  .footer-column .newsletter-form {
+    flex-direction: column !important;
+    max-width: 320px !important;
+    margin: 0 auto;
+  }
+
+  .footer-column .newsletter-input {
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .footer-column .newsletter-btn {
+    border-radius: 8px;
+  }
+}
+
+
+/* =======================================
+   FOOTER FINAL SPACING + CENTERING FIXES
+   ======================================= */
+
+/* 1️⃣ Equal spacing for Customer Service items */
+.contact-info p {
+  margin: 10px 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 12px !important; /* equal icon + text spacing */
+  font-size: 15px;
+}
+
+/* Same spacing as Shop/Connect list */
+.footer-column ul li,
+.social-link {
+  margin-bottom: 10px !important;
+}
+
+/* 2️⃣ Center bottom footer content */
+.footer-bottom-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 15px !important;
+}
+
+/* Center legal links text & badges */
+.footer-legal,
+.legal-links,
+.footer-badges {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* 3️⃣ Fix alignment of bottom text line */
+.footer-legal p {
+  width: 100%;
+  text-align: center !important;
+  margin-bottom: 8px;
+}
+
+/* 4️⃣ Consistent font size in bottom links */
+.legal-links a {
+  font-size: 14px !important;
+}
+
+/* 5️⃣ Make badges line centered and compact */
+.footer-badges .badge {
+  font-size: 13px !important;
+  padding: 6px 14px !important;
+  display: inline-block;
+  text-align: center;
+}
+
+/* 6️⃣ Mobile centering (force) */
+@media(max-width:780px) {
+
+  .footer-bottom-content {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .footer-legal,
+  .legal-links,
+  .footer-badges {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+}
+
+
+
+/* ===== FINAL CUSTOMER SERVICE SPACING FIX ===== */
+
+.contact-info p {
+  margin: 14px 0 !important;     /* equal spacing top & bottom */
+  line-height: 1.55 !important;  /* clean readable line height */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+
+
+/* === MATCH CUSTOMER SERVICE SPACING TO SHOP LIST === */
+.contact-info p {
+  margin-bottom: 12px !important;   /* exactly like li item */
+  margin-top: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 10px !important;
+  line-height: 1.4;
+}
+
+
+
+
+
   </style>
 </head>
 <body>
@@ -362,84 +673,59 @@
     </div>
   </section>
 
-   <!-- Footer -->
-<footer class="main-footer">
+   <footer class="main-footer">
   <div class="footer-content">
-    <!-- Newsletter Section -->
-    <div class="footer-newsletter">
-      <h3>Stay In The Loop</h3>
-      <p>Subscribe to get special offers, exclusive launches, and fragrance tips.</p>
-      <div class="newsletter-form">
-        <input type="email" placeholder="Enter your email" class="newsletter-input">
-        <button class="newsletter-btn">Subscribe</button>
-      </div>
-    </div>
-
-    <!-- Footer Links -->
     <div class="footer-links">
+
       <div class="footer-column">
         <h4>Shop</h4>
         <ul>
-          <li><a href='/products'>All Perfumes</a></li>
-          <li><a href='/products?category=Classic'>Classic Collection</a></li>
-          <li><a href='/products?category=Luxury'>Luxury Collection</a></li>
-          <li><a href='/products?category=Modern'>Modern Collection</a></li>
+          <li><a href="products.html">All Perfumes</a></li>
+          <li><a href="products.html?category=Classic">Classic Collection</a></li>
+          <li><a href="products.html?category=Luxury">Luxury Collection</a></li>
+          <li><a href="products.html?category=Modern">Modern Collection</a></li>
           <li><a href="#bestsellers">Best Sellers</a></li>
         </ul>
       </div>
 
-      <!--<div class="footer-column">
-        <h4>Customer Care</h4>
-        <ul>
-          <li><a href="#contact">Contact Us</a></li>
-          <li><a href="#shipping">Shipping Info</a></li>
-          <li><a href="#returns">Returns & Exchanges</a></li>
-          <li><a href="#size-guide">Fragrance Guide</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="about.html">About Al-Abwa</a></li>
-          <li><a href="#careers">Careers</a></li>
-          <li><a href="#sustainability">Sustainability</a></li>
-          <li><a href="#press">Press</a></li>
-          <li><a href="#wholesale">Wholesale</a></li>
-        </ul>
-      </div> -->
-
       <div class="footer-column">
         <h4>Connect</h4>
-        <div class="social-links">
-  <a href="#" class="social-link"><i class="fab fa-facebook-f"></i> Facebook</a>
-  <a href="#" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
-  <a href="#" class="social-link"><i class="fab fa-x-twitter"></i> Twitter</a>
-  <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i> Pinterest</a>
-  <a href="#" class="social-link"><i class="fab fa-tiktok"></i> TikTok</a>
-</div>
-
-        <div class="contact-info">
-  <p><strong>Customer Service</strong></p>
-  <p><i class="fas fa-phone"></i> +91 9004263544</p>
-  <p><i class="fas fa-envelope"></i> fawazfragnance@gmail.com</p>
-  <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
-</div>
-
+        <a class="social-link"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+        <a class="social-link"><i class="fab fa-x-twitter"></i> Twitter</a>
+        <a class="social-link"><i class="fab fa-pinterest-p"></i> Pinterest</a>
+        <a class="social-link"><i class="fab fa-tiktok"></i> TikTok</a>
       </div>
+
+      <div class="footer-column contact-info">
+        <h4>Customer Service</h4>
+        <p><i class="fas fa-phone"></i> +91 9004263544</p>
+        <p><i class="fas fa-envelope"></i> fawazfragnance@gmail.com</p>
+        <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Stay In The Loop</h4>
+        <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
+          Subscribe to get special offers, exclusive launches, and fragrance tips.
+        </p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Enter your email" class="newsletter-input">
+          <button class="newsletter-btn">Subscribe</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- Footer Bottom -->
   <div class="footer-bottom">
     <div class="footer-bottom-content">
       <div class="footer-legal">
-        <p>&copy; 2025 Fawaz Fragnance. All rights reserved. Crafted by Eaz Nexora</p>
+        <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
         <div class="legal-links">
-          <a href="#privacy">Privacy Policy</a>
-          <a href="#terms">Terms of Service</a>
-          <a href="#accessibility">Accessibility</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+          <a href="#">Accessibility</a>
         </div>
       </div>
       <div class="footer-badges">
@@ -449,7 +735,9 @@
       </div>
     </div>
   </div>
+
 </footer>
+
 
 
   <script>
