@@ -126,7 +126,22 @@ a{color:inherit;text-decoration:none}
 .cart-item{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:6px;background:#f5f5f5;border-radius:6px}
 .qty-controls{display:flex;gap:4px;align-items:center}
 .qty-controls button{padding:2px 6px;border-radius:4px;border:0;background:#ccc;cursor:pointer}
-.cart-total{margin-top:12px;font-weight:700}
+.cart-total {
+  margin-top: 12px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between; /* Pushes Total to left, Shipping to right */
+  align-items: center;            /* Ensures they align vertically */
+  flex-wrap: wrap;                /* Allows wrapping on very small phones */
+}
+
+/* Ensure the shipping text looks neat */
+.cart-shipping-note {
+  margin-top: 0;
+  color: #777;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
 .cart-form{display:none;flex-direction:column;gap:6px;margin-top:12px}
 .cart-form input,.cart-form select{padding:8px;border-radius:6px;border:1px solid rgba(0,0,0,0.2)}
 .pay-btn{margin-top:10px;padding:10px;border:none;border-radius:6px;background:var(--gold);color:#fff;cursor:pointer;font-weight:700}
@@ -462,6 +477,384 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
   text-align: center;
 }
 
+
+.old-price {
+  text-decoration: line-through;
+  color: #b87a7a;
+  font-size: 16px;
+  margin-right: 6px;
+  opacity: 0.8;
+}
+
+.new-price {
+  font-weight: 800;
+  color: var(--accent);
+  font-size: 20px;
+}
+
+
+
+
+
+
+/* ========================= */
+/* FIX FOOTER 4 COLUMN LAYOUT */
+/* ========================= */
+
+/* 4 equal columns */
+.footer-links {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(200px, 1fr)) !important;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Titles consistent */
+.footer-column h4 {
+  font-size: 18px !important;
+  margin-bottom: 16px !important;
+}
+
+/* Align newsletter input/buttons */
+.newsletter-form {
+  display: flex !important;
+  width: 100% !important;
+}
+
+/* Prevent horizontal phone slide */
+footer, .footer-links, .footer-content {
+  overflow-x: hidden !important;
+}
+
+/* Responsive */
+@media(max-width:850px) {
+  .footer-links {
+    grid-template-columns: repeat(2,1fr) !important;
+  }
+}
+
+@media(max-width:500px) {
+  .footer-links {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+  }
+}
+
+
+
+
+/* ======== FINAL FOOTER FIXES ======== */
+
+/* Restore black bottom bar */
+.footer-bottom {
+  background: #000 !important;
+}
+
+/* Newsletter visibility fix */
+.newsletter-form {
+  display: flex !important;
+  width: 100% !important;
+}
+
+.newsletter-input,
+.newsletter-btn {
+  height: 48px !important;
+  font-size: 15px !important;
+}
+
+/* Social icons match gold style */
+.social-link i {
+  color: var(--gold) !important;
+  width: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* Better alignment */
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* Mobile alignment fixes */
+@media(max-width:600px) {
+  .footer-column {
+    text-align: center !important;
+  }
+
+  .social-link {
+    justify-content: center !important;
+  }
+
+  .contact-info p {
+    text-align: center !important;
+  }
+
+  .newsletter-form {
+    flex-direction: column !important;
+  }
+
+  .newsletter-input {
+    border-radius: 6px !important;
+    margin-bottom: 10px;
+  }
+
+  .newsletter-btn {
+    border-radius: 6px !important;
+  }
+}
+
+
+
+
+/* =============================
+   FINAL FOOTER FIXES (Stable)
+   ============================= */
+
+/* 1️⃣ Remove black background completely */
+.footer-bottom {
+  background: transparent !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* 2️⃣ Customer Service spacing & alignment */
+.contact-info p {
+  margin-bottom: 12px !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 3️⃣ Make Customer Service icons gold like Connect */
+.contact-info i {
+  color: var(--gold) !important;
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+
+/* 4️⃣ Newsletter input & button full width visible */
+.footer-column .newsletter-form {
+  display: flex !important;
+  width: 100% !important;
+  max-width: 420px !important;
+}
+
+.footer-column .newsletter-input {
+  flex: 1;
+  border-radius: 8px 0 0 8px;
+  padding: 14px 18px;
+  font-size: 15px;
+}
+
+.footer-column .newsletter-btn {
+  border-radius: 0 8px 8px 0;
+  padding: 14px 22px;
+  font-size: 15px;
+  background: var(--gold);
+  color: #fff;
+  border: none;
+}
+
+/* 5️⃣ Make entire fourth column align same height */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 60px;
+  align-items: start;
+}
+
+/* 6️⃣ Mobile fixes */
+@media(max-width:780px) {
+
+  .footer-links {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+
+  .social-link {
+    justify-content: center;
+  }
+
+  .contact-info p {
+    justify-content: center;
+  }
+
+  .footer-column .newsletter-form {
+    flex-direction: column !important;
+    max-width: 320px !important;
+    margin: 0 auto;
+  }
+
+  .footer-column .newsletter-input {
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .footer-column .newsletter-btn {
+    border-radius: 8px;
+  }
+}
+
+
+/* =======================================
+   FOOTER FINAL SPACING + CENTERING FIXES
+   ======================================= */
+
+/* 1️⃣ Equal spacing for Customer Service items */
+.contact-info p {
+  margin: 10px 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 12px !important; /* equal icon + text spacing */
+  font-size: 15px;
+}
+
+/* Same spacing as Shop/Connect list */
+.footer-column ul li,
+.social-link {
+  margin-bottom: 10px !important;
+}
+
+/* 2️⃣ Center bottom footer content */
+.footer-bottom-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  gap: 15px !important;
+}
+
+/* Center legal links text & badges */
+.footer-legal,
+.legal-links,
+.footer-badges {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* 3️⃣ Fix alignment of bottom text line */
+.footer-legal p {
+  width: 100%;
+  text-align: center !important;
+  margin-bottom: 8px;
+}
+
+/* 4️⃣ Consistent font size in bottom links */
+.legal-links a {
+  font-size: 14px !important;
+}
+
+/* 5️⃣ Make badges line centered and compact */
+.footer-badges .badge {
+  font-size: 13px !important;
+  padding: 6px 14px !important;
+  display: inline-block;
+  text-align: center;
+}
+
+/* 6️⃣ Mobile centering (force) */
+@media(max-width:780px) {
+
+  .footer-bottom-content {
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .footer-legal,
+  .legal-links,
+  .footer-badges {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+}
+
+
+
+/* ===== FINAL CUSTOMER SERVICE SPACING FIX ===== */
+
+.contact-info p {
+  margin: 14px 0 !important;     /* equal spacing top & bottom */
+  line-height: 1.55 !important;  /* clean readable line height */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+
+
+
+/* === MATCH CUSTOMER SERVICE SPACING TO SHOP LIST === */
+.contact-info p {
+  margin-bottom: 12px !important;   /* exactly like li item */
+  margin-top: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 10px !important;
+  line-height: 1.4;
+}
+
+
+
+/* ==============================
+   FINAL CUSTOMER SERVICE MATCH
+   ============================== */
+
+/* Same spacing as Shop & Connect */
+.contact-info p {
+  margin: 12px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-size: 15px !important;
+  color: rgba(255,255,255,0.85) !important;
+  line-height: 1.45 !important;
+}
+
+/* Same icon look as Connect */
+.contact-info p i {
+  color: var(--gold) !important;
+  font-size: 18px !important;
+  width: 24px !important;
+  text-align: center !important;
+}
+
+/* Remove weird extra spacing from first child */
+.contact-info p:first-child {
+  margin-top: 0 !important;
+}
+
+
+
+/* ==== FORCE CUSTOMER SERVICE LIST TO MATCH CONNECT ==== */
+
+.footer-column:nth-child(3) p {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 12px 0 !important;
+  padding: 0 !important;
+  font-size: 15px !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* ICON LOOK EXACTLY SAME AS CONNECT */
+.footer-column:nth-child(3) p i {
+  color: var(--gold) !important;
+  font-size: 18px !important;
+  width: 24px !important;
+  text-align: center !important;
+}
+
+
+
   </style>
 </head>
 <body>
@@ -514,8 +907,9 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
   <!-- Shop -->
   <section class="section" id="shop">
   <h2 class="section-title">Shop Perfumes</h2>
-  <div class="products-grid">
+  <div class="products-grid homeProducts">
 
+    
     <!-- Product card 1 -->
     <div class="product">
       <div class="image-wrap">
@@ -527,7 +921,7 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
         <p class="description">Rich amber with warm spice undertones — long lasting and intimate.</p>
         <div class="card-footer">
           <div>
-            <div class="price">₹200</div>
+            <div class="hp-price" data-price="200"></div>
             <div class="tags">
               <span class="tag">Daytime</span>
               <span class="tag">Burberry</span>
@@ -549,7 +943,7 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
         <p class="description">Soft rose petals with a velvety finish and romantic sillage.</p>
         <div class="card-footer">
           <div>
-            <div class="price">₹250</div>
+            <div class="hp-price" data-price="250"></div>
             <div class="tags">
               <span class="tag">Floral</span>
               <span class="tag">D'</span>
@@ -571,7 +965,7 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
         <p class="description">Fresh aquatic notes with crisp citrus — clean and invigorating.</p>
         <div class="card-footer">
           <div>
-            <div class="price">₹250</div>
+           <div class="hp-price" data-price="250"></div>
             <div class="tags">
               <span class="tag">Fresh</span>
               <span class="tag">Musk</span>
@@ -593,7 +987,7 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
         <p class="description">Deep oud fragrance with regal notes — bold, luxurious, long-lasting.</p>
         <div class="card-footer">
           <div>
-            <div class="price">₹250</div>
+          <div class="hp-price" data-price="250"></div>
             <div class="tags">
               <span class="tag">Premium</span>
               <span class="tag">Oud</span>
@@ -603,6 +997,7 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
         </div>
       </div>
     </div>
+
 
   </div>
 
@@ -627,33 +1022,25 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
   <input type="text" id="customerName" placeholder="Full Name" required/>
   <input type="tel" id="customerPhone" placeholder="Phone Number" required/>
   <input type="email" id="customerEmail" placeholder="Email" required/>
+  <input type="text" id="customerFlat" placeholder="Flat Number / House Number / Room Number" required/>
   <input type="text" id="customerStreet" placeholder="Street Address" required/>
   <input type="text" id="customerCity" placeholder="City" required/>
+  <input type="text" id="customerZip" placeholder="Zipcode" required/>
   <input type="text" id="customerState" placeholder="State" required/>
   <input type="text" id="customerLandmark" placeholder="Landmark" required/>
-  <input type="text" id="customerZip" placeholder="Zipcode" required/>
-  <input type="text" id="customerFlat" placeholder="Flat Number / House Number / Room Number" required/>
   <input type="text" id="customerCountry" placeholder="Country" required/>
   <button class="pay-btn" id="confirmPayBtn">Confirm & Pay via WhatsApp</button>
   <button class="pay-btn" id="backBtn" style="background:#ccc;color:#111;margin-top:6px;">Back</button>
 </div>
   </div>
 
-<!-- Footer -->
 <footer class="main-footer">
   <div class="footer-content">
-    <!-- Newsletter Section -->
-    <div class="footer-newsletter">
-      <h3>Stay In The Loop</h3>
-      <p>Subscribe to get special offers, exclusive launches, and fragrance tips.</p>
-      <div class="newsletter-form">
-        <input type="email" placeholder="Enter your email" class="newsletter-input">
-        <button class="newsletter-btn">Subscribe</button>
-      </div>
-    </div>
 
-    <!-- Footer Links -->
+    <!-- Footer Links (4 columns) -->
     <div class="footer-links">
+
+      <!-- COLUMN 1 -->
       <div class="footer-column">
         <h4>Shop</h4>
         <ul>
@@ -665,46 +1052,36 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
         </ul>
       </div>
 
-     <!-- <div class="footer-column">
-        <h4>Customer Care</h4>
-        <ul>
-          <li><a href="#contact">Contact Us</a></li>
-          <li><a href="#shipping">Shipping Info</a></li>
-          <li><a href="#returns">Returns & Exchanges</a></li>
-          <li><a href="#size-guide">Fragrance Guide</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div> 
-
-      <div class="footer-column">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="about.html">About Al-Abwa</a></li>
-          <li><a href="#careers">Careers</a></li>
-          <li><a href="#sustainability">Sustainability</a></li>
-          <li><a href="#press">Press</a></li>
-          <li><a href="#wholesale">Wholesale</a></li>
-        </ul>
-      </div> -->
-
+      <!-- COLUMN 2 -->
       <div class="footer-column">
         <h4>Connect</h4>
-        <div class="social-links">
-  <a href="#" class="social-link"><i class="fab fa-facebook-f"></i> Facebook</a>
-  <a href="#" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
-  <a href="#" class="social-link"><i class="fab fa-x-twitter"></i> Twitter</a>
-  <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i> Pinterest</a>
-  <a href="#" class="social-link"><i class="fab fa-tiktok"></i> TikTok</a>
-</div>
-
-        <div class="contact-info">
-  <h4>Customer Service</h4>
-  <p><i class="fas fa-phone"></i> +91 9004263544</p>
-  <p><i class="fas fa-envelope"></i> fawazfragnance@gmail.com</p>
-  <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
-</div>
-
+        <a class="social-link"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+        <a class="social-link"><i class="fab fa-x-twitter"></i> Twitter</a>
+        <a class="social-link"><i class="fab fa-pinterest-p"></i> Pinterest</a>
+        <a class="social-link"><i class="fab fa-tiktok"></i> TikTok</a>
       </div>
+
+      <!-- COLUMN 3 -->
+      <div class="footer-column">
+        <h4>Customer Service</h4>
+        <p><i class="fas fa-phone"></i> +91 9004263544</p>
+        <p><i class="fas fa-envelope"></i> fawazfragnance@gmail.com</p>
+        <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
+      </div>
+
+      <!-- COLUMN 4 (NEWSLETTER MOVED HERE) -->
+      <div class="footer-column">
+        <h4>Stay In The Loop</h4>
+        <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
+          Subscribe to get special offers, exclusive launches, and fragrance tips.
+        </p>
+        <div class="newsletter-form" style="display:flex;gap:0;">
+          <input type="email" placeholder="Enter your email" class="newsletter-input" style="border-radius:6px 0 0 6px;">
+          <button class="newsletter-btn" style="border-radius:0 6px 6px 0;">Subscribe</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -714,9 +1091,9 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
       <div class="footer-legal">
         <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
         <div class="legal-links">
-          <a href="#privacy">Privacy Policy</a>
-          <a href="#terms">Terms of Service</a>
-          <a href="#accessibility">Accessibility</a>
+          <a href="">Privacy Policy</a>
+          <a href="">Terms of Service</a>
+          <a href="">Accessibility</a>
         </div>
       </div>
       <div class="footer-badges">
@@ -727,6 +1104,7 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
     </div>
   </div>
 </footer>
+
 
 
 <button id="stickyCheckout" class="sticky-checkout">Checkout (₹0)</button>
@@ -780,11 +1158,10 @@ function handleStickyCheckoutVisibility() {
 }
 
 
-
 function goToDetails(img) {
   const productCard = img.closest('.product');
   const name = productCard.querySelector('h3').innerText;
-  const price = productCard.querySelector('.price').innerText.replace('₹','').trim();
+  const price = productCard.querySelector('.hp-price').dataset.price;
   const description = productCard.querySelector('.description').innerText;
   const image = img.getAttribute('src');
 
@@ -798,6 +1175,7 @@ function goToDetails(img) {
   window.location.href = `product-details.html?${params.toString()}`;
 }
 
+
 (function(){
   'use strict';
 
@@ -808,7 +1186,7 @@ function goToDetails(img) {
   const STORAGE_KEY = 'alabwa_cart_v1';
   const DISCOUNT_RATE = 0.125; // 12.5% discount
   const SHIPPING_CHARGE = 75;
-  const FREE_SHIPPING_THRESHOLD = 499;
+  const FREE_SHIPPING_THRESHOLD = 599;
 
 
   // ========== ELEMENTS ==========
@@ -955,16 +1333,26 @@ if (cart.length === 0) {
   }
 
   // ==== SHIPPING NOTE ====
-  if (shipping > 0) {
-    const shipNote = document.createElement('div');
-    shipNote.className = 'cart-shipping-note';
-    shipNote.textContent = `Includes ₹${shipping} of Shipping Charges`;
-    cartItemsEl.appendChild(shipNote);
-  }
+
 
   // ==== ORIGINAL TOTAL (as your UI shows) ====
+  // ==== ORIGINAL TOTAL (Updated for side-by-side layout) ====
   if (cartTotalEl) {
-    cartTotalEl.textContent = `Total: ₹${originalTotalWithShipping}`;
+    // 1. Clear previous content
+    cartTotalEl.innerHTML = ''; 
+
+    // 2. Create Total Price Text (Left Side)
+    const priceSpan = document.createElement('span');
+    priceSpan.textContent = `Total: ₹${originalTotalWithShipping}`;
+    cartTotalEl.appendChild(priceSpan);
+
+    // 3. Create Shipping Note (Right Side)
+    if (shipping > 0) {
+      const shipSpan = document.createElement('span');
+      shipSpan.className = 'cart-shipping-note';
+      shipSpan.textContent = `Includes ₹${shipping} Shipping`; // text
+      cartTotalEl.appendChild(shipSpan);
+    }
   }
 
   // ==== DISCOUNTED TOTAL (below the Total) ====
@@ -1032,16 +1420,25 @@ if (cartBtn) {
   }
 
   function addToCartFromProductEl(productEl){
-    if (!productEl) return;
-    const name = (productEl.querySelector('h3') || {}).textContent?.trim() || 'Product';
-    const priceTxt = (productEl.querySelector('.price')||{}).textContent || productEl.dataset.price || '';
-    const price = parsePrice(priceTxt);
-    const image = (productEl.querySelector('img')||{}).src || '';
-    const existing = cart.find(i => i.name === name);
-    if (existing) existing.qty++;
-    else cart.push({ name, price, image, qty: 1 });
-    renderCart();
+  if (!productEl) return;
+
+  const name = productEl.querySelector('h3').textContent.trim();
+
+  // 👉 grab correct data-price value
+  const price = parseInt(productEl.querySelector('.hp-price').dataset.price, 10);
+
+  const image = productEl.querySelector('img').src;
+
+  const existing = cart.find(i => i.name === name);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ name, price, image, qty: 1 });
   }
+
+  renderCart();
+}
+
 
   // ========== NAVIGATION FUNCTIONALITY ==========
   function navigateToCategory(category) {
@@ -1353,7 +1750,7 @@ function handleWhatsAppCheckout() {
   // DISCOUNT SYSTEM
   const DISCOUNT_RATE = 0.125;
   const SHIPPING_CHARGE = 75;
-  const FREE_SHIPPING_THRESHOLD = 499;
+  const FREE_SHIPPING_THRESHOLD = 599;
 
   const originalSubtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
@@ -1466,6 +1863,24 @@ function handleWhatsAppCheckout() {
   };
 
 })();
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  
+  const cards = document.querySelectorAll(".hp-price[data-price]");
+
+  cards.forEach(priceEl => {
+    const price = parseInt(priceEl.dataset.price, 10);
+    const oldPrice = price + 40;
+
+    priceEl.innerHTML = `
+      <span class="old-price">₹${oldPrice}</span>
+      <span class="new-price">₹${price}</span>
+    `;
+  });
+
+});
+
 
 </script>
 
