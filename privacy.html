@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Privacy Policy | Fawaz Fragrance</title>
+
+  <link rel="icon" href="Favicon.png" type="image/png">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{
+      --bg:#fff; --text:#111; --muted:#6b6b6b; --gold:#b99056; --accent:#0b0b0b;
+      --beige:#f5efe8; --card-shadow:0 8px 24px rgba(12,12,12,0.12); --max-width:1200px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Lato,Arial,sans-serif;background:var(--beige);color:var(--text);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+
+    /* Navbar */
+    .navbar{position:sticky;top:0;background:rgba(255,255,255,0.95);border-bottom:1px solid rgba(0,0,0,0.06);z-index:100;padding:10px 16px}
+    .nav-top{display:flex;align-items:center;justify-content:space-between;max-width:var(--max-width);margin:auto}
+    .logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent)}
+    .hamburger{display:none;flex-direction:column;cursor:pointer;gap:4px}
+    .hamburger span{width:24px;height:3px;background:var(--accent);border-radius:2px}
+    .search-mobile{margin:10px 0;display:flex;justify-content:center}
+    .search-mobile input{width:100%;max-width:400px;padding:8px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.1)}
+    .nav-links{display:flex;justify-content:center;gap:16px;transition:max-height .25s ease,opacity .25s ease}
+    .nav-links a{color:var(--muted);font-weight:600}
+    
+    /* Cart Button (Visual Only for this page) */
+    .cart-btn-static{position:fixed;right:16px;bottom:16px;background:var(--gold);border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;box-shadow:var(--card-shadow);cursor:pointer;z-index:200; color: #fff; font-size: 24px;}
+
+    /* Privacy Policy Specific Styles */
+    .policy-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 16px;
+    }
+    .policy-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+        padding: 48px;
+    }
+    .policy-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 42px;
+        color: var(--accent);
+        margin-bottom: 8px;
+        text-align: center;
+    }
+    .policy-meta {
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .policy-content h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 24px;
+        color: var(--gold);
+        margin-top: 32px;
+        margin-bottom: 16px;
+    }
+    .policy-content p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin-bottom: 16px;
+        font-size: 16px;
+    }
+    .policy-content ul {
+        margin-bottom: 16px;
+        padding-left: 20px;
+        color: var(--muted);
+    }
+    .policy-content li {
+        margin-bottom: 8px;
+        line-height: 1.6;
+    }
+    .policy-content strong {
+        color: var(--accent);
+    }
+    .contact-highlight {
+        background: var(--beige);
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 4px solid var(--gold);
+        margin-top: 20px;
+    }
+
+    /* Footer Styles */
+    .main-footer {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+      color: #fff;
+      margin-top: 60px;
+      font-family: Lato, Arial, sans-serif;
+    }
+    .footer-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 50px 16px 30px;
+    }
+    .footer-newsletter {
+      text-align: center;
+      margin-bottom: 50px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .footer-newsletter h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      margin-bottom: 12px;
+      color: var(--gold);
+    }
+    .footer-newsletter p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
+    .newsletter-form {
+      display: flex;
+      max-width: 400px;
+      margin: 0 auto;
+      gap: 0;
+    }
+    .newsletter-input {
+      flex: 1;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 8px 0 0 8px;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--accent);
+    }
+    .newsletter-btn {
+      padding: 14px 24px;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .newsletter-btn:hover { background: #a67c44; }
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+    .footer-column h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: var(--gold);
+    }
+    .footer-column ul { list-style: none; }
+    .footer-column ul li { margin-bottom: 12px; }
+    .footer-column ul li a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 15px;
+    }
+    .footer-column ul li a:hover { color: var(--gold); }
+    .social-links { margin-bottom: 25px; }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+      font-size: 15px;
+    }
+    .social-link:hover { color: var(--gold); }
+    .social-link span { font-size: 18px; width: 24px; }
+    .contact-info p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .contact-info p:first-child {
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+    .contact-info i { width: 20px; margin-right: 6px; color: var(--gold); }
+    .social-link i { width: 24px; text-align: center; font-size: 18px; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.3);
+    }
+    .footer-bottom-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 25px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-legal { display: flex; align-items: center; gap: 30px; flex-wrap: wrap; }
+    .legal-links { display: flex; gap: 20px; }
+    .legal-links a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+    .legal-links a:hover { color: var(--gold); }
+    .footer-badges { display: flex; gap: 20px; flex-wrap: wrap; }
+    .badge {
+      background: rgba(185, 144, 86, 0.2);
+      color: var(--gold);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid rgba(185, 144, 86, 0.3);
+    }
+
+    /* Responsive */
+    @media(max-width:900px){
+      .hamburger{display:flex}
+      .nav-links{flex-direction:column;align-items:center;max-height:0;overflow:hidden;opacity:0}
+      .nav-links.open{max-height:400px;opacity:1;margin-top:10px}
+      .policy-card { padding: 24px; }
+      .policy-title { font-size: 32px; }
+    }
+    @media(max-width:768px){
+      .footer-content { padding: 40px 16px 20px; }
+      .footer-newsletter h3 { font-size: 24px; }
+      .newsletter-form { flex-direction: column; max-width: 300px; }
+      .newsletter-input { border-radius: 8px; margin-bottom: 10px; }
+      .newsletter-btn { border-radius: 8px; }
+      .footer-links { grid-template-columns: 1fr; gap: 30px; }
+      .footer-bottom-content { flex-direction: column; text-align: center; gap: 15px; }
+      .footer-legal { flex-direction: column; gap: 15px; }
+      .footer-badges { justify-content: center; }
+    }
+    @media(max-width:480px){
+      .footer-badges { flex-direction: column; align-items: center; }
+      .legal-links { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-top">
+      <div class="logo">Fawaz Fragrance</div>
+      <div class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></div>
+    </div>
+    <!--<div class="search-mobile"><input id="searchInput" placeholder="Search perfumes..." /></div>-->
+    <div class="nav-links" id="navLinks">
+      <a href="index.html#collections">Collections</a>
+      <a href="index.html#shop">Shop</a>
+      <a href="products.html">All Products</a>
+      <a href="journal.html">Journal</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <section class="policy-container">
+    <div class="policy-card">
+        <h1 class="policy-title">Privacy Policy</h1>
+        <div class="policy-meta">Last Updated: November 2025</div>
+
+        <div class="policy-content">
+            <p>Welcome to Fawaz Fragrance. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+
+            <h2>1. Information We Collect</h2>
+            <p>We may collect, use, store and transfer different kinds of personal data about you which we have grouped together follows:</p>
+            <ul>
+                <li><strong>Identity Data:</strong> includes first name, last name, username or similar identifier.</li>
+                <li><strong>Contact Data:</strong> includes billing address, delivery address, email address and telephone numbers.</li>
+                <li><strong>Transaction Data:</strong> includes details about payments to and from you and other details of products you have purchased from us.</li>
+                <li><strong>Technical Data:</strong> includes internet protocol (IP) address, browser type and version, time zone setting and location, and operating system.</li>
+            </ul>
+
+            <h2>2. How We Use Your Information</h2>
+            <p>We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:</p>
+            <ul>
+                <li>To register you as a new customer.</li>
+                <li>To process and deliver your order including managing payments, fees and charges.</li>
+                <li>To manage our relationship with you which will include notifying you about changes to our terms or privacy policy.</li>
+                <li>To improve our website, products/services, marketing, customer relationships and experiences.</li>
+            </ul>
+
+            <h2>3. Data Security</h2>
+            <p>We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors and other third parties who have a business need to know.</p>
+
+            <h2>4. Cookies</h2>
+            <p>Our website uses cookies to distinguish you from other users of our website. This helps us to provide you with a good experience when you browse our website and also allows us to improve our site. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies.</p>
+
+            <h2>5. Third-Party Links</h2>
+            <p>This website may include links to third-party websites, plug-ins and applications. Clicking on those links or enabling those connections may allow third parties to collect or share data about you. We do not control these third-party websites and are not responsible for their privacy statements.</p>
+
+            <h2>6. Contact Us</h2>
+            <p>If you have any questions about this privacy policy or our privacy practices, please contact us:</p>
+            
+            <div class="contact-highlight">
+                <p><strong>Fawaz Fragrance</strong><br>
+                Email: fawazfragnance@gmail.com<br>
+                Phone: +91 9004263544<br>
+                Address: Navi Mumbai, Maharashtra, India</p>
+            </div>
+        </div>
+    </div>
+  </section>
+
+ <!-- <a href="index.html#shop" class="cart-btn-static" title="Go to Shop">
+    <i class="fas fa-shopping-cart"></i>
+  </a> -->
+
+  
+
+  <script>
+    // Minimal Script for Mobile Menu and Search
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    const searchInput = document.getElementById('searchInput');
+
+    if (hamburgerBtn && navLinks) {
+      hamburgerBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+              // Redirect to main shop page with search query
+              window.location.href = `index.html#shop`; 
+          }
+      });
+    }
+  </script>
+
+</body>
+</html>
