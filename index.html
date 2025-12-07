@@ -887,6 +887,133 @@ footer, .footer-links, .footer-content {
   }
 }
 
+/* ======================
+   FAWAZ HEADER (FIGMA STYLE)
+   ====================== */
+
+.ff-header {
+  width: 100%;
+  background: #FFFCE9;
+  position: sticky;
+  top: 0;
+  z-index: 300;
+}
+
+.ff-header-inner {
+  max-width: 1200px;
+  height: 62px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+/* ------- Logo ------- */
+.ff-logo img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+/* ------- Search Bar ------- */
+.ff-search {
+  flex: 1;
+  max-width: 420px;
+  position: relative;
+  margin: 0 18px;
+}
+
+.ff-search input {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #C2BAB7;
+  border-radius: 50px;
+  height: 34px;
+  padding: 0 40px 0 15px;
+  outline: none;
+  font-size: 15px;
+  color: #6b6b6b;
+}
+
+.ff-search i {
+  position: absolute;
+  right: 14px;
+  top: 8px;
+  font-size: 18px;
+  color: #6b4b3e;
+  cursor: pointer;
+}
+
+/* ------- Hamburger ------- */
+.ff-ham {
+  width: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.ff-ham span {
+  width: 100%;
+  height: 3px;
+  background: #6b4b3e;
+  border-radius: 2px;
+}
+
+/* ------- Bottom line ------- */
+.ff-bottom-line {
+  width: 100%;
+  height: 5px;
+  background: #fffce9;
+}
+
+@media(max-width:600px){
+  .ff-search input {
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .ff-search i {
+    top: 7px;
+  }
+
+  .ff-logo img {
+    height: 32px;
+  }
+}
+
+
+/* =======================
+   MOBILE MENU (Drawer)
+   ======================= */
+.ff-mobile-menu {
+  position: fixed;
+  top: 62px; /* exactly below header */
+  right: -280px;
+  width: 260px;
+  height: 100vh;
+  background: #FFFCE9;
+  border-left: 2px solid #fffce9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-weight: 600;
+  transition: right .3s ease-in-out;
+  z-index: 500;
+}
+
+.ff-mobile-menu a {
+  color: #664136;
+  font-size: 16px;
+}
+
+.ff-mobile-menu.open {
+  right: 0;
+  box-shadow: -12px 0 32px rgba(0,0,0,0.2);
+}
+
 
 
 
@@ -895,20 +1022,44 @@ footer, .footer-links, .footer-content {
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-top">
-      <div class="logo">Fawaz Fragrance</div>
-      <div class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></div>
+  <!-- NEW HEADER -->
+<header class="ff-header">
+  <div class="ff-header-inner">
+
+    <!-- Left: Logo -->
+    <div class="ff-logo">
+      <img src="Logo.png" alt="Fawaz Fragrance">
     </div>
-    <div class="search-mobile"><input id="searchInput" placeholder="Search perfumes..." /></div>
-    <div class="nav-links" id="navLinks">
-      <a href="#collections">Collections</a>
-      <a href="#shop">Top Perfumes</a>
-      <a href="products.html">All Products</a>
-      <a href="journal.html">Journal</a>
-      <a href="about.html">About</a>
+
+    <!-- Center: Search -->
+    <div class="ff-search">
+      <input id="searchInput" type="text" placeholder="Search perfumes...">
+      <i class="fas fa-search" id="searchBtn"></i>
     </div>
-  </nav>
+
+    <!-- Right: Hamburger -->
+    <div class="ff-ham" id="hamburgerBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+
+  <!-- Bottom brown line -->
+  <div class="ff-bottom-line"></div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="ff-mobile-menu" id="ffMobileMenu">
+  <a href="#collections">Collections</a>
+  <a href="#shop">Shop</a>
+  <a href="products.html">All Products</a>
+  <a href="journal.html">Journal</a>
+  <a href="about.html">About</a>
+</div>
+
+
 
   <!-- 🔥 Sliding Offer Banner -->
 <div class="offer-banner">
@@ -1140,9 +1291,8 @@ footer, .footer-links, .footer-content {
       <div class="footer-legal">
         <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
         <div class="legal-links">
-          <a href="">Privacy Policy</a>
-          <a href="">Terms of Service</a>
-          <a href="">Accessibility</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
         </div>
       </div>
       <div class="footer-badges">
@@ -1929,6 +2079,53 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
+
+// ====== HAMBURGER MOBILE MENU ======
+const ffHam = document.getElementById("hamburgerBtn");
+const ffMenu = document.getElementById("ffMobileMenu");
+
+if (ffHam && ffMenu) {
+  ffHam.addEventListener("click", () => {
+    ffMenu.classList.toggle("open");
+  });
+}
+
+
+
+// =====================
+// SEARCH BAR FUNCTION
+// =====================
+
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+
+// Scroll to shop section
+function scrollToShop() {
+  const shopSection = document.querySelector("#shop");
+  if (!shopSection) return;
+
+  const navHeight = document.querySelector(".ff-header")?.offsetHeight || 0;
+  const top = shopSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+  window.scrollTo({ top, behavior: "smooth" });
+}
+
+// When typing + enter
+if (searchInput) {
+  searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      scrollToShop();
+    }
+  });
+}
+
+// When clicking icon
+if (searchBtn) {
+  searchBtn.addEventListener("click", () => {
+    scrollToShop();
+  });
+}
+
 
 
 </script>
