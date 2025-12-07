@@ -855,7 +855,7 @@ footer, .footer-links, .footer-content {
 
 
 
-/* ======== SLIDING OFFER BANNER ======== */
+/* ======== SLIDING OFFER BANNER (Improved) ======== */
 .offer-banner{
   width:100%;
   overflow:hidden;
@@ -870,22 +870,23 @@ footer, .footer-links, .footer-content {
 
 .offer-track{
   display:inline-block;
-  padding-left:100%;
-  animation:offerSlide 14s linear infinite;
+  /* removed big left padding = no late start */
+  animation:offerSlide 30s linear infinite; /* slower speed */
 }
 
+/* smoother infinite loop */
 @keyframes offerSlide{
-  0%{ transform:translateX(0); }
-  100%{ transform:translateX(-100%); }
+  0% { transform:translateX(0); }
+  100% { transform:translateX(-50%); } /* perfect seamless loop */
 }
 
-/* Mobile fixes */
 @media(max-width:600px){
   .offer-banner{
     font-size:14px;
     padding:8px 0;
   }
 }
+
 
 
 
@@ -902,7 +903,7 @@ footer, .footer-links, .footer-content {
     <div class="search-mobile"><input id="searchInput" placeholder="Search perfumes..." /></div>
     <div class="nav-links" id="navLinks">
       <a href="#collections">Collections</a>
-      <a href="#shop">Shop</a>
+      <a href="#shop">Top Perfumes</a>
       <a href="products.html">All Products</a>
       <a href="journal.html">Journal</a>
       <a href="about.html">About</a>
