@@ -855,6 +855,40 @@ footer, .footer-links, .footer-content {
 
 
 
+/* ======== SLIDING OFFER BANNER ======== */
+.offer-banner{
+  width:100%;
+  overflow:hidden;
+  background:#b99056;
+  color:#fff;
+  font-weight:700;
+  font-size:18px;
+  padding:10px 0;
+  white-space:nowrap;
+  position:relative;
+}
+
+.offer-track{
+  display:inline-block;
+  padding-left:100%;
+  animation:offerSlide 14s linear infinite;
+}
+
+@keyframes offerSlide{
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-100%); }
+}
+
+/* Mobile fixes */
+@media(max-width:600px){
+  .offer-banner{
+    font-size:14px;
+    padding:8px 0;
+  }
+}
+
+
+
   </style>
 </head>
 <body>
@@ -874,6 +908,16 @@ footer, .footer-links, .footer-content {
       <a href="about.html">About</a>
     </div>
   </nav>
+
+  <!-- 🔥 Sliding Offer Banner -->
+<div class="offer-banner">
+  <div class="offer-track">
+    Limited-Time Launch Offer: Flat 12.5% OFF. Live Now! ✨ &nbsp; • &nbsp;
+    Limited-Time Launch Offer: Flat 12.5% OFF. Live Now! ✨ &nbsp; • &nbsp;
+    Limited-Time Launch Offer: Flat 12.5% OFF. Live Now! ✨ &nbsp; • &nbsp;
+  </div>
+</div>
+
 
   <!-- Hero -->
   <section class="hero">
@@ -1055,11 +1099,9 @@ footer, .footer-links, .footer-content {
       <!-- COLUMN 2 -->
       <div class="footer-column">
         <h4>Connect</h4>
-        <a class="social-link"><i class="fab fa-facebook-f"></i> Facebook</a>
-        <a class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
-        <a class="social-link"><i class="fab fa-x-twitter"></i> Twitter</a>
-        <a class="social-link"><i class="fab fa-pinterest-p"></i> Pinterest</a>
-        <a class="social-link"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a class="social-link" href="https://www.facebook.com/profile.php?id=61578977254156"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a class="social-link" href="https://www.instagram.com/fawazfragrance/"><i class="fab fa-instagram"></i> Instagram</a>
+        <a class="social-link" href="https://in.pinterest.com/fawazfragrance/"><i class="fab fa-pinterest-p"></i> Pinterest</a>
       </div>
 
       <!-- COLUMN 3 -->
@@ -1098,7 +1140,7 @@ footer, .footer-links, .footer-content {
       </div>
       <div class="footer-badges">
         <div class="badge">🔒 Secure Shopping</div>
-        <div class="badge">🚚 Free Shipping ₹999+</div>
+        <div class="badge">🚚 Free Shipping ₹599+</div>
         <div class="badge">↩️ Easy Returns</div>
       </div>
     </div>
