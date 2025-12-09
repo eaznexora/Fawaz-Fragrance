@@ -23,17 +23,25 @@
     body{font-family:Lato,sans-serif;background:var(--beige);color:var(--text);}
     a{text-decoration:none;color:inherit;}
     img{max-width:100%;border-radius:14px;display:block;}
+ :root{
+  --bg:#fff; --text:#111; --muted:#6b6b6b; --gold:#b99056; --accent:#0b0b0b;
+  --beige:#f5efe8; --card-shadow:0 8px 24px rgba(12,12,12,0.12); --max-width:1200px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Lato,Arial,sans-serif;background:var(--beige);color:var(--text);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
 
-    /* Navbar */
-    .navbar{position:sticky;top:0;background:rgba(255,255,255,0.9);border-bottom:1px solid rgba(0,0,0,0.05);z-index:100;padding:10px 16px;}
-    .nav-top{display:flex;align-items:center;justify-content:space-between;max-width:var(--max-width);margin:0 auto;}
-    .logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:bold;color:var(--accent);}
-    .hamburger{display:none;flex-direction:column;cursor:pointer;gap:4px;}
-    .hamburger span{width:24px;height:3px;background:var(--accent);border-radius:2px;}
-    .search-mobile{margin:10px 0;display:flex;justify-content:center;}
-    .search-mobile input{width:100%;max-width:400px;padding:8px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.1);}
-    .nav-links{display:flex;justify-content:center;gap:16px;transition:max-height 0.3s ease,opacity 0.3s ease;max-width:var(--max-width);margin:0 auto;}
-    .nav-links a{color:var(--muted);font-weight:600;}
+/* Navbar */
+.navbar{position:sticky;top:0;background:rgba(255,255,255,0.95);border-bottom:1px solid rgba(0,0,0,0.06);z-index:-1;padding:10px 16px}
+.nav-top{display:flex;align-items:center;justify-content:space-between;max-width:var(--max-width);margin:auto}
+.logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent)}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:4px}
+.hamburger span{width:24px;height:3px;background:var(--accent);border-radius:2px}
+.search-mobile{margin:10px 0;display:flex;justify-content:center}
+.search-mobile input{width:100%;max-width:400px;padding:8px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.1)}
+.nav-links{display:flex;justify-content:center;gap:16px;transition:max-height .25s ease,opacity .25s ease}
+.nav-links a{color:var(--muted);font-weight:600}
 
     /* Section */
     .section{padding:48px 16px;max-width:var(--max-width);margin:auto;}
@@ -314,24 +322,173 @@
         gap: 10px !important;
       }
     }
+
+
+    
+.ff-header {
+  width: 100%;
+  background: #FFFCE9;
+  position: sticky;
+  top: 0;
+  z-index: 300;
+}
+
+.ff-header-inner {
+  max-width: 1200px;
+  height: 62px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+/* ------- Logo ------- */
+.ff-logo img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+/* ------- Search Bar ------- */
+.ff-search {
+  flex: 1;
+  max-width: 420px;
+  position: relative;
+  margin: 0 18px;
+}
+
+.ff-search input {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #C2BAB7;
+  border-radius: 50px;
+  height: 34px;
+  padding: 0 40px 0 15px;
+  outline: none;
+  font-size: 15px;
+  color: #6b6b6b;
+}
+
+.ff-search i {
+  position: absolute;
+  right: 14px;
+  top: 8px;
+  font-size: 18px;
+  color: #6b4b3e;
+  cursor: pointer;
+}
+
+/* ------- Hamburger ------- */
+.ff-ham {
+  width: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.ff-ham span {
+  width: 100%;
+  height: 3px;
+  background: #6b4b3e;
+  border-radius: 2px;
+}
+
+/* ------- Bottom line ------- */
+.ff-bottom-line {
+  width: 100%;
+  height: 5px;
+  background: #fffce9;
+}
+
+@media(max-width:600px){
+  .ff-search input {
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .ff-search i {
+    top: 7px;
+  }
+
+  .ff-logo img {
+    height: 32px;
+  }
+}
+
+
+/* =======================
+   MOBILE MENU (Drawer)
+   ======================= */
+.ff-mobile-menu {
+  position: fixed;
+  top: 62px; /* exactly below header */
+  right: -280px;
+  width: 260px;
+  height: 100vh;
+  background: #FFFCE9;
+  border-left: 2px solid #fffce9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-weight: 600;
+  transition: right .3s ease-in-out;
+  z-index: 500;
+}
+
+.ff-mobile-menu a {
+  color: #664136;
+  font-size: 16px;
+}
+
+.ff-mobile-menu.open {
+  right: 0;
+  box-shadow: -12px 0 32px rgba(0,0,0,0.2);
+}
+
+
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-top">
-      <div class="logo">Fawaz Fragrance</div>
-      <div class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></div>
+  <!-- NEW HEADER -->
+<header class="ff-header">
+  <div class="ff-header-inner">
+
+    <!-- Left: Logo -->
+    <div class="ff-logo">
+      <img src="Logo.png" alt="Fawaz Fragrance">
     </div>
-    <div class="search-mobile"><input id="searchInput" placeholder="Search site..." /></div>
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="journal.html">Journal</a>
-      <a href="about.html">About</a>
+
+    <!-- Center: Search -->
+    <div class="ff-search">
+      <input id="searchInput" type="text" placeholder="Search perfumes...">
+      <i class="fas fa-search" id="searchBtn"></i>
     </div>
-  </nav>
+
+    <!-- Right: Hamburger -->
+    <div class="ff-ham" id="hamburgerBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+
+  <!-- Bottom brown line -->
+  <div class="ff-bottom-line"></div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="ff-mobile-menu" id="ffMobileMenu">
+  <a href="index.html">Home</a>
+  <a href="products.html">All Products</a>
+  <a href="journal.html">Journal</a>
+</div>
+
 
   <!-- About Section -->
   <section class="section">
@@ -359,12 +516,12 @@
         <p>Email: fawazfragnance@gmail.com</p>
       </div>
     </div>
-    <div class="contact-form">
+ <div class="contact-form">
       <h3>Send a Message</h3>
-      <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea rows="4" placeholder="Your Message" required></textarea>
+      <form id="contactForm">
+        <input type="text" id="contactName" placeholder="Your Name" required>
+        <input type="email" id="contactEmail" placeholder="Your Email" required>
+        <textarea id="contactMessage" rows="4" placeholder="Your Message" required></textarea>
         <button type="submit">Send Message</button>
       </form>
     </div>
@@ -400,14 +557,14 @@
           <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
         </div>
 
-        <div class="footer-column">
+       <div class="footer-column">
           <h4>Stay In The Loop</h4>
           <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
             Subscribe to get special offers, exclusive launches, and fragrance tips.
           </p>
           <div class="newsletter-form">
-            <input type="email" placeholder="Enter your email" class="newsletter-input">
-            <button class="newsletter-btn">Subscribe</button>
+            <input type="email" id="newsletterEmail" placeholder="Enter your email" class="newsletter-input">
+            <button id="newsletterBtn" class="newsletter-btn">Subscribe</button>
           </div>
         </div>
 
@@ -432,10 +589,61 @@
     </div>
   </footer>
 
-  <script>
-    const hamburgerBtn=document.getElementById('hamburgerBtn');
-    const navLinks=document.getElementById('navLinks');
-    hamburgerBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));
+ <script>
+    // ====== HAMBURGER MOBILE MENU ======
+    const ffHam = document.getElementById("hamburgerBtn");
+    const ffMenu = document.getElementById("ffMobileMenu");
+
+    if (ffHam && ffMenu) {
+      ffHam.addEventListener("click", () => {
+        ffMenu.classList.toggle("open");
+      });
+    }
+
+    // ====== WHATSAPP FUNCTIONALITY ======
+    const PHONE_NUMBER = "919004263544"; // Your WhatsApp Number
+
+    // 1. CONTACT FORM LOGIC
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevents page reload
+
+        const name = document.getElementById('contactName').value;
+        const email = document.getElementById('contactEmail').value;
+        const msg = document.getElementById('contactMessage').value;
+
+        // Construct Message
+        let whatsappText = `*📬 NEW CONTACT MESSAGE*\n\n`;
+        whatsappText += `*Name:* ${name}\n`;
+        whatsappText += `*Email:* ${email}\n`;
+        whatsappText += `*Message:* ${msg}`;
+
+        // Open WhatsApp
+        window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(whatsappText)}`, '_blank');
+      });
+    }
+
+    // 2. NEWSLETTER LOGIC
+    const newsletterBtn = document.getElementById('newsletterBtn');
+    if (newsletterBtn) {
+      newsletterBtn.addEventListener('click', function() {
+        const email = document.getElementById('newsletterEmail').value;
+
+        if (!email) {
+          alert("Please enter your email address first.");
+          return;
+        }
+
+        // Construct Message
+        let whatsappText = `*📧 NEWSLETTER SIGNUP*\n\n`;
+        whatsappText += `Hello, I would like to subscribe to the Fawaz Fragrance newsletter.\n`;
+        whatsappText += `*My Email:* ${email}`;
+
+        // Open WhatsApp
+        window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(whatsappText)}`, '_blank');
+      });
+    }
   </script>
 </body>
 </html>
