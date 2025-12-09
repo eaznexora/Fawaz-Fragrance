@@ -23,17 +23,7 @@
     a{text-decoration:none;color:inherit;}
     img{max-width:100%;border-radius:12px;display:block;}
 
-    /* Navbar */
-    .navbar{position:sticky;top:0;background:rgba(255,255,255,0.9);border-bottom:1px solid rgba(0,0,0,0.05);z-index:100;padding:10px 16px;}
-    .nav-top{display:flex;align-items:center;justify-content:space-between;}
-    .logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:bold;color:var(--accent);}
-    .hamburger{display:none;flex-direction:column;cursor:pointer;gap:4px;}
-    .hamburger span{width:24px;height:3px;background:var(--accent);border-radius:2px;}
-    .search-mobile{margin:10px 0;display:flex;justify-content:center;}
-    .search-mobile input{width:100%;max-width:400px;padding:8px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.1);}
-    .nav-links{display:flex;justify-content:center;gap:16px;transition:max-height 0.3s ease,opacity 0.3s ease;}
-    .nav-links a{color:var(--muted);font-weight:600;}
-
+    
     /* Journal */
     .section{padding:48px 16px;max-width:var(--max-width);margin:auto;}
     .section-title{font-family:'Playfair Display',serif;font-size:30px;margin-bottom:20px;text-align:center;}
@@ -629,25 +619,169 @@ footer, .footer-links, .footer-content {
 
 
 
+.ff-header {
+  width: 100%;
+  background: #FFFCE9;
+  position: sticky;
+  top: 0;
+  z-index: 300;
+}
+
+.ff-header-inner {
+  max-width: 1200px;
+  height: 62px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+/* ------- Logo ------- */
+.ff-logo img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+/* ------- Search Bar ------- */
+.ff-search {
+  flex: 1;
+  max-width: 420px;
+  position: relative;
+  margin: 0 18px;
+}
+
+.ff-search input {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #C2BAB7;
+  border-radius: 50px;
+  height: 34px;
+  padding: 0 40px 0 15px;
+  outline: none;
+  font-size: 15px;
+  color: #6b6b6b;
+}
+
+.ff-search i {
+  position: absolute;
+  right: 14px;
+  top: 8px;
+  font-size: 18px;
+  color: #6b4b3e;
+  cursor: pointer;
+}
+
+/* ------- Hamburger ------- */
+.ff-ham {
+  width: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.ff-ham span {
+  width: 100%;
+  height: 3px;
+  background: #6b4b3e;
+  border-radius: 2px;
+}
+
+/* ------- Bottom line ------- */
+.ff-bottom-line {
+  width: 100%;
+  height: 5px;
+  background: #fffce9;
+}
+
+@media(max-width:600px){
+  .ff-search input {
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .ff-search i {
+    top: 7px;
+  }
+
+  .ff-logo img {
+    height: 32px;
+  }
+}
+
+
+/* =======================
+   MOBILE MENU (Drawer)
+   ======================= */
+.ff-mobile-menu {
+  position: fixed;
+  top: 62px; /* exactly below header */
+  right: -280px;
+  width: 260px;
+  height: 100vh;
+  background: #FFFCE9;
+  border-left: 2px solid #fffce9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-weight: 600;
+  transition: right .3s ease-in-out;
+  z-index: 500;
+}
+
+.ff-mobile-menu a {
+  color: #664136;
+  font-size: 16px;
+}
+
+.ff-mobile-menu.open {
+  right: 0;
+  box-shadow: -12px 0 32px rgba(0,0,0,0.2);
+}
+
+
 
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="nav-top">
-      <div class="logo">Fawaz Fragnance</div>
-      <div class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></div>
+   <!-- NEW HEADER -->
+<header class="ff-header">
+  <div class="ff-header-inner">
+
+    <!-- Left: Logo -->
+    <div class="ff-logo">
+      <img src="Logo.png" alt="Fawaz Fragrance">
     </div>
-    <div class="search-mobile"><input id="searchInput" placeholder="Search journal..." /></div>
-    <div class="nav-links" id="navLinks">
-      <a href='index.html'>Home</a>
-      <a href='products.html'>Products</a>
-      <a href="about.html">About</a>
-      <a href='journal.html'>Journal</a>
+
+    <!-- Center: Search -->
+    <div class="ff-search">
+      <input id="searchInput" type="text" placeholder="Search perfumes...">
+      <i class="fas fa-search" id="searchBtn"></i>
     </div>
-  </nav>
+
+    <!-- Right: Hamburger -->
+    <div class="ff-ham" id="hamburgerBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+
+  <!-- Bottom brown line -->
+  <div class="ff-bottom-line"></div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="ff-mobile-menu" id="ffMobileMenu">
+  <a href="index.html">Home
+  <a href="products.html">All Products</a>
+  <a href="about.html">About</a>
+</div>
 
   <!-- Journal Section -->
   <section class="section">
@@ -657,19 +791,16 @@ footer, .footer-links, .footer-content {
         <img src="perfume1.jpeg" alt="Perfume History">
         <h3>The History of Perfume</h3>
         <p>Perfume has been a symbol of luxury and status since ancient Egypt. Discover the fascinating journey of fragrance through time.</p>
-        <a href="#" class="read-more">Read More</a>
       </div>
       <div class="article">
         <img src="perfume2.jpeg" alt="Luxury Scents">
         <h3>Choosing Your Signature Scent</h3>
         <p>Finding a fragrance that defines you is an art. Here’s how you can select a signature perfume that resonates with your personality.</p>
-        <a href="#" class="read-more">Read More</a>
       </div>
       <div class="article">
         <img src="perfume3.jpeg" alt="Seasonal Fragrance">
         <h3>Fragrances for Every Season</h3>
         <p>From fresh citrus in summer to warm oud in winter, learn which perfumes are best suited for each season.</p>
-        <a href="#" class="read-more">Read More</a>
       </div>
     </div>
   </section>
@@ -704,15 +835,15 @@ footer, .footer-links, .footer-content {
       </div>
 
       <div class="footer-column">
-        <h4>Stay In The Loop</h4>
-        <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
-          Subscribe to get special offers, exclusive launches, and fragrance tips.
-        </p>
-        <div class="newsletter-form">
-          <input type="email" placeholder="Enter your email" class="newsletter-input">
-          <button class="newsletter-btn">Subscribe</button>
+          <h4>Stay In The Loop</h4>
+          <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
+            Subscribe to get special offers, exclusive launches, and fragrance tips.
+          </p>
+          <div class="newsletter-form">
+            <input id="footerNewsInput" type="email" placeholder="Enter your email" class="newsletter-input">
+            <button id="footerNewsBtn" class="newsletter-btn">Subscribe</button>
+          </div>
         </div>
-      </div>
 
     </div>
   </div>
@@ -739,20 +870,53 @@ footer, .footer-links, .footer-content {
 
 
   <script>
-    // Navbar toggle
-    const hamburgerBtn=document.getElementById('hamburgerBtn');
-    const navLinks=document.getElementById('navLinks');
-    hamburgerBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));
+    // ====== HAMBURGER MOBILE MENU ======
+    const ffHam = document.getElementById("hamburgerBtn");
+    const ffMenu = document.getElementById("ffMobileMenu");
 
-    // Search filter for articles
-    const searchInput=document.getElementById('searchInput');
-    const articles=document.querySelectorAll('.article');
-    searchInput.addEventListener('input',()=>{
-      const q=searchInput.value.toLowerCase();
-      articles.forEach(a=>{
-        a.style.display=a.textContent.toLowerCase().includes(q)?'block':'none';
+    if (ffHam && ffMenu) {
+      ffHam.addEventListener("click", () => {
+        ffMenu.classList.toggle("open");
       });
-    });
+    }
+
+    // ====== JOURNAL SEARCH FUNCTION ======
+    const searchInput = document.getElementById('searchInput');
+    const articles = document.querySelectorAll('.article');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          const q = searchInput.value.toLowerCase();
+          articles.forEach(a => {
+            // Check if article text matches search
+            a.style.display = a.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+          });
+        });
+    }
+
+    // ====== FOOTER WHATSAPP NEWSLETTER ======
+    const footerNewsBtn = document.getElementById('footerNewsBtn');
+    
+    if (footerNewsBtn) {
+      footerNewsBtn.addEventListener('click', function() {
+        const emailInput = document.getElementById('footerNewsInput');
+        const email = emailInput.value.trim();
+
+        if (!email) {
+          alert('Please enter your email address.');
+          return;
+        }
+
+        // Construct Message
+        const msg = `*🔔 NEWSLETTER SIGNUP*\n\nHello, I would like to stay in the loop!\n\n*My Email:* ${email}`;
+        
+        // Open WhatsApp
+        window.open(`https://wa.me/919004263544?text=${encodeURIComponent(msg)}`, '_blank');
+        
+        // Clear input after sending
+        emailInput.value = '';
+      });
+    }
   </script>
 </body>
 </html>
