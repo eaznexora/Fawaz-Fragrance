@@ -1055,14 +1055,14 @@ footer, .footer-links, .footer-content {
     </div>
   </div>
 
-  <section class="reviews">
+  <!--<section class="reviews">
     <h2>Customer Reviews</h2>
     <div class="rating-summary">
       <div id="avgStars" class="stars" aria-label="Average rating">★★★★★</div>
       <div id="avgText">4.8 out of 5 · 0 reviews</div>
     </div>
     <div id="reviewList" class="review-list"></div>
-  </section>
+  </section>-->
 
   <div class="cart-btn" id="cartBtn">🛒<div class="cart-count" id="cartCount">0</div></div>
 
@@ -1137,16 +1137,16 @@ footer, .footer-links, .footer-content {
         <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
       </div>
 
-      <div class="footer-column">
-        <h4>Stay In The Loop</h4>
-        <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
-          Subscribe to get special offers, exclusive launches, and fragrance tips.
-        </p>
-        <div class="newsletter-form">
-          <input type="email" placeholder="Enter your email" class="newsletter-input">
-          <button class="newsletter-btn">Subscribe</button>
+     <div class="footer-column">
+          <h4>Stay In The Loop</h4>
+          <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
+            Subscribe to get special offers, exclusive launches, and fragrance tips.
+          </p>
+          <div class="newsletter-form">
+            <input id="footerNewsInput" type="email" placeholder="Enter your email" class="newsletter-input">
+            <button id="footerNewsBtn" class="newsletter-btn">Subscribe</button>
+          </div>
         </div>
-      </div>
 
     </div>
   </div>
@@ -1178,84 +1178,77 @@ function generateOrderNumber() {
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
-
   const datePart = `${yyyy}${mm}${dd}`;
   const key = `fwz_order_${datePart}`;
-
   let lastNo = parseInt(localStorage.getItem(key) || "0");
   lastNo++;
   localStorage.setItem(key, lastNo);
-
   return `FWZ-${datePart}-${String(lastNo).padStart(5, '0')}`;
 }
-
-
 
 // ====== GLOBAL SETTINGS ======
 const DISCOUNT_RATE = 0.125;   // 12.5% discount
 const SHIPPING_CHARGE = 75;
 const FREE_SHIPPING_THRESHOLD = 599;
 
-  // Existing: product details + cart
-  const CART_KEY = 'alabwa_cart_v1';
-  const urlParams = new URLSearchParams(window.location.search);
-  const name = urlParams.get('name') ? decodeURIComponent(urlParams.get('name')) : '';
-  const priceParam = urlParams.get('price') ? decodeURIComponent(urlParams.get('price')) : '';
-  const img = urlParams.get('img') ? decodeURIComponent(urlParams.get('img')) : '';
-  const desc = urlParams.get('desc') ? decodeURIComponent(urlParams.get('desc')) : '';
-  const cleanPrice = (txt) => parseInt(String(txt || '').replace(/[^\d]/g,''),10) || 0;
-  
-  let basePrice = 0;
-  let selectedVolume = '50ml';
-  let cart = [];
+const CART_KEY = 'alabwa_cart_v1';
 
-  // Load cart from localStorage
-  function loadCart() {
-    try { 
-      cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); 
-    } catch(e) { 
-      cart = []; 
-    }
-    renderCart();
-  }
+// ====== URL Parameters ======
+const urlParams = new URLSearchParams(window.location.search);
+const name = urlParams.get('name') ? decodeURIComponent(urlParams.get('name')) : '';
+const priceParam = urlParams.get('price') ? decodeURIComponent(urlParams.get('price')) : '';
+const img = urlParams.get('img') ? decodeURIComponent(urlParams.get('img')) : '';
+const desc = urlParams.get('desc') ? decodeURIComponent(urlParams.get('desc')) : '';
+const detailsParam = urlParams.get('details') ? decodeURIComponent(urlParams.get('details')) : '';
+const notesParam = urlParams.get('notes') ? decodeURIComponent(urlParams.get('notes')) : '';
 
-  function saveCart() {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  }
+const cleanPrice = (txt) => parseInt(String(txt || '').replace(/[^\d]/g,''),10) || 0;
 
+let basePrice = 0;
+let selectedVolume = '6ml'; 
+let cart = [];
 
-// ====== UPDATED renderCart() ======
+function loadCart() {
+  try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e) { cart = []; }
+  renderCart();
+}
+
+function saveCart() {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
+// ====== RENDER CART (Fixed Shipping Logic) ======
 function renderCart() {
   const cartItemsEl = document.getElementById('cartItems');
   const cartTotalEl = document.getElementById('cartTotal');
   const cartCountEl = document.getElementById('cartCount');
   const stickyCheckout = document.getElementById('stickyCheckout');
+  const cartBtn = document.getElementById('cartBtn');
 
   if (!cartItemsEl) return;
-
   cartItemsEl.innerHTML = '';
 
-  // ORIGINAL SUBTOTAL
+  // 1. Subtotals
   let originalSubtotal = 0;
-  cart.forEach(item => {
-    originalSubtotal += item.price * item.qty;
-  });
+  cart.forEach(item => { originalSubtotal += item.price * item.qty; });
 
-  // SHIPPING RULE
-  const shipping = originalSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_CHARGE;
+  // 2. Shipping Rule (FIXED: 0 if empty)
+  let shipping = 0;
+  if (cart.length > 0 && originalSubtotal < FREE_SHIPPING_THRESHOLD) {
+      shipping = SHIPPING_CHARGE;
+  }
 
-  // DISCOUNTED UNIT TOTAL
+  // 3. Discounted
   let discountedSubtotal = 0;
   cart.forEach(item => {
     const discountedUnit = Math.round(item.price * (1 - DISCOUNT_RATE));
     discountedSubtotal += discountedUnit * item.qty;
   });
 
-  // TOTALS
   const originalTotalWithShipping = originalSubtotal + shipping;
   const discountedTotalWithShipping = discountedSubtotal + shipping;
 
-  // RENDER ITEMS — show real (non-discounted) price
+  // 4. Render Items
   cart.forEach((item, idx) => {
     const row = document.createElement('div');
     row.className = 'cart-item';
@@ -1270,19 +1263,15 @@ function renderCart() {
 
     const qtyDiv = document.createElement('div');
     qtyDiv.className = 'qty-controls';
-
     const dec = document.createElement('button');
     dec.textContent = '-';
     dec.addEventListener('click', () => changeCartQty(idx, -1));
-
     const qtyNum = document.createElement('span');
     qtyNum.textContent = item.qty;
     qtyNum.style.margin = '0 8px';
-
     const inc = document.createElement('button');
     inc.textContent = '+';
     inc.addEventListener('click', () => changeCartQty(idx, +1));
-
     qtyDiv.append(dec, qtyNum, inc);
 
     const priceSpan = document.createElement('span');
@@ -1292,7 +1281,7 @@ function renderCart() {
     cartItemsEl.appendChild(row);
   });
 
-  // ==== DISCOUNT NOTE ====
+  // 5. Discount Note
   if (cart.length > 0) {
     const dNote = document.createElement('div');
     dNote.className = 'cart-discount-note';
@@ -1300,12 +1289,9 @@ function renderCart() {
     cartItemsEl.appendChild(dNote);
   }
 
-  // ==== ORIGINAL TOTAL & SHIPPING NOTE (SIDE-BY-SIDE) ====
+  // 6. Totals
   if (cartTotalEl) {
-    // We rebuild the HTML to include total AND the shipping note in one flex line
     cartTotalEl.innerHTML = `<span>Total: ₹${originalTotalWithShipping}</span>`;
-    
-    // Add shipping note next to it
     if (shipping > 0) {
       const sNote = document.createElement('span');
       sNote.className = 'cart-shipping-note';
@@ -1314,7 +1300,6 @@ function renderCart() {
     }
   }
 
-  // ==== DISCOUNTED TOTAL ====
   let discountedEl = document.getElementById('discountedTotalEl');
   if (!discountedEl) {
     discountedEl = document.createElement('div');
@@ -1322,36 +1307,38 @@ function renderCart() {
     discountedEl.className = 'discounted-total';
     cartTotalEl.insertAdjacentElement('afterend', discountedEl);
   }
-  discountedEl.textContent = `Discounted Total: ₹${discountedTotalWithShipping}`;
+  
+  if (cart.length > 0) {
+      discountedEl.textContent = `Discounted Total: ₹${discountedTotalWithShipping}`;
+      discountedEl.style.display = 'block';
+  } else {
+      discountedEl.style.display = 'none';
+  }
 
-  // ==== FREE SHIPPING PROGRESS ====
+  // 7. Free Shipping Progress
   let progressEl = document.getElementById('freeShippingProgress');
-  const amountNeeded = Math.max(0, FREE_SHIPPING_THRESHOLD - originalSubtotal);
-
   if (!progressEl) {
     progressEl = document.createElement('div');
     progressEl.id = 'freeShippingProgress';
     progressEl.className = 'free-shipping-progress';
-    cartPanel.appendChild(progressEl);
+    document.getElementById('cartPanel').appendChild(progressEl);
   }
 
-  progressEl.textContent =
-    amountNeeded > 0
-    ? `₹${amountNeeded} away from free shipping`
-    : `You have free shipping!`;
-
-  // ==== UPDATE CART COUNT ====
-  if (cartCountEl) {
-    cartCountEl.textContent = cart.reduce((s,i)=> s + i.qty, 0);
+  if (cart.length > 0) {
+      const amountNeeded = Math.max(0, FREE_SHIPPING_THRESHOLD - originalSubtotal);
+      progressEl.textContent = amountNeeded > 0
+        ? `₹${amountNeeded} away from free shipping`
+        : `You have free shipping!`;
+      progressEl.style.display = 'block';
+  } else {
+      progressEl.style.display = 'none';
   }
 
-  // ==== HIDE CART BUTTON IF EMPTY ====
-  const cartBtn = document.getElementById('cartBtn');
-  cartBtn.style.display = cart.length === 0 ? 'none' : 'flex';
+  if (cartCountEl) cartCountEl.textContent = cart.reduce((s,i)=> s + i.qty, 0);
 
-  // ==== STICKY CHECKOUT UPDATE ====
+  if (cartBtn) cartBtn.style.display = cart.length === 0 ? 'none' : 'flex';
+
   if (stickyCheckout) {
-    // Only show sticky checkout if the cart panel is CLOSED and we have items
     const isCartOpen = document.getElementById('cartPanel').classList.contains('open');
     if (cart.length > 0 && originalTotalWithShipping > 0 && !isCartOpen) {
       stickyCheckout.textContent = `Checkout (₹${originalTotalWithShipping})`;
@@ -1360,270 +1347,109 @@ function renderCart() {
       stickyCheckout.style.display = 'none';
     }
   }
-
   saveCart();
 }
 
+function changeCartQty(idx, delta) {
+  if (!cart[idx]) return;
+  cart[idx].qty += delta;
+  if (cart[idx].qty <= 0) cart.splice(idx,1);
+  renderCart();
+}
 
-  function changeCartQty(idx, delta) {
-    if (!cart[idx]) return;
-    cart[idx].qty += delta;
-    if (cart[idx].qty <= 0) cart.splice(idx,1);
-    renderCart();
-  }
+// Initial Page Load
+if (name && priceParam && img) {
+  basePrice = cleanPrice(priceParam);
+  document.getElementById('productName').textContent = name;
+  document.getElementById('oldPrice').textContent = '₹' + (basePrice + 40);
+  document.getElementById('productPrice').textContent = '₹' + basePrice;
+  document.getElementById('productDesc').textContent = desc || '';
+  document.getElementById('productImg').src = img;
+  document.getElementById('productImg').alt = name;
+  
+  const categoryMap = { 'Amber Noir': 'Classic Collection', 'Royal Oud': 'Luxury Collection', 'Velour Rose': 'Floral Collection', 'Ocean Mist': 'Fresh Collection', 'Golden Sandal': 'Woody Collection', 'Fresh Citrus': 'Citrus Collection' };
+  document.getElementById('productCategory').textContent = categoryMap[name] || 'Premium Collection';
+  
+  const detailContainer = document.getElementById('detailedDescription');
+  let finalHtml = detailsParam || `This exquisite fragrance opens with vibrant top notes...`;
+  if (notesParam) finalHtml += `<br><br><strong>Olfactory Notes:</strong><br>${notesParam}`;
+  detailContainer.innerHTML = finalHtml;
 
-  // Categories mapping
-  const categoryMap = {
-    'Amber Noir': 'Classic Collection',
-    'Royal Oud': 'Luxury Collection', 
-    'Velour Rose': 'Floral Collection',
-    'Ocean Mist': 'Fresh Collection',
-    'Golden Sandal': 'Woody Collection',
-    'Fresh Citrus': 'Citrus Collection'
-  };
+  updateVolumePrices();
+}
 
-  if (name && priceParam && img) {
-    basePrice = cleanPrice(priceParam);
-    document.getElementById('productName').textContent = name;
-    document.getElementById('oldPrice').textContent = '₹' + (basePrice + 40);
-    document.getElementById('productPrice').textContent = '₹' + basePrice;
-    document.getElementById('productDesc').textContent = desc || '';
-    document.getElementById('productImg').src = img;
-    document.getElementById('productImg').alt = name;
-    
-    // Set category
-    const category = categoryMap[name] || 'Premium Collection';
-    document.getElementById('productCategory').textContent = category;
-    
-    // Update volume prices
-    updateVolumePrices();
-  }
-
-  function updateVolumePrices() {
-    const volumeOptions = document.querySelectorAll('.volume-option');
-    volumeOptions.forEach(option => {
-      const extraPrice = parseInt(option.dataset.price);
-      const totalPrice = basePrice + extraPrice;
-      option.querySelector('.vol-price').textContent = totalPrice;
-    });
-  }
-
-  // Volume selection
-  document.addEventListener('click', function(e) {
-    const volumeOption = e.target.closest('.volume-option');
-    if (volumeOption) {
-      // Remove selected class from all options
-      document.querySelectorAll('.volume-option').forEach(opt => opt.classList.remove('selected'));
-      // Add selected class to clicked option
-      volumeOption.classList.add('selected');
-      selectedVolume = volumeOption.dataset.volume;
-      
-      // Update main price
-      const extraPrice = parseInt(volumeOption.dataset.price);
-      const newPrice = basePrice + extraPrice;
-      document.getElementById('productPrice').textContent = '₹' + newPrice;
-    }
+function updateVolumePrices() {
+  const volumeOptions = document.querySelectorAll('.volume-option');
+  volumeOptions.forEach(option => {
+    const extraPrice = parseInt(option.dataset.price);
+    option.querySelector('.vol-price').textContent = basePrice + extraPrice;
   });
+}
 
-  function changeQty(delta) {
-    const qtyEl = document.getElementById('quantity');
-    let val = parseInt(qtyEl.value,10) || 1;
-    val = Math.max(1, val + delta);
-    qtyEl.value = val;
+document.addEventListener('click', function(e) {
+  const volumeOption = e.target.closest('.volume-option');
+  if (volumeOption) {
+    document.querySelectorAll('.volume-option').forEach(opt => opt.classList.remove('selected'));
+    volumeOption.classList.add('selected');
+    selectedVolume = volumeOption.dataset.volume;
+    const extraPrice = parseInt(volumeOption.dataset.price);
+    document.getElementById('productPrice').textContent = '₹' + (basePrice + extraPrice);
   }
-
-  // Cart Panel Functions
-  function openCartPanel() {
-    const cartPanel = document.getElementById('cartPanel');
-    if (cartPanel) {
-      cartPanel.classList.add('open');
-      cartPanel.setAttribute('aria-hidden','false');
-    }
-    document.getElementById('stickyCheckout').style.display = 'none';
-  }
-
-  function closeCartPanel() {
-    const cartPanel = document.getElementById('cartPanel');
-    if (cartPanel) {
-      cartPanel.classList.remove('open');
-      cartPanel.setAttribute('aria-hidden','true');
-    }
-    // Re-run renderCart to update sticky visibility correctly
-    renderCart();
-  }
-
-  // Custom Alert Functions
-  function showAlert(productName, quantity, price) {
-    const overlay = document.getElementById('alertOverlay');
-    const alertProductName = document.getElementById('alertProductName');
-    const alertProductDetails = document.getElementById('alertProductDetails');
-    
-    alertProductName.textContent = productName;
-    alertProductDetails.textContent = `Quantity: ${quantity} • Volume: ${selectedVolume} • Price: ₹${price}`;
-    
-    overlay.classList.add('show');
-    
-    // Auto close after 5 seconds
-    setTimeout(() => {
-      if (overlay.classList.contains('show')) {
-        closeAlert();
-      }
-    }, 5000);
-  }
-
-  function closeAlert() {
-    const overlay = document.getElementById('alertOverlay');
-    overlay.classList.remove('show');
-  }
-
-  function goToCart() {
-    closeAlert();
-    // Navigate to products page and open cart
-    // Since we are ON the details page, just open cart panel
-    openCartPanel();
-  }
-
-  // Close modal when clicking outside
-  document.getElementById('alertOverlay').addEventListener('click', function(e) {
-    if (e.target === this) {
-      closeAlert();
-    }
-  });
-
-  // Cart button click
-  document.getElementById('cartBtn').addEventListener('click', openCartPanel);
-  document.getElementById('closeCart').addEventListener('click', closeCartPanel);
-  // Prevent closing when clicking inside the cart
-document.getElementById('cartPanel').addEventListener('click', (event) => {
-  event.stopPropagation();
 });
 
-  // Close cart when clicking outside
- document.addEventListener('click', function(e) {
+function changeQty(delta) {
+  const qtyEl = document.getElementById('quantity');
+  let val = parseInt(qtyEl.value,10) || 1;
+  val = Math.max(1, val + delta);
+  qtyEl.value = val;
+}
+
+function openCartPanel() {
+  const cartPanel = document.getElementById('cartPanel');
+  cartPanel.classList.add('open');
+  cartPanel.setAttribute('aria-hidden','false');
+  document.getElementById('stickyCheckout').style.display = 'none';
+}
+
+function closeCartPanel() {
+  const cartPanel = document.getElementById('cartPanel');
+  cartPanel.classList.remove('open');
+  cartPanel.setAttribute('aria-hidden','true');
+  renderCart();
+}
+
+// Interaction Event Listeners
+document.getElementById('cartBtn').addEventListener('click', openCartPanel);
+document.getElementById('closeCart').addEventListener('click', closeCartPanel);
+document.getElementById('cartPanel').addEventListener('click', (event) => event.stopPropagation());
+document.addEventListener('click', function(e) {
   const cartPanel = document.getElementById('cartPanel');
   const cartBtn = document.getElementById('cartBtn');
-
-  // Only close if cart is open
   if (!cartPanel.classList.contains('open')) return;
-
-  // If clicking the floating cart button → ignore
   if (cartBtn.contains(e.target)) return;
-
-  // If clicking checkout button (sticky) → ignore
   if (document.getElementById('stickyCheckout').contains(e.target)) return;
-
-  // If clicking inside the cart panel → ignore
   if (cartPanel.contains(e.target)) return;
-
-  // Otherwise close
   closeCartPanel();
 });
 
+function addToCart() {
+  const qty = parseInt(document.getElementById('quantity').value,10) || 1;
+  const selectedOption = document.querySelector('.volume-option.selected');
+  const extraPrice = parseInt(selectedOption.dataset.price);
+  const finalPrice = basePrice + extraPrice;
+  const item = { name: name, price: finalPrice, image: img, qty: qty };
+  
+  const existing = cart.find(p => p.name === item.name);
+  if (existing) existing.qty += qty;
+  else cart.push(item);
+  
+  renderCart();
+  openCartPanel();
+}
 
-  function addToCart() {
-    const qty = parseInt(document.getElementById('quantity').value,10) || 1;
-    const selectedOption = document.querySelector('.volume-option.selected');
-    const extraPrice = parseInt(selectedOption.dataset.price);
-    const finalPrice = basePrice + extraPrice;
-    
-    const item = { 
-      name: name, 
-      price: finalPrice, 
-      image: img, 
-      qty: qty 
-    };
-    
-    const existing = cart.find(p => p.name === item.name);
-    if (existing) existing.qty += qty;
-    else cart.push(item);
-    
-    renderCart();
-    
-    // Show custom alert
-    showAlert(item.name, qty, finalPrice);
-  }
-
-  // Load cart on page load
-  loadCart();
-
-  // Fake reviews (4 or 5 stars only)
-  const reviewNames = ['Ayesha','Rahul','Zara','Imran','Kavya','Omar','Riya','Arjun','Noor','Meera'];
-  const reviewTexts = [
-    'Smells luxurious and lasts long. Great purchase!',
-    'Warm opening with a smooth dry-down. Perfect for evenings.',
-    'Fresh yet deep. Got compliments all day.',
-    'Elegant scent, not overpowering. Will buy again.',
-    'Excellent projection and longevity at this price.',
-    'Balanced and refined. Signature scent material.',
-    'Rich and comforting without being heavy.',
-    'Modern, clean, and very wearable.',
-    'Premium vibe and solid performance.',
-    'Sophisticated blend that stands out.'
-  ];
-
-  function randomInt(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
-
-  function makeFakeReviews(count){
-    const arr = [];
-    for(let i=0;i<count;i++){
-      const n = reviewNames[randomInt(0, reviewNames.length-1)];
-      const t = reviewTexts[randomInt(0, reviewTexts.length-1)];
-      const rating = randomInt(4,5); // only 4 or 5
-      const daysAgo = randomInt(1, 45);
-      const date = Date.now() - daysAgo*24*60*60*1000;
-      arr.push({ name:n, rating, text:t, date });
-    }
-    return arr;
-  }
-
-  function renderStars(n){
-    const full = Math.round(n);
-    return '★★★★★'.slice(0, full) + '☆☆☆☆☆'.slice(0, 5 - full);
-  }
-
-  function fmtDate(ts){
-    try { return new Date(ts).toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'}); }
-    catch { return ''; }
-  }
-
-  function renderReviews(revs){
-    const list = document.getElementById('reviewList');
-    const avgStars = document.getElementById('avgStars');
-    const avgText = document.getElementById('avgText');
-
-    list.innerHTML = '';
-    revs.slice().sort((a,b)=> (b.date||0)-(a.date||0)).forEach(r=>{
-      const div = document.createElement('div');
-      div.className = 'review-item';
-      div.innerHTML = `
-        <div class="meta">
-          <span class="stars" aria-hidden="true">${renderStars(r.rating||0)}</span>
-          <strong>${r.name||'Anonymous'}</strong>
-          <span style="margin-left:auto;color:#777;font-size:.85rem;">${fmtDate(r.date)}</span>
-        </div>
-        <p>${(r.text||'').replace(/</g,'&lt;')}</p>
-      `;
-      list.appendChild(div);
-    });
-
-    const avg = revs.length ? (revs.reduce((s,r)=> s + (r.rating||0),0)/revs.length) : 0;
-    avgStars.textContent = renderStars(avg);
-    avgText.textContent = `${avg.toFixed(1)} out of 5 · ${revs.length} review${revs.length===1?'':'s'}`;
-  }
-
-  // Generate 5–8 fake reviews and render
-  const fakeCount = randomInt(5,8);
-  const fakeReviews = makeFakeReviews(fakeCount);
-  renderReviews(fakeReviews);
-
-  // === Checkout Logic ===
-document.getElementById('checkoutBtn').addEventListener('click', () => {
-  document.getElementById('cartForm').style.display = 'flex';
-});
-
-document.getElementById('backBtn').addEventListener('click', () => {
-  document.getElementById('cartForm').style.display = 'none';
-});
+// Checkout Logic
+document.getElementById('checkoutBtn').addEventListener('click', () => { document.getElementById('cartForm').style.display = 'flex'; });
+document.getElementById('backBtn').addEventListener('click', () => { document.getElementById('cartForm').style.display = 'none'; });
 
 document.getElementById('confirmPayBtn').addEventListener('click', () => {
   const name = document.getElementById('customerName').value.trim();
@@ -1637,79 +1463,62 @@ document.getElementById('confirmPayBtn').addEventListener('click', () => {
   const flat = document.getElementById('customerFlat').value.trim();
   const country = document.getElementById('customerCountry').value.trim();
 
- if (!name || !phone || !email || !street || !city || !state || 
-    !landmark || !zipcode || !flat || !country) {
+  if (!name || !phone || !email || !street || !city || !state || !landmark || !zipcode || !flat || !country) {
     alert('Please fill in all details!');
     return;
-}
-
-
-  if (!cart.length) {
-    alert('Your cart is empty!');
-    return;
   }
+  if (!cart.length) { alert('Your cart is empty!'); return; }
 
-  // CALCULATE TOTALS
   let originalSubtotal = 0;
   let discountedSubtotal = 0;
   cart.forEach(item => {
     originalSubtotal += item.price * item.qty;
-    const disc = Math.round(item.price * (1 - DISCOUNT_RATE));
-    discountedSubtotal += disc * item.qty;
+    discountedSubtotal += Math.round(item.price * (1 - DISCOUNT_RATE)) * item.qty;
   });
 
   const shipping = originalSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_CHARGE;
   const finalTotal = discountedSubtotal + shipping;
-
-  // ORDER NUMBER
   const orderNumber = generateOrderNumber();
 
-  // MESSAGE BUILDER (NO BROKEN SYMBOLS)
-  let msg = "";
-  msg += `*🧾 ORDER CONFIRMATION*\n\n`;
-  msg += `*Order Number:* ${orderNumber}\n\n`;
-
-  msg += `*👤 Customer:* ${name}\n`;
-  msg += `*📞 Phone:* ${phone}\n`;
-  msg += `*✉️ Email:* ${email}\n\n`;
-
-  msg += `*🏠 Address:*\n`;
-  msg += `${flat}\n`;
-  msg += `${street}, ${landmark}\n`;
-  msg += `${city}, ${state} - ${zipcode}\n`;
-  msg += `${country}\n\n`;
-
-
-  msg += `────────────────────────\n\n`;
-  msg += `*🧴 Order Details:*\n`;
-
+  let msg = `*🧾 ORDER CONFIRMATION*\n\n*Order Number:* ${orderNumber}\n\n*👤 Customer:* ${name}\n*📞 Phone:* ${phone}\n*✉️ Email:* ${email}\n\n*🏠 Address:*\n${flat}\n${street}, ${landmark}\n${city}, ${state} - ${zipcode}\n${country}\n\n────────────────────────\n\n*🧴 Order Details:*\n`;
   cart.forEach(item => {
     const disc = Math.round(item.price * (1 - DISCOUNT_RATE));
     msg += `• ${item.qty} × ${item.name} — ₹${disc * item.qty}\n`;
   });
+  msg += `\n────────────────────────\n\n*💵 Total Payable:* ₹${finalTotal}\n\n🙏 Thank you for shopping with *Fawaz Fragrance*`;
 
-  msg += `\n────────────────────────\n\n`;
-  msg += `*💵 Total Payable:* ₹${finalTotal}\n\n`;
-  msg += `🙏 Thank you for shopping with *Fawaz Fragrance*`;
-
-  // SEND WHATSAPP MESSAGE
-  window.open(
-    `https://wa.me/9004263544?text=${encodeURIComponent(msg)}`,
-    "_blank"
-  );
+  window.open(`https://wa.me/919004263544?text=${encodeURIComponent(msg)}`, "_blank");
 });
 
+document.getElementById('stickyCheckout').addEventListener('click', () => { openCartPanel(); });
 
-document.getElementById('stickyCheckout').addEventListener('click', () => {
-  openCartPanel();
-});
+// ====== FOOTER NEWSLETTER WHATSAPP LOGIC ======
+const footerNewsBtn = document.getElementById('footerNewsBtn');
+if (footerNewsBtn) {
+  footerNewsBtn.addEventListener('click', function() {
+    const emailInput = document.getElementById('footerNewsInput');
+    const email = emailInput.value.trim();
 
+    if (!email) {
+      alert('Please enter your email address.');
+      return;
+    }
 
-// Disable alert popup completely
-function showAlert(){ return; }
-function closeAlert(){ return; }
+    // Construct Message
+    const msg = `*🔔 NEWSLETTER SIGNUP*\n\nHello, I would like to stay in the loop!\n\n*My Email:* ${email}`;
+    
+    // Open WhatsApp
+    window.open(`https://wa.me/919004263544?text=${encodeURIComponent(msg)}`, '_blank');
+    
+    // Clear input
+    emailInput.value = '';
+  });
+}
 
-
+loadCart();
+function showAlert(productName, quantity, price) { return; }
+function closeAlert() { return; }
+function goToCart() { closeAlert(); openCartPanel(); }
 </script>
 
 </body>
