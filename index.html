@@ -21,7 +21,7 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 
 /* Navbar */
-.navbar{position:sticky;top:0;background:rgba(255,255,255,0.95);border-bottom:1px solid rgba(0,0,0,0.06);z-index:100;padding:10px 16px}
+.navbar{position:sticky;top:0;background:rgba(255,255,255,0.95);border-bottom:1px solid rgba(0,0,0,0.06);z-index:-1;padding:10px 16px}
 .nav-top{display:flex;align-items:center;justify-content:space-between;max-width:var(--max-width);margin:auto}
 .logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent)}
 .hamburger{display:none;flex-direction:column;cursor:pointer;gap:4px}
@@ -121,8 +121,28 @@ a{color:inherit;text-decoration:none}
 /* Cart */
 .cart-btn{position:fixed;right:16px;bottom:16px;background:var(--gold);border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;box-shadow:var(--card-shadow);cursor:pointer;z-index:200}
 .cart-count{position:absolute;top:6px;right:6px;background:#111;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px}
-.cart-panel{position:fixed;right:0;top:0;height:100vh;width:400px;max-width:100%;background:#fff;box-shadow:-20px 0 40px rgba(0,0,0,0.08);transform:translateX(100%);transition:transform .3s;padding:20px;z-index:200;display:flex;flex-direction:column;overflow-y:auto}
-.cart-panel.open{transform:translateX(0)}
+/* Cart Panel - UPDATED Z-INDEX */
+.cart-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 400px;
+  max-width: 100%;
+  background: #fff;
+  box-shadow: -20px 0 40px rgba(0,0,0,0.08);
+  transform: translateX(100%);
+  transition: transform .3s;
+  padding: 20px;
+  
+  /* CHANGED FROM 200 TO 2000 TO FIX THE OVERLAP */
+  z-index: 2000 !important; 
+  
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.cart-panel.open{transform:translateX(0); z-index: 100;}
 .cart-item{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:6px;background:#f5f5f5;border-radius:6px}
 .qty-controls{display:flex;gap:4px;align-items:center}
 .qty-controls button{padding:2px 6px;border-radius:4px;border:0;background:#ccc;cursor:pointer}
@@ -1111,22 +1131,26 @@ footer, .footer-links, .footer-content {
   <h2 class="section-title">Shop Perfumes</h2>
   <div class="products-grid homeProducts">
 
-    
-    <!-- Product card 1 -->
-    <div class="product">
+    <div class="product" 
+         data-name="Burberry Weekend" 
+         data-price="200" 
+         data-img="./Attar Photos/Burberry Weekend6.png"
+         data-desc="A relaxing, fresh, and citrusy fragrance."
+         data-details="A relaxing and fresh fragrance found in the outdoor spirit of the brand. It has a sheer, fresh, and citrusy floral fragrance that invites you to relax and enjoy the moment."
+         data-notes="Top: Mignonette, Mandarin Orange | Heart: Nectarine, Blue Hyacinth, Iris | Base: Sandalwood, Musk, Cedar">
       <div class="image-wrap">
         <img src="./Attar Photos/Burberry Weekend6.png" alt="Burberry Weekend" onclick="goToDetails(this)">
-        <button class="arrow-btn" aria-hidden="true">›</button>
+        <button class="arrow-btn" aria-hidden="true" onclick="goToDetails(this.previousElementSibling)">›</button>
       </div>
       <div class="info">
         <h3>Burberry Weekend</h3>
-        <p class="description">Rich amber with warm spice undertones — long lasting and intimate.</p>
+        <p class="description">A relaxing, fresh, and citrusy fragrance.</p>
         <div class="card-footer">
           <div>
             <div class="hp-price" data-price="200"></div>
             <div class="tags">
               <span class="tag">Daytime</span>
-              <span class="tag">Burberry</span>
+              <span class="tag">Fresh</span>
             </div>
           </div>
           <button class="add-btn">Add to Cart</button>
@@ -1134,21 +1158,26 @@ footer, .footer-links, .footer-content {
       </div>
     </div>
 
-    <!-- Product card 2 -->
-    <div class="product">
+    <div class="product"
+         data-name="D' love Sauvage" 
+         data-price="250" 
+         data-img="./Attar Photos/Dlove Sauvage8.png"
+         data-desc="Radically fresh, raw and noble."
+         data-details="A radically fresh composition, dictated by a name that has the ring of a manifesto. Natural ingredients, selected with extreme care, prevail in excessive doses."
+         data-notes="Top: Calabrian Bergamot, Pepper | Heart: Sichuan Pepper, Lavender, Pink Pepper | Base: Ambroxan, Cedar">
       <div class="image-wrap">
         <img src="./Attar Photos/Dlove Sauvage8.png" alt="D' love Sauvage" onclick="goToDetails(this)">
-        <button class="arrow-btn" aria-hidden="true">›</button>
+        <button class="arrow-btn" aria-hidden="true" onclick="goToDetails(this.previousElementSibling)">›</button>
       </div>
       <div class="info">
         <h3>D' love Sauvage</h3>
-        <p class="description">Soft rose petals with a velvety finish and romantic sillage.</p>
+        <p class="description">Radically fresh, raw and noble.</p>
         <div class="card-footer">
           <div>
             <div class="hp-price" data-price="250"></div>
             <div class="tags">
-              <span class="tag">Floral</span>
-              <span class="tag">D'</span>
+              <span class="tag">Spicy</span>
+              <span class="tag">Bold</span>
             </div>
           </div>
           <button class="add-btn">Add to Cart</button>
@@ -1156,21 +1185,26 @@ footer, .footer-links, .footer-content {
       </div>
     </div>
 
-    <!-- Product card 3 -->
-    <div class="product">
+    <div class="product"
+         data-name="Musk Rose" 
+         data-price="250" 
+         data-img="./Attar Photos/Musk Rose11.png"
+         data-desc="Soft petals meeting creamy musk."
+         data-details="An enchanting blend where the romance of blooming roses meets the softness of white musk. It is delicate, powdery, and absolutely elegant."
+         data-notes="Top: Rose Petals, Peony | Heart: Jasmine, White Musk | Base: Amber, Powder Notes">
       <div class="image-wrap">
         <img src="./Attar Photos/Musk Rose11.png" alt="Musk Rose" onclick="goToDetails(this)">
-        <button class="arrow-btn" aria-hidden="true">›</button>
+        <button class="arrow-btn" aria-hidden="true" onclick="goToDetails(this.previousElementSibling)">›</button>
       </div>
       <div class="info">
         <h3>Musk Rose</h3>
-        <p class="description">Fresh aquatic notes with crisp citrus — clean and invigorating.</p>
+        <p class="description">Soft petals meeting creamy musk.</p>
         <div class="card-footer">
           <div>
            <div class="hp-price" data-price="250"></div>
             <div class="tags">
-              <span class="tag">Fresh</span>
-              <span class="tag">Musk</span>
+              <span class="tag">Floral</span>
+              <span class="tag">Powdery</span>
             </div>
           </div>
           <button class="add-btn">Add to Cart</button>
@@ -1178,21 +1212,26 @@ footer, .footer-links, .footer-content {
       </div>
     </div>
 
-    <!-- Product card 4 -->
-    <div class="product">
+    <div class="product"
+         data-name="Oud Lavender" 
+         data-price="250" 
+         data-img="./Attar Photos/Oud Lavender15.png"
+         data-desc="Calming lavender meets deep, resinous oud."
+         data-details="A surprising and delightful combination. The calming, herbaceous freshness of Lavender cuts through the dark richness of Oud, creating a perfectly balanced modern masterpiece."
+         data-notes="Top: French Lavender, Lemon | Heart: Violet, Oud | Base: Patchouli, Musk">
       <div class="image-wrap">
         <img src="./Attar Photos/Oud Lavender15.png" alt="Oud Lavender" onclick="goToDetails(this)">
-        <button class="arrow-btn" aria-hidden="true">›</button>
+        <button class="arrow-btn" aria-hidden="true" onclick="goToDetails(this.previousElementSibling)">›</button>
       </div>
       <div class="info">
         <h3>Oud Lavender</h3>
-        <p class="description">Deep oud fragrance with regal notes — bold, luxurious, long-lasting.</p>
+        <p class="description">Calming lavender meets deep, resinous oud.</p>
         <div class="card-footer">
           <div>
           <div class="hp-price" data-price="250"></div>
             <div class="tags">
               <span class="tag">Premium</span>
-              <span class="tag">Oud</span>
+              <span class="tag">Woody</span>
             </div>
           </div>
           <button class="add-btn">Add to Cart</button>
@@ -1271,16 +1310,16 @@ footer, .footer-links, .footer-content {
       </div>
 
       <!-- COLUMN 4 (NEWSLETTER MOVED HERE) -->
-      <div class="footer-column">
-        <h4>Stay In The Loop</h4>
-        <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
-          Subscribe to get special offers, exclusive launches, and fragrance tips.
-        </p>
-        <div class="newsletter-form" style="display:flex;gap:0;">
-          <input type="email" placeholder="Enter your email" class="newsletter-input" style="border-radius:6px 0 0 6px;">
-          <button class="newsletter-btn" style="border-radius:0 6px 6px 0;">Subscribe</button>
+     <div class="footer-column">
+          <h4>Stay In The Loop</h4>
+          <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
+            Subscribe to get special offers, exclusive launches, and fragrance tips.
+          </p>
+          <div class="newsletter-form" style="display:flex;gap:0;">
+            <input id="footerNewsInput" type="email" placeholder="Enter your email" class="newsletter-input" style="border-radius:6px 0 0 6px;">
+            <button id="footerNewsBtn" class="newsletter-btn" style="border-radius:0 6px 6px 0;">Subscribe</button>
+          </div>
         </div>
-      </div>
 
     </div>
   </div>
@@ -1305,7 +1344,6 @@ footer, .footer-links, .footer-content {
 </footer>
 
 
-
 <button id="stickyCheckout" class="sticky-checkout">Checkout (₹0)</button>
 
 <script>
@@ -1315,65 +1353,57 @@ function generateOrderNumber() {
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, '0');
   const dd = String(today.getDate()).padStart(2, '0');
-
   const datePart = `${yyyy}${mm}${dd}`;
-
-  // Load last order number for today
   const key = `fwz_order_${datePart}`;
   let lastNumber = parseInt(localStorage.getItem(key) || "0");
-
-  lastNumber += 1; // increment
-
+  lastNumber += 1; 
   localStorage.setItem(key, lastNumber.toString());
-
   const padded = String(lastNumber).padStart(5, '0');
-
   return `FWZ-${datePart}-${padded}`;
 }
-
 
 function handleStickyCheckoutVisibility() {
   const stickyCheckout = document.getElementById('stickyCheckout');
   const cartPanel = document.getElementById('cartPanel');
-
   if (!stickyCheckout) return;
-
   const cart = JSON.parse(localStorage.getItem('alabwa_cart_v1') || '[]');
 
-  // If cart empty → hide
   if (cart.length === 0) {
     stickyCheckout.style.display = 'none';
     return;
   }
-
-  // If cart is open → hide
   if (cartPanel.classList.contains('open')) {
     stickyCheckout.style.display = 'none';
     return;
   }
-
-  // Else → show
   stickyCheckout.style.display = 'block';
 }
 
-
+// ====== FIXED: Now sends Details and Notes to the next page ======
 function goToDetails(img) {
   const productCard = img.closest('.product');
-  const name = productCard.querySelector('h3').innerText;
-  const price = productCard.querySelector('.hp-price').dataset.price;
-  const description = productCard.querySelector('.description').innerText;
+  
+  // Grab basic info
+  const name = productCard.dataset.name;
+  const price = productCard.dataset.price;
+  const description = productCard.dataset.desc;
   const image = img.getAttribute('src');
+
+  // Grab NEW info
+  const details = productCard.dataset.details || '';
+  const notes = productCard.dataset.notes || '';
 
   const params = new URLSearchParams({
     name: name,
     price: price,
     desc: description,
-    img: image
+    img: image,
+    details: details, // sending this now
+    notes: notes      // sending this now
   });
 
   window.location.href = `product-details.html?${params.toString()}`;
 }
-
 
 (function(){
   'use strict';
@@ -1383,17 +1413,15 @@ function goToDetails(img) {
   const qsa = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
   const parsePrice = txt => parseInt(String(txt||'').replace(/[^\d]/g,''),10) || 0;
   const STORAGE_KEY = 'alabwa_cart_v1';
-  const DISCOUNT_RATE = 0.125; // 12.5% discount
+  const DISCOUNT_RATE = 0.125; 
   const SHIPPING_CHARGE = 75;
   const FREE_SHIPPING_THRESHOLD = 599;
 
-
   // ========== ELEMENTS ==========
   const hamburgerBtn = qs('#hamburgerBtn');
-  const navLinks = qs('#navLinks');
+  const navLinks = qs('#ffMobileMenu');
   const searchInput = qs('#searchInput');
-  const shopSection = qs('#shop');
-
+  
   const cartBtn = qs('#cartBtn');
   const cartPanel = qs('#cartPanel');
   const closeCart = qs('#closeCart');
@@ -1407,7 +1435,7 @@ function goToDetails(img) {
   function ensureSticky() {
     let s = qs('#stickyCheckout');
     if (!s) {
-      s = document.createElement('div');
+      s = document.createElement('button');
       s.id = 'stickyCheckout';
       s.className = 'sticky-checkout';
       s.style.display = 'none';
@@ -1421,195 +1449,173 @@ function goToDetails(img) {
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch(e){ cart = []; }
 
-const stickyCheckout = ensureSticky();
+  const stickyCheckout = ensureSticky();
 
   function saveCart(){ 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cart || [])); 
   }
 
+  // ====== FIXED RENDER CART ======
   function renderCart() {
-  if (!cartItemsEl) return;
-  cartItemsEl.innerHTML = '';
+    if (!cartItemsEl) return;
+    cartItemsEl.innerHTML = '';
 
-  // ===== EMPTY CART HANDLING =====
-if (cart.length === 0) {
-  // clear UI
-  cartItemsEl.innerHTML = '';
+    // ORIGINAL SUBTOTAL
+    let originalSubtotal = 0;
+    cart.forEach(item => {
+      originalSubtotal += item.price * item.qty;
+    });
 
-  if (cartTotalEl) cartTotalEl.textContent = 'Total: ₹0';
-
-  // hide discounted total (if exists)
-  const discountedEl = document.getElementById('discountedTotalEl');
-  if (discountedEl) discountedEl.textContent = '';
-
-  // hide free shipping text
-  const progressEl = document.getElementById('freeShippingProgress');
-  if (progressEl) progressEl.textContent = '';
-
-  // hide sticky button
-  if (stickyCheckout) stickyCheckout.style.display = 'none';
-
-  // hide cart button
-  const cartBtn = document.getElementById('cartBtn');
-  cartBtn.style.display = 'none';
-
-  saveCart();
-  return;
-}
-
-
-  // ORIGINAL SUBTOTAL (no discount)
-  let originalSubtotal = 0;
-  cart.forEach(item => {
-    originalSubtotal += item.price * item.qty;
-  });
-
-  // SHIPPING RULE
-  const shipping = originalSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_CHARGE;
-
-  // DISCOUNTED SUBTOTAL (apply 12.5% OFF per item)
-  let discountedSubtotal = 0;
-  cart.forEach(item => {
-    const discountedUnit = Math.round(item.price * (1 - DISCOUNT_RATE));
-    discountedSubtotal += discountedUnit * item.qty;
-  });
-
-  // FINAL TOTALS
-  const originalTotalWithShipping = originalSubtotal + shipping;
-  const discountedTotalWithShipping = discountedSubtotal + shipping;
-
-  // ==== RENDER CART ITEMS (real price, not discounted) ====
-  cart.forEach((item, idx) => {
-    const row = document.createElement('div');
-    row.className = 'cart-item';
-
-    const img = document.createElement('img');
-    img.src = item.image || '';
-    img.alt = item.name || '';
-    img.style.width = '50px';
-    img.style.height = '50px';
-    img.style.objectFit = 'cover';
-    img.style.borderRadius = '6px';
-
-    const nameSpan = document.createElement('span');
-    nameSpan.textContent = item.name;
-    nameSpan.style.flex = '1';
-    nameSpan.style.fontWeight = '600';
-
-    const qtyDiv = document.createElement('div');
-    qtyDiv.className = 'qty-controls';
-
-    const dec = document.createElement('button');
-    dec.type = 'button';
-    dec.textContent = '-';
-    dec.addEventListener('click', (ev)=>{ ev.stopPropagation(); changeQty(idx, -1); });
-
-    const qtyNum = document.createElement('span');
-    qtyNum.textContent = item.qty;
-    qtyNum.style.margin = '0 8px';
-
-    const inc = document.createElement('button');
-    inc.type = 'button';
-    inc.textContent = '+';
-    inc.addEventListener('click', (ev)=>{ ev.stopPropagation(); changeQty(idx, +1); });
-
-    qtyDiv.append(dec, qtyNum, inc);
-
-    const priceSpan = document.createElement('span');
-    priceSpan.textContent = `₹${item.price * item.qty}`;
-    priceSpan.style.fontWeight = '700';
-
-    row.append(img, nameSpan, qtyDiv, priceSpan);
-    cartItemsEl.appendChild(row);
-  });
-
-  // ==== DISCOUNT NOTE (exact placement like your screenshot) ====
-  if (cart.length > 0) {
-    const discountNote = document.createElement('div');
-    discountNote.className = 'cart-discount-note';
-    discountNote.textContent = 'Introductory Offer @12.5% on each product has been applied';
-    cartItemsEl.appendChild(discountNote);
-  }
-
-  // ==== SHIPPING NOTE ====
-
-
-  // ==== ORIGINAL TOTAL (as your UI shows) ====
-  // ==== ORIGINAL TOTAL (Updated for side-by-side layout) ====
-  if (cartTotalEl) {
-    // 1. Clear previous content
-    cartTotalEl.innerHTML = ''; 
-
-    // 2. Create Total Price Text (Left Side)
-    const priceSpan = document.createElement('span');
-    priceSpan.textContent = `Total: ₹${originalTotalWithShipping}`;
-    cartTotalEl.appendChild(priceSpan);
-
-    // 3. Create Shipping Note (Right Side)
-    if (shipping > 0) {
-      const shipSpan = document.createElement('span');
-      shipSpan.className = 'cart-shipping-note';
-      shipSpan.textContent = `Includes ₹${shipping} Shipping`; // text
-      cartTotalEl.appendChild(shipSpan);
+    // --- FIX: Strict Shipping Logic ---
+    let shipping = 0;
+    // Only apply shipping if cart has items AND is under threshold
+    if (cart.length > 0 && originalSubtotal < FREE_SHIPPING_THRESHOLD) {
+        shipping = SHIPPING_CHARGE;
     }
-  }
 
-  // ==== DISCOUNTED TOTAL (below the Total) ====
-  let discountedEl = document.getElementById('discountedTotalEl');
-  if (!discountedEl) {
-    discountedEl = document.createElement('div');
-    discountedEl.id = 'discountedTotalEl';
-    discountedEl.className = 'discounted-total';
-    cartTotalEl.insertAdjacentElement('afterend', discountedEl);
-  }
-  discountedEl.textContent = `Discounted Total: ₹${discountedTotalWithShipping}`;
+    // DISCOUNTED SUBTOTAL
+    let discountedSubtotal = 0;
+    cart.forEach(item => {
+      const discountedUnit = Math.round(item.price * (1 - DISCOUNT_RATE));
+      discountedSubtotal += discountedUnit * item.qty;
+    });
 
-  // ==== FREE SHIPPING PROGRESS ====
-  let progressEl = document.getElementById('freeShippingProgress');
-  const amountNeeded = Math.max(0, FREE_SHIPPING_THRESHOLD - originalSubtotal);
+    // FINAL TOTALS
+    const originalTotalWithShipping = originalSubtotal + shipping;
+    const discountedTotalWithShipping = discountedSubtotal + shipping;
 
-  if (!progressEl) {
-    progressEl = document.createElement('div');
-    progressEl.id = 'freeShippingProgress';
-    progressEl.className = 'free-shipping-progress';
-    cartPanel.appendChild(progressEl);
-  }
-
-  progressEl.textContent =
-    amountNeeded > 0
-    ? `₹${amountNeeded} away from free shipping`
-    : `You have free shipping!`;
-
-  // ==== UPDATE CART COUNT ====
-  if (cartCountEl) {
-    cartCountEl.textContent = cart.reduce((s,i) => s + i.qty, 0);
-  }
-
-  // Hide cart button if cart empty
-if (cartBtn) {
+    // RENDER ITEMS
     if (cart.length === 0) {
-        cartBtn.style.display = 'none';
+        cartItemsEl.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">Your cart is empty</div>';
     } else {
-        cartBtn.style.display = 'flex';
+        cart.forEach((item, idx) => {
+          const row = document.createElement('div');
+          row.className = 'cart-item';
+      
+          const img = document.createElement('img');
+          img.src = item.image || '';
+          img.alt = item.name || '';
+          img.style.width = '50px';
+          img.style.height = '50px';
+          img.style.objectFit = 'cover';
+          img.style.borderRadius = '6px';
+      
+          const nameSpan = document.createElement('span');
+          nameSpan.textContent = item.name;
+          nameSpan.style.flex = '1';
+          nameSpan.style.fontWeight = '600';
+      
+          const qtyDiv = document.createElement('div');
+          qtyDiv.className = 'qty-controls';
+      
+          const dec = document.createElement('button');
+          dec.type = 'button';
+          dec.textContent = '-';
+          dec.addEventListener('click', (ev)=>{ ev.stopPropagation(); changeQty(idx, -1); });
+      
+          const qtyNum = document.createElement('span');
+          qtyNum.textContent = item.qty;
+          qtyNum.style.margin = '0 8px';
+      
+          const inc = document.createElement('button');
+          inc.type = 'button';
+          inc.textContent = '+';
+          inc.addEventListener('click', (ev)=>{ ev.stopPropagation(); changeQty(idx, +1); });
+      
+          qtyDiv.append(dec, qtyNum, inc);
+      
+          const priceSpan = document.createElement('span');
+          priceSpan.textContent = `₹${item.price * item.qty}`;
+          priceSpan.style.fontWeight = '700';
+      
+          row.append(img, nameSpan, qtyDiv, priceSpan);
+          cartItemsEl.appendChild(row);
+        });
     }
-}
 
+    // ==== DISCOUNT NOTE ====
+    if (cart.length > 0) {
+      const discountNote = document.createElement('div');
+      discountNote.className = 'cart-discount-note';
+      discountNote.textContent = 'Introductory Offer @12.5% on each product has been applied';
+      cartItemsEl.appendChild(discountNote);
+    }
 
-  // ==== UPDATE STICKY CHECKOUT BUTTON ====
-  if (stickyCheckout) {
-    if (cart.length > 0 && originalTotalWithShipping > 0) {
-      stickyCheckout.textContent = `Checkout (₹${originalTotalWithShipping})`;
+    // ==== TOTALS ====
+    if (cartTotalEl) {
+      cartTotalEl.innerHTML = ''; 
+      const priceSpan = document.createElement('span');
+      // Ensure it shows 0 if empty
+      priceSpan.textContent = `Total: ₹${cart.length > 0 ? originalTotalWithShipping : 0}`;
+      cartTotalEl.appendChild(priceSpan);
+
+      if (shipping > 0) {
+        const shipSpan = document.createElement('span');
+        shipSpan.className = 'cart-shipping-note';
+        shipSpan.textContent = `Includes ₹${shipping} Shipping`;
+        cartTotalEl.appendChild(shipSpan);
+      }
+    }
+
+    // ==== DISCOUNTED TOTAL ====
+    let discountedEl = document.getElementById('discountedTotalEl');
+    if (!discountedEl) {
+      discountedEl = document.createElement('div');
+      discountedEl.id = 'discountedTotalEl';
+      discountedEl.className = 'discounted-total';
+      cartTotalEl.insertAdjacentElement('afterend', discountedEl);
+    }
+    
+    if (cart.length > 0) {
+        discountedEl.textContent = `Discounted Total: ₹${discountedTotalWithShipping}`;
+        discountedEl.style.display = 'block';
     } else {
-      stickyCheckout.style.display = 'none';
+        discountedEl.style.display = 'none';
     }
-  }
-  
-  saveCart();
 
+    // ==== FREE SHIPPING PROGRESS ====
+    let progressEl = document.getElementById('freeShippingProgress');
+    if (!progressEl) {
+      progressEl = document.createElement('div');
+      progressEl.id = 'freeShippingProgress';
+      progressEl.className = 'free-shipping-progress';
+      cartPanel.appendChild(progressEl);
+    }
+
+    if (cart.length > 0) {
+        const amountNeeded = Math.max(0, FREE_SHIPPING_THRESHOLD - originalSubtotal);
+        progressEl.textContent =
+          amountNeeded > 0
+          ? `₹${amountNeeded} away from free shipping`
+          : `You have free shipping!`;
+        progressEl.style.display = 'block';
+    } else {
+        progressEl.style.display = 'none';
+    }
+
+    // ==== CART COUNT ====
+    if (cartCountEl) {
+      cartCountEl.textContent = cart.reduce((s,i) => s + i.qty, 0);
+    }
+
+    // ==== CART BUTTON VISIBILITY ====
+    if (cartBtn) {
+        cartBtn.style.display = cart.length === 0 ? 'none' : 'flex';
+    }
+
+    // ==== STICKY CHECKOUT ====
+    if (stickyCheckout) {
+      if (cart.length > 0 && originalTotalWithShipping > 0) {
+        stickyCheckout.textContent = `Checkout (₹${originalTotalWithShipping})`;
+        // Visibility is handled by the scroll/resize handler separately
+      } else {
+        stickyCheckout.style.display = 'none';
+      }
+    }
+    
+    saveCart();
     handleStickyCheckoutVisibility();
-
-}
-
+  }
 
   function changeQty(idx, delta){
     if (!cart[idx]) return;
@@ -1619,33 +1625,28 @@ if (cartBtn) {
   }
 
   function addToCartFromProductEl(productEl){
-  if (!productEl) return;
+    if (!productEl) return;
+    // Use dataset for reliability
+    const name = productEl.dataset.name;
+    const price = parseInt(productEl.dataset.price, 10);
+    const image = productEl.dataset.img || productEl.querySelector('img').src;
 
-  const name = productEl.querySelector('h3').textContent.trim();
-
-  // 👉 grab correct data-price value
-  const price = parseInt(productEl.querySelector('.hp-price').dataset.price, 10);
-
-  const image = productEl.querySelector('img').src;
-
-  const existing = cart.find(i => i.name === name);
-  if (existing) {
-    existing.qty++;
-  } else {
-    cart.push({ name, price, image, qty: 1 });
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ name, price, image, qty: 1 });
+    }
+    renderCart();
+    openCart();
   }
 
-  renderCart();
-}
-
-
-  // ========== NAVIGATION FUNCTIONALITY ==========
+  // ========== NAVIGATION ==========
   function navigateToCategory(category) {
-    console.log('Navigating to category:', category);
     window.location.href = `products.html?category=${encodeURIComponent(category)}`;
   }
 
-  // ========== COLLECTIONS SLIDER ==========
+  // ========== SLIDER LOGIC ==========
   function initCollectionsSlider() {
     const track = qs('#sliderTrack');
     if (!track) return;
@@ -1687,7 +1688,6 @@ if (cartBtn) {
     function updateDrag(x) {
       if (!isDragging) return;
       const dx = x - startX;
-      
       if (Math.abs(dx) > 10) {
         hasMovedSignificantly = true;
         pos = dragStart - dx;
@@ -1698,12 +1698,10 @@ if (cartBtn) {
 
     function endDrag(endX) {
       if (!isDragging) return;
-      
       const endTime = Date.now();
       const timeDiff = endTime - startTime;
       const dx = Math.abs(endX - startX);
       
-      // Quick tap/click with minimal movement = navigation
       if (timeDiff < 300 && dx < 10 && !hasMovedSignificantly && startTarget) {
         const card = startTarget.closest('.collection-card');
         if (card && card.dataset.category) {
@@ -1711,7 +1709,6 @@ if (cartBtn) {
           return;
         }
       }
-      
       isDragging = false;
       startTarget = null;
       hasMovedSignificantly = false;
@@ -1719,37 +1716,18 @@ if (cartBtn) {
       setTimeout(() => isAutoPlaying = true, 1000);
     }
 
-    // Desktop events
     track.addEventListener('mouseenter', () => isAutoPlaying = false);
-    track.addEventListener('mouseleave', () => {
-      if (!isDragging) isAutoPlaying = true;
-    });
-
-    track.addEventListener('mousedown', (e) => {
-      startDrag(e.clientX, e.target);
-      e.preventDefault();
-    });
-
-    track.addEventListener('mousemove', (e) => {
-      updateDrag(e.clientX);
-    });
-
-    track.addEventListener('mouseup', (e) => {
-      endDrag(e.clientX);
-    });
-
+    track.addEventListener('mouseleave', () => { if (!isDragging) isAutoPlaying = true; });
+    track.addEventListener('mousedown', (e) => { startDrag(e.clientX, e.target); e.preventDefault(); });
+    track.addEventListener('mousemove', (e) => { updateDrag(e.clientX); });
+    track.addEventListener('mouseup', (e) => { endDrag(e.clientX); });
     track.addEventListener('mouseleave', () => {
       if (isDragging) {
         isDragging = false;
-        startTarget = null;
-        hasMovedSignificantly = false;
         track.style.cursor = '';
         setTimeout(() => isAutoPlaying = true, 1000);
       }
     });
-
-    // Mobile touch events
-    let touchStartTarget = null;
 
     track.addEventListener('touchstart', (e) => {
       isDragging = true;
@@ -1757,46 +1735,32 @@ if (cartBtn) {
       startX = e.touches[0].clientX;
       startTime = Date.now();
       dragStart = pos;
-      touchStartTarget = e.target;
-      e.preventDefault();
-    }, { passive: false });
+      startTarget = e.target;
+    }, { passive: true });
 
     track.addEventListener('touchmove', (e) => {
       if (!isDragging) return;
       const dx = e.touches[0].clientX - startX;
-      
-      // Only move if significant drag (more than 10px)
       if (Math.abs(dx) > 10) {
         pos = dragStart - dx;
         pos = ((pos % halfWidth) + halfWidth) % halfWidth;
         track.style.transform = `translateX(-${pos}px)`;
       }
-      e.preventDefault();
-    }, { passive: false });
+    }, { passive: true });
 
     track.addEventListener('touchend', (e) => {
       const endTime = Date.now();
       const timeDiff = endTime - startTime;
       const dx = Math.abs(e.changedTouches[0].clientX - startX);
       
-      // If it was a quick tap with minimal movement, treat as click
-      if (timeDiff < 300 && dx < 10 && touchStartTarget) {
-        const card = touchStartTarget.closest('.collection-card');
+      if (timeDiff < 300 && dx < 10 && startTarget) {
+        const card = startTarget.closest('.collection-card');
         if (card && card.dataset.category) {
-          console.log('Mobile tap navigation to:', card.dataset.category);
           navigateToCategory(card.dataset.category);
           return;
         }
       }
-      
       isDragging = false;
-      touchStartTarget = null;
-      setTimeout(() => isAutoPlaying = true, 1000);
-    });
-
-    track.addEventListener('touchcancel', () => {
-      isDragging = false;
-      touchStartTarget = null;
       setTimeout(() => isAutoPlaying = true, 1000);
     });
 
@@ -1805,19 +1769,14 @@ if (cartBtn) {
       pos = pos % halfWidth;
       track.style.transform = `translateX(-${pos}px)`;
     }
-    
     window.addEventListener('resize', recalc);
     cancelAnimationFrame(raf);
     raf = requestAnimationFrame(step);
-    window.addEventListener('unload', () => cancelAnimationFrame(raf));
   }
 
-
-  // ========== EVENT HANDLERS ==========
+  // ========== EVENTS ==========
   function initEventHandlers() {
-    // Global click handler
     document.addEventListener('click', function(e){
-      // Add to cart button
       const abtn = e.target.closest('.add-btn');
       if (abtn){
         e.preventDefault();
@@ -1826,7 +1785,6 @@ if (cartBtn) {
         return;
       }
       
-      // Sticky checkout click
       const stickyClicked = e.target.closest('#stickyCheckout, .sticky-checkout');
       if (stickyClicked){
         e.preventDefault();
@@ -1835,208 +1793,135 @@ if (cartBtn) {
       }
     }, false);
 
-    // Cart functionality
-    if (cartBtn) {
-      cartBtn.addEventListener('click', openCart);
-    }
+    if (cartBtn) cartBtn.addEventListener('click', openCart);
+    if (closeCart) closeCart.addEventListener('click', closeCartPanel);
+    if (checkoutBtn && cartForm) checkoutBtn.addEventListener('click', () => cartForm.style.display = 'flex');
+    if (backBtn && cartForm) backBtn.addEventListener('click', () => cartForm.style.display = 'none');
 
-    if (closeCart) {
-      closeCart.addEventListener('click', closeCartPanel);
-    }
-
-    if (checkoutBtn && cartForm) {
-      checkoutBtn.addEventListener('click', () => cartForm.style.display = 'flex');
-    }
-
-    if (backBtn && cartForm) {
-      backBtn.addEventListener('click', () => cartForm.style.display = 'none');
-    }
-
-    // Click outside cart to close
     document.addEventListener('click', function(e){
       if (!cartPanel || !cartPanel.classList.contains('open')) return;
-      
-      const clickedInside = cartPanel.contains(e.target) || 
-                           (cartBtn && cartBtn.contains(e.target)) || 
-                           (stickyCheckout && stickyCheckout.contains(e.target));
-      
-      if (!clickedInside) {
-        closeCartPanel();
-      }
+      const clickedInside = cartPanel.contains(e.target) || (cartBtn && cartBtn.contains(e.target));
+      if (!clickedInside) closeCartPanel();
     });
 
-    // WhatsApp checkout
     const confirmPayBtn = qs('#confirmPayBtn');
-    if (confirmPayBtn) {
-      confirmPayBtn.addEventListener('click', handleWhatsAppCheckout);
-    }
+    if (confirmPayBtn) confirmPayBtn.addEventListener('click', handleWhatsAppCheckout);
 
-    // Shipping estimate
-    const shippingOption = qs('#shippingOption');
-    const deliveryEstimate = qs('#deliveryEstimate');
-    if (shippingOption && deliveryEstimate) {
-      shippingOption.addEventListener('change', function(e){
-        const val = e.target.value;
-        if (val==='Standard') deliveryEstimate.textContent='Estimated Delivery: 3-7 days';
-        else if (val==='Express') deliveryEstimate.textContent='Estimated Delivery: 1-3 days';
-        else if (val==='Same-Day') deliveryEstimate.textContent='Estimated Delivery: Today';
-      });
-    }
-
-    // Navbar toggle
     if (hamburgerBtn && navLinks) {
       hamburgerBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
     }
-
-    // Search functionality
+    
     initSearchFunctionality();
-  }
 
-  // ========== CART FUNCTIONS ==========
- function openCart() {
-  if (cartPanel) {
-    cartPanel.classList.add('open');
-    cartPanel.setAttribute('aria-hidden', 'false');
-    if (cartForm) cartForm.style.display = 'none';
+    // ... inside initEventHandlers() ...
 
-    // 🔥 Hide sticky checkout when cart is open
-    const stickyCheckout = document.getElementById('stickyCheckout');
-    if (stickyCheckout) {
-      stickyCheckout.style.display = 'none';
+    // Footer Newsletter WhatsApp Logic
+    const footerNewsBtn = document.getElementById('footerNewsBtn');
+    if (footerNewsBtn) {
+      footerNewsBtn.addEventListener('click', function() {
+        const emailInput = document.getElementById('footerNewsInput');
+        const email = emailInput.value.trim();
+
+        if (!email) {
+          alert('Please enter your email address.');
+          return;
+        }
+
+        // Construct Message
+        const msg = `*🔔 NEWSLETTER SIGNUP*\n\nHello, I would like to stay in the loop!\n\n*My Email:* ${email}`;
+        
+        // Open WhatsApp
+        window.open(`https://wa.me/919004263544?text=${encodeURIComponent(msg)}`, '_blank');
+        
+        // Optional: Clear input after sending
+        emailInput.value = '';
+      });
     }
   }
-}
 
-function closeCartPanel() {
-  if (cartPanel) {
-    cartPanel.classList.remove('open');
-    cartPanel.setAttribute('aria-hidden', 'true');
-    if (cartForm) cartForm.style.display = 'none';
-
-    // 🔥 Show sticky checkout again if cart has items
-    const stickyCheckout = document.getElementById('stickyCheckout');
-    if (stickyCheckout && cart.length > 0) {
-      stickyCheckout.style.display = 'block';
-    } else if (stickyCheckout) {
-      stickyCheckout.style.display = 'none';
+  function openCart() {
+    if (cartPanel) {
+      cartPanel.classList.add('open');
+      cartPanel.setAttribute('aria-hidden', 'false');
+      if (cartForm) cartForm.style.display = 'none';
+      const stickyCheckout = document.getElementById('stickyCheckout');
+      if (stickyCheckout) stickyCheckout.style.display = 'none';
     }
   }
-}
 
-function handleWhatsAppCheckout() {
-  const name = (qs('#customerName') || {}).value || '';
-  const phone = (qs('#customerPhone') || {}).value || '';
-  const email = (qs('#customerEmail') || {}).value || '';
-  const street = (qs('#customerStreet') || {}).value || '';
-  const city = (qs('#customerCity') || {}).value || '';
-  const state = (qs('#customerState') || {}).value || '';
-  const landmark = (qs('#customerLandmark') || {}).value || '';
-  const zipcode = (qs('#customerZip') || {}).value || '';
-  const flat = (qs('#customerFlat') || {}).value || '';
-  const country = (qs('#customerCountry') || {}).value || '';
+  function closeCartPanel() {
+    if (cartPanel) {
+      cartPanel.classList.remove('open');
+      cartPanel.setAttribute('aria-hidden', 'true');
+      if (cartForm) cartForm.style.display = 'none';
+      handleStickyCheckoutVisibility();
+    }
+  }
 
+  function handleWhatsAppCheckout() {
+    const name = (qs('#customerName') || {}).value || '';
+    const phone = (qs('#customerPhone') || {}).value || '';
+    const email = (qs('#customerEmail') || {}).value || '';
+    const street = (qs('#customerStreet') || {}).value || '';
+    const city = (qs('#customerCity') || {}).value || '';
+    const state = (qs('#customerState') || {}).value || '';
+    const landmark = (qs('#customerLandmark') || {}).value || '';
+    const zipcode = (qs('#customerZip') || {}).value || '';
+    const flat = (qs('#customerFlat') || {}).value || '';
+    const country = (qs('#customerCountry') || {}).value || '';
 
     if (!name || !phone || !email || !street || !city || !state || !landmark || !zipcode || !flat || !country) {
-    alert('Fill all details!');
-    return;
+      alert('Fill all details!');
+      return;
+    }
+
+    if (!cart.length) {
+      alert('Your cart is empty.');
+      return;
+    }
+
+    const originalSubtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    const discountedSubtotal = cart.reduce((sum, item) => {
+      const dp = Math.round(item.price * (1 - DISCOUNT_RATE));
+      return sum + dp * item.qty;
+    }, 0);
+    const shipping = originalSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_CHARGE;
+    const finalTotal = discountedSubtotal + shipping;
+    const orderNumber = generateOrderNumber();
+
+    let msg = `*🧾 ORDER CONFIRMATION*\n\n*Order Number:* ${orderNumber}\n\n*👤 Customer:* ${name}\n*📞 Phone:* ${phone}\n*✉️ Email:* ${email}\n\n*🏠 Address:*\n${flat}\n${street}, ${landmark}\n${city}, ${state} - ${zipcode}\n${country}\n\n────────────────────────\n\n*🧴 Order Details:*\n`;
+    cart.forEach(item => {
+      const discPrice = Math.round(item.price * (1 - DISCOUNT_RATE));
+      msg += `• ${item.qty} × ${item.name} — ₹${discPrice * item.qty}\n`;
+    });
+    msg += `\n────────────────────────\n\n*💵 Total Payable:* ₹${finalTotal}\n\n🙏 Thank you for shopping with *Fawaz Fragrance*`;
+
+    window.open(`https://wa.me/9004263544?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
-  if (!cart.length) {
-    alert('Your cart is empty.');
-    return;
-  }
-
-  // DISCOUNT SYSTEM
-  const DISCOUNT_RATE = 0.125;
-  const SHIPPING_CHARGE = 75;
-  const FREE_SHIPPING_THRESHOLD = 599;
-
-  const originalSubtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-  const discountedSubtotal = cart.reduce((sum, item) => {
-    const dp = Math.round(item.price * (1 - DISCOUNT_RATE));
-    return sum + dp * item.qty;
-  }, 0);
-
-  const shipping = originalSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_CHARGE;
-
-  const finalTotal = discountedSubtotal + shipping;
-
-  // ORDER NUMBER
-  const orderNumber = generateOrderNumber();
-
-  // BUILD CLEAN WHATSAPP MESSAGE
-  let msg = "";
-
-  msg += `*🧾 ORDER CONFIRMATION*\n\n`;
-  msg += `*Order Number:* ${orderNumber}\n\n`;
-
-  msg += `*👤 Customer:* ${name}\n`;
-  msg += `*📞 Phone:* ${phone}\n`;
-  msg += `*✉️ Email:* ${email}\n\n`;
-
- msg += `*🏠 Address:*\n`;
- msg += `${flat}\n`;
- msg += `${street}, ${landmark}\n`;
- msg += `${city}, ${state} - ${zipcode}\n`;
- msg += `${country}\n\n`;
-
-  msg += `────────────────────────\n\n`;
-  msg += `*🧴 Order Details:*\n`;
-
-  cart.forEach(item => {
-    const discPrice = Math.round(item.price * (1 - DISCOUNT_RATE));
-    msg += `• ${item.qty} × ${item.name} — ₹${discPrice * item.qty}\n`;
-  });
-
-  msg += `\n────────────────────────\n\n`;
-  msg += `*💵 Total Payable:* ₹${finalTotal}\n\n`;
-  msg += `🙏 Thank you for shopping with *Fawaz Fragrance*`;
-
-  // SEND
-  window.open(
-    `https://wa.me/9004263544?text=${encodeURIComponent(msg)}`,
-    "_blank"
-  );
-}
-
-
-  // ========== SEARCH FUNCTIONALITY ==========
   function initSearchFunctionality() {
+    const shopSection = qs('#shop');
     function scrollToShop(){
       if (!shopSection) return;
-      const nav = qs('.navbar');
+      const nav = qs('.ff-header');
       const navH = nav ? nav.offsetHeight : 0;
-      const top = shopSection.getBoundingClientRect().top + window.pageYOffset - navH - 8;
+      const top = shopSection.getBoundingClientRect().top + window.pageYOffset - navH;
       window.scrollTo({ top, behavior:'smooth' });
     }
     
     if (searchInput) {
-      searchInput.addEventListener('pointerdown', (e)=>{
-        if (e.isPrimary === false) return;
-        e.preventDefault();
-        scrollToShop();
-        setTimeout(()=>{ 
-          try { 
-            searchInput.focus({ preventScroll:true }); 
-          } catch { 
-            searchInput.focus(); 
-          } 
-        }, 450);
-      }, { passive:false });
-      
-      searchInput.addEventListener('focus', ()=> setTimeout(scrollToShop, 80));
-    }
-    
-    document.querySelectorAll('a[href="#shop"]').forEach(a=>{
-      a.addEventListener('click', (ev)=>{ 
-        ev.preventDefault(); 
-        scrollToShop(); 
+      searchInput.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter') {
+           e.preventDefault();
+           scrollToShop();
+           searchInput.blur();
+        }
       });
-    });
+    }
+    const sBtn = qs('#searchBtn');
+    if (sBtn) sBtn.addEventListener('click', scrollToShop);
   }
 
-  // ========== INITIALIZATION ==========
   function init() {
     renderCart();
     initCollectionsSlider();
@@ -2044,92 +1929,29 @@ function handleWhatsAppCheckout() {
     setTimeout(handleStickyCheckoutVisibility, 200);
   }
 
-  
-  // Start when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 
-  // ========== UTILITY API ==========
   window.__alabwa_cart = {
     getCart: () => JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'),
-    clearCart: () => {
-      cart = [];
-      renderCart();
-    }
+    clearCart: () => { cart = []; renderCart(); }
   };
 
 })();
 
-
+// Price formatter for product grid
 document.addEventListener("DOMContentLoaded", function () {
-  
   const cards = document.querySelectorAll(".hp-price[data-price]");
-
   cards.forEach(priceEl => {
     const price = parseInt(priceEl.dataset.price, 10);
     const oldPrice = price + 40;
-
-    priceEl.innerHTML = `
-      <span class="old-price">₹${oldPrice}</span>
-      <span class="new-price">₹${price}</span>
-    `;
+    priceEl.innerHTML = `<span class="old-price">₹${oldPrice}</span><span class="new-price">₹${price}</span>`;
   });
-
 });
-
-
-// ====== HAMBURGER MOBILE MENU ======
-const ffHam = document.getElementById("hamburgerBtn");
-const ffMenu = document.getElementById("ffMobileMenu");
-
-if (ffHam && ffMenu) {
-  ffHam.addEventListener("click", () => {
-    ffMenu.classList.toggle("open");
-  });
-}
-
-
-
-// =====================
-// SEARCH BAR FUNCTION
-// =====================
-
-const searchInput = document.getElementById("searchInput");
-const searchBtn = document.getElementById("searchBtn");
-
-// Scroll to shop section
-function scrollToShop() {
-  const shopSection = document.querySelector("#shop");
-  if (!shopSection) return;
-
-  const navHeight = document.querySelector(".ff-header")?.offsetHeight || 0;
-  const top = shopSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
-  window.scrollTo({ top, behavior: "smooth" });
-}
-
-// When typing + enter
-if (searchInput) {
-  searchInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      scrollToShop();
-    }
-  });
-}
-
-// When clicking icon
-if (searchBtn) {
-  searchBtn.addEventListener("click", () => {
-    scrollToShop();
-  });
-}
-
-
-
 </script>
-
 </body>
 </html>
 
