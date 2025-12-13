@@ -20,7 +20,7 @@
     a{color:inherit;text-decoration:none}
 
     /* ======================
-       FAWAZ HEADER (DIZSOL STYLE)
+       FAWAZ HEADER
        ====================== */
 
     .ff-header {
@@ -38,12 +38,12 @@
       margin: auto;
       display: flex;
       align-items: center;
-      justify-content: space-between; /* Pushes items to edges */
+      justify-content: space-between;
       padding: 0 16px;
       position: relative;
     }
 
-    /* ------- 1. Left: Hamburger ------- */
+    /* Left: Hamburger */
     .ff-ham {
       width: 24px;
       display: flex;
@@ -52,30 +52,18 @@
       cursor: pointer;
       z-index: 302;
     }
+    .ff-ham span { width: 100%; height: 2px; background: #111; border-radius: 2px; }
 
-    .ff-ham span {
-      width: 100%;
-      height: 2px;
-      background: #111;
-      border-radius: 2px;
-    }
-
-    /* ------- 2. Center: Logo ------- */
+    /* Center: Logo */
     .ff-logo {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
       z-index: 301;
     }
+    .ff-logo img { height: 36px; width: auto; display: block; }
 
-    .ff-logo img {
-      height: 36px;
-      width: auto;
-      display: block;
-      border-radius: 0;
-    }
-
-    /* ------- 3. Right: Search Icon ------- */
+    /* Right: Search Icon */
     .ff-search-trigger {
       cursor: pointer;
       font-size: 20px;
@@ -85,7 +73,7 @@
       text-align: right;
     }
 
-    /* ------- HIDDEN SEARCH BAR OVERLAY ------- */
+    /* Search Bar Overlay */
     .ff-search-bar {
       position: absolute;
       top: 0;
@@ -97,20 +85,12 @@
       align-items: center;
       padding: 0 16px;
       z-index: 305;
-      
-      /* Animation Setup */
       opacity: 0;
       visibility: hidden;
       transform: translateY(-10px);
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
-
-    .ff-search-bar.active {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
+    .ff-search-bar.active { opacity: 1; visibility: visible; transform: translateY(0); }
     .ff-search-bar input {
       flex: 1;
       border: none;
@@ -121,20 +101,12 @@
       outline: none;
       padding: 0 10px;
     }
+    .ff-search-close { font-size: 20px; color: #666; cursor: pointer; padding: 5px; }
 
-    .ff-search-close {
-      font-size: 20px;
-      color: #666;
-      cursor: pointer;
-      padding: 5px;
-    }
-
-    /* =======================
-       MOBILE MENU (Drawer)
-       ======================= */
+    /* Mobile Menu */
     .ff-mobile-menu {
       position: fixed;
-      top: 60px; /* matches header height */
+      top: 60px; 
       right: -280px;
       width: 260px;
       height: 100vh;
@@ -148,44 +120,39 @@
       transition: right .3s ease-in-out;
       z-index: 500;
     }
+    .ff-mobile-menu a { color: #664136; font-size: 16px; }
+    .ff-mobile-menu.open { right: 0; box-shadow: -12px 0 32px rgba(0,0,0,0.2); }
 
-    .ff-mobile-menu a {
-      color: #664136;
-      font-size: 16px;
-    }
-
-    .ff-mobile-menu.open {
-      right: 0;
-      box-shadow: -12px 0 32px rgba(0,0,0,0.2);
-    }
-
-    /* Section */
+    /* Content & Grid */
     .section{padding:48px 16px;max-width:var(--max-width);margin:auto}
     .section-title{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:20px;text-align:center}
 
-    /* Categories */
     .categories{text-align:center;margin-bottom:24px}
     .categories button{margin:0 6px;padding:8px 14px;border-radius:8px;border:1px solid var(--gold);background:#fff;cursor:pointer;transition:0.3s}
     .categories button.active,.categories button:hover{background:var(--gold);color:#fff}
 
-    /* Products */
     .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
     .product{background:#fff;border-radius:16px;box-shadow:var(--card-shadow);overflow:hidden;display:flex;flex-direction:column;transition:transform .18s;position:relative;padding:0}
     .product:hover{transform:translateY(-6px)}
     .product .image-wrap{position:relative;height:220px;background:#fff;display:flex;align-items:center;justify-content:center;padding:18px}
     .product .image-wrap img{width:100%;height:100%;object-fit:cover;border-radius:12px}
     .product .arrow-btn{position:absolute;right:14px;bottom:14px;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    
     .product .info{padding:14px 16px 18px;display:flex;flex-direction:column;gap:8px}
     .product h3{font-family:'Playfair Display',serif;font-size:18px;margin:0}
     .product .description{font-size:13px;color:var(--muted);margin:0 0 4px}
     .product .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
     .product .tag{background:#f3efe8;border-radius:999px;padding:6px 10px;font-size:12px;color:var(--accent);font-weight:600}
-    .product .price{font-size:20px;font-weight:800;color:var(--accent)}
+    
+    /* Price Styling - Updated for Old/New Logic */
+    .pp-price { font-size: 16px; color: var(--accent); display: flex; align-items: center; gap: 8px; }
+    .old-price { color: #b88b7a; text-decoration: line-through; font-weight: 400; font-size: 14px; }
+    .new-price { color: #000; font-weight: 800; font-size: 20px; }
+
     .product .card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;gap:12px}
     .product .add-btn{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:700}
-    .product .muted{font-size:12px;color:var(--muted)}
-
-    /* Cart */
+    
+    /* Cart & Overlay */
     .cart-btn{position:fixed;right:16px;bottom:16px;background:var(--gold);border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;box-shadow:var(--card-shadow);cursor:pointer;z-index:200}
     .cart-count{position:absolute;top:6px;right:6px;background:#111;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px}
     
@@ -197,11 +164,10 @@
     .qty-controls{display:flex;gap:4px;align-items:center}
     .qty-controls button{padding:2px 6px;cursor:pointer;border-radius:4px;border:none;background:#ccc}
     
-    /* Sticky Checkout */
     .sticky-checkout{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;padding:12px 28px;font-weight:bold;font-size:16px;cursor:pointer;display:none;z-index:250;border-radius:999px;border:2px solid #000;box-shadow:0 4px 10px rgba(0,0,0,0.2);transition:background 0.3s, transform 0.2s}
     .sticky-checkout:hover{background:#a67c44;transform:translateX(-50%) scale(1.05)}
 
-    /* Footer Styles */
+    /* Footer */
     .main-footer { background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%); color: #fff; margin-top: 60px; font-family: Lato, Arial, sans-serif; }
     .footer-content { max-width: var(--max-width); margin: 0 auto; padding: 50px 16px 30px; }
     .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; align-items: start; }
@@ -235,13 +201,9 @@
     .cart-form input,.cart-form select{padding:8px;border-radius:6px;border:1px solid rgba(0,0,0,0.2)}
     .pay-btn { margin-top: 20px !important; margin-bottom: 10px !important; font-size: 1rem; text-transform: capitalize; border:none;border-radius:6px;background:var(--gold);color:#fff;cursor:pointer;font-weight:700;padding:10px; }
     .pay-btn:hover{background:#a67c44}
-    .pay-btn::first-letter { text-transform: uppercase; }
     .close-cart{position:absolute;top:10px;right:10px;cursor:pointer;font-size:24px}
     .free-shipping-progress { margin-top: 10px; text-align: center; font-size: 0.95rem; color: #666; line-height: 1.4; }
     
-    .old-price { color: #b88b7a; text-decoration: line-through; font-weight: 400; margin-right: 6px; }
-    .new-price { color: #000; font-weight: 800; }
-
     @media (max-width: 800px) {
       .footer-links { grid-template-columns: repeat(2, 1fr); text-align: center; }
       .footer-column { margin-bottom: 30px; }
@@ -256,53 +218,68 @@
       .newsletter-btn { border-radius: 8px; }
     }
 
- /* New Full-Width Bottom Row */
-.bulk-wholesale-row {
-  width: 100%;
-  text-align: center;         /* Centralized for Phone & Desktop */
-  margin-top: 40px;           /* Space above it */
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,0.1); /* Nice divider line */
-  color: rgba(255,255,255,0.6);
-  font-size: 15px;
-  clear: both;                /* Ensures it stays below everything */
-}
-.bulk-wholesale-row a {
-  color: var(--gold);
-  font-weight: 700;
-  text-decoration: none;
-  margin-left: 4px;
-}
-.bulk-wholesale-row a:hover {
-  text-decoration: underline;
-}
+    /* Bulk Row */
+    .bulk-wholesale-row {
+      width: 100%;
+      text-align: center; 
+      margin-top: 40px; 
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.6);
+      font-size: 15px;
+      clear: both;
+    }
+    .bulk-wholesale-row a { color: var(--gold); font-weight: 700; text-decoration: none; margin-left: 4px; }
+    .bulk-wholesale-row a:hover { text-decoration: underline; }
+
+    /* Search Suggestions */
+    .search-suggestions {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      border-top: 1px solid #f0f0f0;
+      display: none;
+      z-index: 999;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+    .search-suggestions.active { display: block; }
+    .suggestion-item {
+      padding: 14px 20px;
+      border-bottom: 1px solid #f5f5f5;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      color: #333;
+      transition: background 0.2s;
+    }
+    .suggestion-item:hover { background-color: #f9f4ea; color: #000; }
+    .suggestion-item i { color: #b99056; margin-right: 12px; font-size: 14px; }
   </style>
 </head>
 <body>
 
   <header class="ff-header">
     <div class="ff-header-inner">
-
       <div class="ff-ham" id="hamburgerBtn">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </div>
-
       <div class="ff-logo">
         <a href="index.html"><img src="Logo.png" alt="Fawaz Fragrance"></a>
       </div>
-
       <div class="ff-search-trigger" id="searchTriggerBtn">
         <i class="fas fa-search"></i>
       </div>
-
       <div class="ff-search-bar" id="searchOverlay">
-        <i class="fas fa-search" style="color:#aaa; font-size:16px;"></i>
-        <input id="searchInput" type="text" placeholder="Search for perfumes...">
-        <i class="fas fa-times ff-search-close" id="closeSearchBtn"></i>
+         <i class="fas fa-search" style="color:#aaa; font-size:16px;"></i>
+         <input id="searchInput" type="text" placeholder="Search for perfumes..." autocomplete="off">
+         <i class="fas fa-times ff-search-close" id="closeSearchBtn"></i>
+         <div class="search-suggestions" id="searchSuggestions"></div>
       </div>
-
     </div>
   </header>
 
@@ -323,13 +300,7 @@
 
     <div class="products-grid" id="productsGrid">
 
-      <div class="product" data-category="Classic"
-           data-name="Burberry Weekend"
-           data-price="200"
-           data-img="./Attar Photos/Burberry Weekend6.png"
-           data-desc="Sharp citrus explosion — energizing."
-           data-details="A relaxing and fresh fragrance found in the outdoor spirit of the brand. It has a sheer, fresh, and citrusy floral fragrance that invites you to relax and enjoy the moment."
-           data-notes="Top: Mignonette, Mandarin Orange | Heart: Nectarine, Blue Hyacinth, Iris | Base: Sandalwood, Musk, Cedar">
+      <div class="product" data-category="Classic" data-name="Burberry Weekend" data-price="200" data-img="./Attar Photos/Burberry Weekend6.png" data-desc="Sharp citrus explosion — energizing." data-details="A relaxing and fresh fragrance found in the outdoor spirit of the brand." data-notes="Top: Mignonette, Mandarin Orange | Heart: Nectarine | Base: Sandalwood">
         <div class="image-wrap">
           <img src="./Attar Photos/Burberry Weekend6.png" alt="Burberry Weekend" onclick="goToDetails(this)">
           <button class="arrow-btn" onclick="goToDetails(this.previousElementSibling)">›</button>
@@ -338,20 +309,15 @@
           <h3>Burberry Weekend</h3>
           <p class="description">Sharp citrus explosion — energizing.</p>
           <div class="card-footer">
-            <div><div class="pp-price" data-price="200"></div>
-            <div class="tags"><span class="tag">Classic</span><span class="tag">Fresh</span></div></div>
+            <div>
+              <div class="pp-price" data-price="200"></div> <div class="tags"><span class="tag">Classic</span><span class="tag">Fresh</span></div>
+            </div>
             <button class="add-btn">Add to Cart</button>
           </div>
         </div>
       </div>
 
-      <div class="product" data-category="Luxury"
-           data-name="D' Blue"
-           data-price="250"
-           data-img="./Attar Photos/D Blue7.png"
-           data-desc="Deep aquatic freshness with incense."
-           data-details="A tribute to masculine freedom in an aromatic-woody fragrance with a captivating trail. A timeless scent housed in a bottle of deep and mysterious blue."
-           data-notes="Top: Lemon, Mint, Pink Pepper | Heart: Ginger, Iso E Super, Nutmeg | Base: Labdanum, Sandalwood, Patchouli">
+      <div class="product" data-category="Luxury" data-name="D' Blue" data-price="250" data-img="./Attar Photos/D Blue7.png" data-desc="Deep aquatic freshness with incense." data-details="A tribute to masculine freedom in an aromatic-woody fragrance." data-notes="Top: Lemon, Mint | Heart: Ginger, Nutmeg | Base: Labdanum, Patchouli">
         <div class="image-wrap">
           <img src="./Attar Photos/D Blue7.png" alt="D' Blue" onclick="goToDetails(this)">
           <button class="arrow-btn" onclick="goToDetails(this.previousElementSibling)">›</button>
@@ -360,19 +326,16 @@
           <h3>D' Blue</h3>
           <p class="description">Deep aquatic freshness with incense.</p>
           <div class="card-footer">
-            <div><div class="pp-price" data-price="250"></div><div class="tags"><span class="tag">Luxury</span><span class="tag">Aquatic</span></div></div>
+            <div>
+              <div class="pp-price" data-price="250"></div>
+              <div class="tags"><span class="tag">Luxury</span><span class="tag">Aquatic</span></div>
+            </div>
             <button class="add-btn">Add to Cart</button>
           </div>
         </div>
       </div>
 
-      <div class="product" data-category="Modern"
-           data-name="D' love Sauvage"
-           data-price="250"
-           data-img="./Attar Photos/Dlove Sauvage8.png"
-           data-desc="Radically fresh, raw and noble."
-           data-details="A radically fresh composition, dictated by a name that has the ring of a manifesto. Natural ingredients, selected with extreme care, prevail in excessive doses."
-           data-notes="Top: Calabrian Bergamot, Pepper | Heart: Sichuan Pepper, Lavender, Pink Pepper | Base: Ambroxan, Cedar">
+      <div class="product" data-category="Modern" data-name="D' love Sauvage" data-price="250" data-img="./Attar Photos/Dlove Sauvage8.png" data-desc="Radically fresh, raw and noble." data-details="A radically fresh composition, dictated by a name that has the ring of a manifesto." data-notes="Top: Calabrian Bergamot | Heart: Sichuan Pepper | Base: Ambroxan">
         <div class="image-wrap">
           <img src="./Attar Photos/Dlove Sauvage8.png" alt="D' love Sauvage" onclick="goToDetails(this)">
           <button class="arrow-btn" onclick="goToDetails(this.previousElementSibling)">›</button>
@@ -381,19 +344,16 @@
           <h3>D' love Sauvage</h3>
           <p class="description">Radically fresh, raw and noble.</p>
           <div class="card-footer">
-            <div><div class="pp-price" data-price="250"></div><div class="tags"><span class="tag">Modern</span><span class="tag">Spicy</span></div></div>
+            <div>
+              <div class="pp-price" data-price="250"></div>
+              <div class="tags"><span class="tag">Modern</span><span class="tag">Spicy</span></div>
+            </div>
             <button class="add-btn">Add to Cart</button>
           </div>
         </div>
       </div>
 
-      <div class="product" data-category="Classic"
-           data-name="Majestic"
-           data-price="160"
-           data-img="./Attar Photos/Majestic9.png"
-           data-desc="A royal blend of vanilla and wood."
-           data-details="Majestic is a fragrance that embodies royalty and sophistication. A warm, woody scent wrapped in sweet vanilla and amber, perfect for those who want to leave a lasting impression."
-           data-notes="Top: Bergamot, Rose | Heart: Amber, Vanilla, Cedar | Base: Sandalwood, Musk">
+      <div class="product" data-category="Classic" data-name="Majestic" data-price="160" data-img="./Attar Photos/Majestic9.png" data-desc="A royal blend of vanilla and wood." data-details="Majestic is a fragrance that embodies royalty and sophistication." data-notes="Top: Bergamot, Rose | Heart: Amber, Vanilla | Base: Sandalwood">
         <div class="image-wrap">
           <img src="./Attar Photos/Majestic9.png" alt="Majestic" onclick="goToDetails(this)">
           <button class="arrow-btn" onclick="goToDetails(this.previousElementSibling)">›</button>
@@ -402,19 +362,16 @@
           <h3>Majestic</h3>
           <p class="description">A royal blend of vanilla and wood.</p>
           <div class="card-footer">
-            <div><div class="pp-price" data-price="160"></div><div class="tags"><span class="tag">Classic</span><span class="tag">Woody</span></div></div>
+            <div>
+              <div class="pp-price" data-price="160"></div>
+              <div class="tags"><span class="tag">Classic</span><span class="tag">Woody</span></div>
+            </div>
             <button class="add-btn">Add to Cart</button>
           </div>
         </div>
       </div>
 
-      <div class="product" data-category="Luxury"
-           data-name="Musk Rijali"
-           data-price="250"
-           data-img="./Attar Photos/Musk Rijali10.png"
-           data-desc="Intense, masculine white musk."
-           data-details="A powerful fragrance designed for the modern man. Musk Rijali blends pure white musk with earthy undertones to create a scent that is both clean and commanding."
-           data-notes="Top: Fresh Greens, Herbal Notes | Heart: White Musk, Woods | Base: Amber, Earthy Notes">
+      <div class="product" data-category="Luxury" data-name="Musk Rijali" data-price="250" data-img="./Attar Photos/Musk Rijali10.png" data-desc="Intense, masculine white musk." data-details="A powerful fragrance designed for the modern man." data-notes="Top: Fresh Greens | Heart: White Musk | Base: Amber">
         <div class="image-wrap">
           <img src="./Attar Photos/Musk Rijali10.png" alt="Musk Rijali" onclick="goToDetails(this)">
           <button class="arrow-btn" onclick="goToDetails(this.previousElementSibling)">›</button>
@@ -423,19 +380,16 @@
           <h3>Musk Rijali</h3>
           <p class="description">Intense, masculine white musk.</p>
           <div class="card-footer">
-            <div><div class="pp-price" data-price="250"></div><div class="tags"><span class="tag">Luxury</span><span class="tag">Musk</span></div></div>
+            <div>
+              <div class="pp-price" data-price="250"></div>
+              <div class="tags"><span class="tag">Luxury</span><span class="tag">Musk</span></div>
+            </div>
             <button class="add-btn">Add to Cart</button>
           </div>
         </div>
       </div>
 
-      <div class="product" data-category="Modern"
-           data-name="Musk Rose"
-           data-price="250"
-           data-img="./Attar Photos/Musk Rose11.png"
-           data-desc="Soft petals meeting creamy musk."
-           data-details="An enchanting blend where the romance of blooming roses meets the softness of white musk. It is delicate, powdery, and absolutely elegant."
-           data-notes="Top: Rose Petals, Peony | Heart: Jasmine, Musk | Base: Amber, Powder Notes">
+      <div class="product" data-category="Modern" data-name="Musk Rose" data-price="250" data-img="./Attar Photos/Musk Rose11.png" data-desc="Soft petals meeting creamy musk." data-details="An enchanting blend where the romance of blooming roses meets the softness of white musk." data-notes="Top: Rose Petals | Heart: Jasmine, Musk | Base: Amber">
         <div class="image-wrap">
           <img src="./Attar Photos/Musk Rose11.png" alt="Musk Rose" onclick="goToDetails(this)">
           <button class="arrow-btn" onclick="goToDetails(this.previousElementSibling)">›</button>
@@ -444,19 +398,16 @@
           <h3>Musk Rose</h3>
           <p class="description">Soft petals meeting creamy musk.</p>
           <div class="card-footer">
-            <div><div class="pp-price" data-price="250"></div><div class="tags"><span class="tag">Modern</span><span class="tag">Floral</span></div></div>
+            <div>
+              <div class="pp-price" data-price="250"></div>
+              <div class="tags"><span class="tag">Modern</span><span class="tag">Floral</span></div>
+            </div>
             <button class="add-btn">Add to Cart</button>
           </div>
         </div>
       </div>
 
-      <div class="product" data-category="Classic"
-           data-name="Oud 9"
-           data-price="160"
-           data-img="./Attar Photos/Oud 912.png"
-           data-desc="Traditional, deep, resinous oud."
-           data-details="Oud 9 takes you back to the roots of perfumery. It is a deep, dark, and resinous scent that highlights the pure aroma of Agarwood without any distractions."
-           data-notes="Top: Spices | Heart: Agarwood (Oud) | Base: Leather, Smoke">
+      <div class="product" data-category="Classic" data-name="Oud 9" data-price="160" data-img="./Attar Photos/Oud 912.png" data-desc="Traditional, deep, resinous oud." data-details="Oud 9 takes you back to the roots of perfumery." data-notes="Top: Spices | Heart: Agarwood (Oud) | Base: Leather, Smoke">
         <div class="image-wrap">
           <img src="./Attar Photos/Oud 912.png" alt="Oud 9" onclick="goToDetails(this)">
           <button class="arrow-btn" onclick="goToDetails(this.previousElementSibling)">›</button>
@@ -465,19 +416,16 @@
           <h3>Oud 9</h3>
           <p class="description">Traditional, deep, resinous oud.</p>
           <div class="card-footer">
-            <div><div class="pp-price" data-price="160"></div><div class="tags"><span class="tag">Classic</span><span class="tag">Oud</span></div></div>
+            <div>
+              <div class="pp-price" data-price="160"></div>
+              <div class="tags"><span class="tag">Classic</span><span class="tag">Oud</span></div>
+            </div>
             <button class="add-btn">Add to Cart</button>
           </div>
         </div>
       </div>
 
-      <div class="product" data-category="Luxury"
-           data-name="Oud Kashmiri"
-           data-price="250"
-           data-img="./Attar Photos/Oud Kashmiri13.png"
-           data-desc="Rich saffron blended with premium oud."
-           data-details="Inspired by the valleys of Kashmir, this scent marries the costliest spice in the world, Saffron, with the richness of Oud. It is warm, spicy, and incredibly luxurious."
-           data-notes="Top: Kashmiri Saffron, Cinnamon | Heart: Rose, Oud | Base: Amber, Sandalwood">
+      <div class="product" data-category="Luxury" data-name="Oud Kashmiri" data-price="250" data-img="./Attar Photos/Oud Kashmiri13.png" data-desc="Rich saffron blended with premium oud." data-details="Inspired by the valleys of Kashmir, this scent marries the costliest spice in the world, Saffron, with Oud." data-notes="Top: Kashmiri Saffron | Heart: Rose, Oud | Base: Amber, Sandalwood">
         <div class="image-wrap">
           <img src="./Attar Photos/Oud Kashmiri13.png" alt="Oud Kashmiri" onclick="goToDetails(this)">
           <button class="arrow-btn" onclick="goToDetails(this.previousElementSibling)">›</button>
@@ -486,19 +434,16 @@
           <h3>Oud Kashmiri</h3>
           <p class="description">Rich saffron blended with premium oud.</p>
           <div class="card-footer">
-            <div><div class="pp-price" data-price="250"></div><div class="tags"><span class="tag">Luxury</span><span class="tag">Spicy</span></div></div>
+            <div>
+              <div class="pp-price" data-price="250"></div>
+              <div class="tags"><span class="tag">Luxury</span><span class="tag">Spicy</span></div>
+            </div>
             <button class="add-btn">Add to Cart</button>
           </div>
         </div>
       </div>
 
-      <div class="product" data-category="Modern"
-           data-name="Oud Kuwaiti"
-           data-price="250"
-           data-img="./Attar Photos/Oud Kuwaiti14.png"
-           data-desc="Smoky, intense, and long-lasting."
-           data-details="A bold and intense fragrance favored in the Gulf region. Oud Kuwaiti is characterized by its smoky, leathery profile that commands attention and lasts for days."
-           data-notes="Top: Incense, Cardamom | Heart: Leather, Oud | Base: Tobacco, Ambergris">
+      <div class="product" data-category="Modern" data-name="Oud Kuwaiti" data-price="250" data-img="./Attar Photos/Oud Kuwaiti14.png" data-desc="Smoky, intense, and long-lasting." data-details="A bold and intense fragrance favored in the Gulf region." data-notes="Top: Incense | Heart: Leather, Oud | Base: Tobacco">
         <div class="image-wrap">
           <img src="./Attar Photos/Oud Kuwaiti14.png" alt="Oud Kuwaiti" onclick="goToDetails(this)">
           <button class="arrow-btn" onclick="goToDetails(this.previousElementSibling)">›</button>
@@ -507,19 +452,16 @@
           <h3>Oud Kuwaiti</h3>
           <p class="description">Smoky, intense, and long-lasting.</p>
           <div class="card-footer">
-            <div><div class="pp-price" data-price="250"></div><div class="tags"><span class="tag">Modern</span><span class="tag">Bold</span></div></div>
+            <div>
+              <div class="pp-price" data-price="250"></div>
+              <div class="tags"><span class="tag">Modern</span><span class="tag">Bold</span></div>
+            </div>
             <button class="add-btn">Add to Cart</button>
           </div>
         </div>
       </div>
 
-      <div class="product" data-category="Classic"
-           data-name="Oud Lavender"
-           data-price="250"
-           data-img="./Attar Photos/Oud Lavender15.png"
-           data-desc="A unique mix of calm floral and dark wood."
-           data-details="A surprising and delightful combination. The calming, herbaceous freshness of Lavender cuts through the dark richness of Oud, creating a perfectly balanced modern masterpiece."
-           data-notes="Top: French Lavender, Lemon | Heart: Violet, Oud | Base: Patchouli, Musk">
+      <div class="product" data-category="Classic" data-name="Oud Lavender" data-price="250" data-img="./Attar Photos/Oud Lavender15.png" data-desc="A unique mix of calm floral and dark wood." data-details="A surprising and delightful combination." data-notes="Top: French Lavender | Heart: Violet, Oud | Base: Patchouli">
         <div class="image-wrap">
           <img src="./Attar Photos/Oud Lavender15.png" alt="Oud Lavender" onclick="goToDetails(this)">
           <button class="arrow-btn" onclick="goToDetails(this.previousElementSibling)">›</button>
@@ -528,7 +470,10 @@
           <h3>Oud Lavender</h3>
           <p class="description">A unique mix of calm floral and dark wood.</p>
           <div class="card-footer">
-            <div><div class="pp-price" data-price="250"></div><div class="tags"><span class="tag">Classic</span><span class="tag">Floral</span></div></div>
+            <div>
+              <div class="pp-price" data-price="250"></div>
+              <div class="tags"><span class="tag">Classic</span><span class="tag">Floral</span></div>
+            </div>
             <button class="add-btn">Add to Cart</button>
           </div>
         </div>
@@ -567,9 +512,7 @@
 
   <footer class="main-footer">
     <div class="footer-content">
-
     <div class="footer-links">
-
       <div class="footer-column">
         <h4>Shop</h4>
         <ul>
@@ -580,21 +523,18 @@
           <li><a href="#bestsellers">Best Sellers</a></li>
         </ul>
       </div>
-
       <div class="footer-column">
         <h4>Connect</h4>
         <a class="social-link" href="https://www.facebook.com/profile.php?id=61578977254156"><i class="fab fa-facebook-f"></i> Facebook</a>
         <a class="social-link" href="https://www.instagram.com/fawazfragrance/"><i class="fab fa-instagram"></i> Instagram</a>
         <a class="social-link" href="https://in.pinterest.com/fawazfragrance/"><i class="fab fa-pinterest-p"></i> Pinterest</a>
       </div>
-
       <div class="footer-column">
         <h4>Customer Service</h4>
         <p><i class="fas fa-phone"></i> +91 9004263544</p>
         <p><i class="fas fa-envelope"></i> fawazfragnance@gmail.com</p>
         <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
       </div>
-
       <div class="footer-column">
           <h4>Stay In The Loop</h4>
           <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
@@ -605,20 +545,17 @@
             <button id="footerNewsBtn" class="newsletter-btn" style="border-radius:0 6px 6px 0;">Subscribe</button>
           </div>
         </div>
-
     </div> 
     <div class="bulk-wholesale-row">
-      For Bulk and Wholesale enquiry please drop an email <strong>fawazfragnance@gmail.com</strong>.</a>
+      For Bulk and Wholesale enquiry please drop an email <a href="mailto:fawazfragnance@gmail.com">fawazfragnance@gmail.com</a>.
     </div>
-
 </div>
-
     <div class="footer-bottom">
       <div class="footer-bottom-content">
         <div class="footer-legal">
           <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
           <div class="legal-links">
-            <a href="privacy.html">policies</a>
+            <a href="privacy.html">Policies</a>
             <a href="terms.html">Terms of Service</a>
           </div>
         </div>
@@ -629,6 +566,7 @@
       </div>
     </div>
   </footer>
+
 <script>
 function generateOrderNumber() {
   const today = new Date();
@@ -657,7 +595,6 @@ function handleStickyCheckoutVisibility() {
   const footerRect = footer.getBoundingClientRect();
   const windowHeight = window.innerHeight;
 
-  // Hide if cart open or footer visible, else show if cart has items
   const cart = JSON.parse(localStorage.getItem('alabwa_cart_v1') || '[]');
   
   if (cartOpen || (footerRect.top < windowHeight && footerRect.bottom > 0)) {
@@ -671,24 +608,18 @@ function handleStickyCheckoutVisibility() {
 
 function goToDetails(imgElement) {
     const parent = imgElement.closest(".product");
-    
-    // Get basic info
     const name = parent.getAttribute("data-name");
     const price = parent.getAttribute("data-price");
     const img = parent.getAttribute("data-img");
     const desc = parent.getAttribute("data-desc");
-
-    // Get NEW info (Details and Notes)
     const details = parent.getAttribute("data-details") || '';
     const notes = parent.getAttribute("data-notes") || '';
 
-    // Create the long URL
     window.location.href = `product-details.html?name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&img=${encodeURIComponent(img)}&desc=${encodeURIComponent(desc)}&details=${encodeURIComponent(details)}&notes=${encodeURIComponent(notes)}`;
 }   
 
 (function(){
   'use strict';
-
   const STORAGE_KEY = 'alabwa_cart_v1';
 
   // helpers
@@ -698,9 +629,7 @@ function goToDetails(imgElement) {
 
   // UI elements
   const hamburgerBtn = qs('#hamburgerBtn');
-  const navLinks = qs('#ffMobileMenu'); // This is the menu container
-  const searchInput = qs('#searchInput');
-
+  const navLinks = qs('#ffMobileMenu'); 
   const cartBtn = qs('#cartBtn');
   const cartPanel = qs('#cartPanel');
   const closeCart = qs('#closeCart');
@@ -712,17 +641,16 @@ function goToDetails(imgElement) {
   const cartCountEl = qs('#cartCount');
   const stickyCheckout = qs('#stickyCheckout');
 
-  // local cart (load from storage)
+  // local cart
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch(e){ cart = []; }
 
   function saveCart(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(cart || [])); }
 
-  // Check URL for category parameter and auto-select
+  // 1. Initialize Categories from URL
   function initializeCategoryFromURL(){
     const urlParams = new URLSearchParams(window.location.search);
     const category = urlParams.get('category');
-    
     if (category) {
       const categoryBtn = qs(`[data-category="${category}"]`);
       if (categoryBtn) {
@@ -733,21 +661,7 @@ function goToDetails(imgElement) {
     }
   }
 
-  // Auto-open cart if coming from product details page
-  function checkAutoOpenCart() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('openCart') === 'true') {
-      setTimeout(() => {
-        if (cartPanel) {
-          cartPanel.classList.add('open');
-          cartPanel.setAttribute('aria-hidden','false');
-          if (cartForm) cartForm.style.display = 'none';
-        }
-        window.history.replaceState({}, '', window.location.pathname);
-      }, 500);
-    }
-  }
-
+  // 2. Filter Function
   function filterProductsByCategory(category) {
     qsa('.product').forEach(p => {
       if (category === 'all' || p.dataset.category === category) {
@@ -758,35 +672,28 @@ function goToDetails(imgElement) {
     });
   }
 
-  // ====== UPDATED RENDER CART ======
+  // 3. Render Cart
   function renderCart() {
     if (!cartItemsEl) return;
     cartItemsEl.innerHTML = '';
 
-    // ORIGINAL SUBTOTAL
     let originalSubtotal = 0;
-    cart.forEach(item => {
-      originalSubtotal += item.price * item.qty;
-    });
+    cart.forEach(item => { originalSubtotal += item.price * item.qty; });
 
-    // SHIPPING RULE (Fixed: 0 if empty)
     let shipping = 0;
     if (cart.length > 0 && originalSubtotal < FREE_SHIPPING_THRESHOLD) {
         shipping = SHIPPING_CHARGE;
     }
 
-    // DISCOUNTED SUBTOTAL
     let discountedSubtotal = 0;
     cart.forEach(item => {
       const discountedUnit = Math.round(item.price * (1 - DISCOUNT_RATE));
       discountedSubtotal += discountedUnit * item.qty;
     });
 
-    // TOTALS
     const originalTotalWithShipping = originalSubtotal + shipping;
     const discountedTotalWithShipping = discountedSubtotal + shipping;
 
-    // RENDER ITEMS
     if (cart.length === 0) {
         cartItemsEl.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">Your cart is empty</div>';
     } else {
@@ -823,7 +730,6 @@ function goToDetails(imgElement) {
           inc.addEventListener('click', (ev)=>{ ev.stopPropagation(); changeQty(idx, +1); });
 
           qtyDiv.append(dec, qtyNum, inc);
-
           const priceSpan = document.createElement('span');
           priceSpan.textContent = `₹${item.price * item.qty}`;
           priceSpan.style.fontWeight = '700';
@@ -833,7 +739,6 @@ function goToDetails(imgElement) {
         });
     }
 
-    // ==== DISCOUNT NOTE ====
     if (cart.length > 0) {
       const discountNote = document.createElement('div');
       discountNote.className = 'cart-discount-note';
@@ -841,10 +746,8 @@ function goToDetails(imgElement) {
       cartItemsEl.appendChild(discountNote);
     }
 
-    // ==== ORIGINAL TOTAL & SHIPPING NOTE ====
     if (cartTotalEl) {
       cartTotalEl.innerHTML = `<span>Total: ₹${cart.length > 0 ? originalTotalWithShipping : 0}</span>`;
-      
       if (shipping > 0) {
          const sNote = document.createElement('span');
          sNote.className = 'cart-shipping-note';
@@ -853,7 +756,6 @@ function goToDetails(imgElement) {
       }
     }
 
-    // ==== DISCOUNTED TOTAL ====
     let discountedEl = document.getElementById('discountedTotalEl');
     if (!discountedEl) {
       discountedEl = document.createElement('div');
@@ -869,7 +771,6 @@ function goToDetails(imgElement) {
         discountedEl.style.display = 'none';
     }
 
-    // ==== FREE SHIPPING PROGRESS ====
     let progressEl = document.getElementById('freeShippingProgress');
     if (!progressEl) {
       progressEl = document.createElement('div');
@@ -888,17 +789,9 @@ function goToDetails(imgElement) {
         progressEl.style.display = 'none';
     }
 
-    // ==== UPDATE CART COUNT ====
-    if (cartCountEl) {
-      cartCountEl.textContent = cart.reduce((s,i) => s + i.qty, 0);
-    }
+    if (cartCountEl) cartCountEl.textContent = cart.reduce((s,i) => s + i.qty, 0);
+    if (cartBtn) cartBtn.style.display = cart.length === 0 ? 'none' : 'flex';
 
-    // ==== HIDE CART BUTTON WHEN EMPTY ====
-    if (cartBtn) {
-      cartBtn.style.display = cart.length === 0 ? 'none' : 'flex';
-    }
-
-    // ==== UPDATE STICKY CHECKOUT ====
     if (stickyCheckout) {
       if (cart.length > 0 && originalTotalWithShipping > 0) {
         stickyCheckout.textContent = `Checkout (₹${originalTotalWithShipping})`;
@@ -907,7 +800,6 @@ function goToDetails(imgElement) {
       }
     }
 
-    // ==== [FIX] HIDE CHECKOUT BTN IF EMPTY ====
     if (checkoutBtn) {
         if(cart.length === 0) {
             checkoutBtn.style.display = 'none';
@@ -916,7 +808,6 @@ function goToDetails(imgElement) {
             checkoutBtn.style.display = 'block';
         }
     }
-
     saveCart();
     if (typeof handleStickyCheckoutVisibility === 'function') handleStickyCheckoutVisibility();
   }
@@ -928,37 +819,22 @@ function goToDetails(imgElement) {
     renderCart();
   }
 
-  // add product element -> cart
   function addToCartFromProductEl(productEl){
     if (!productEl) return;
-
     const name = (productEl.querySelector('h3') || {}).textContent?.trim() || 'Product';
-    const priceTxt = (productEl.querySelector('.price') || {}).textContent || productEl.dataset.price || '';
+    const priceTxt = productEl.dataset.price || '';
     const price = parsePrice(priceTxt);
     const image = (productEl.querySelector('img') || {}).src || '';
 
-    // detect volume
-    let volume = productEl.getAttribute("data-volume");
-    if (!volume || volume === "default") {
-        volume = "";
-    }
-
+    let volume = productEl.getAttribute("data-volume") || "";
     const existing = cart.find(i => i.name === name && i.volume === volume);
 
     if (existing) {
         existing.qty++;
     } else {
-        cart.push({
-            name,
-            price,
-            image,
-            qty: 1,
-            volume: volume
-        });
+        cart.push({ name, price, image, qty: 1, volume });
     }
-
     renderCart();
-    // Open cart automatically
     if (cartPanel) {
         cartPanel.classList.add('open');
         cartPanel.setAttribute('aria-hidden','false');
@@ -968,7 +844,7 @@ function goToDetails(imgElement) {
     }
   }
 
-  // handle add-btn clicks via delegation
+  // --- EVENTS ---
   document.addEventListener('click', function(e){
     const addBtn = e.target.closest('.add-btn');
     if (addBtn){
@@ -977,7 +853,6 @@ function goToDetails(imgElement) {
       addToCartFromProductEl(prod);
       return;
     }
-    // sticky checkout click - open cart
     if (e.target.closest && e.target.closest('#stickyCheckout, .sticky-checkout')){
       e.preventDefault();
       cartPanel.classList.add('open');
@@ -987,7 +862,6 @@ function goToDetails(imgElement) {
     }
   }, false);
 
-  // cart open/close
   if (cartBtn && cartPanel) {
     cartBtn.addEventListener('click', () => {
       cartPanel.classList.add('open');
@@ -1007,7 +881,6 @@ function goToDetails(imgElement) {
     });
   }
 
-  // [FIX] Checkout Button Safety Check
   if (checkoutBtn && cartForm){
     checkoutBtn.addEventListener('click', ()=> {
         if(cart.length === 0) {
@@ -1022,7 +895,6 @@ function goToDetails(imgElement) {
     backBtn.addEventListener('click', ()=> cartForm.style.display = 'none');
   }
 
-  // close CART panel when clicking outside
   document.addEventListener('click', function(e){
     if (!cartPanel) return;
     if (!cartPanel.classList.contains('open')) return;
@@ -1035,7 +907,6 @@ function goToDetails(imgElement) {
     }
   });
 
-  // confirm & pay -> build WhatsApp message
   const confirmPayBtn = qs('#confirmPayBtn');
   if (confirmPayBtn) {
     confirmPayBtn.addEventListener('click', () => {
@@ -1054,7 +925,6 @@ function goToDetails(imgElement) {
         alert('Fill all details!');
         return;
       }
-
       if (!cart.length) {
         alert('Your cart is empty.');
         return;
@@ -1062,7 +932,6 @@ function goToDetails(imgElement) {
 
       let originalSubtotal = 0;
       let discountedSubtotal = 0;
-
       cart.forEach(item => {
         originalSubtotal += item.price * item.qty;
         const discounted = Math.round(item.price * (1 - DISCOUNT_RATE));
@@ -1071,141 +940,203 @@ function goToDetails(imgElement) {
 
       const shipping = originalSubtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_CHARGE;
       const finalTotal = discountedSubtotal + shipping;
-
       const orderNumber = generateOrderNumber();
 
-      let msg = "";
-      msg += `*🧾 ORDER CONFIRMATION*\n\n`;
-      msg += `*Order Number:* ${orderNumber}\n\n`;
-      msg += `*👤 Customer:* ${name}\n`;
-      msg += `*📞 Phone:* ${phone}\n`;
-      msg += `*✉️ Email:* ${email}\n\n`;
-      msg += `*🏠 Address:*\n`;
-      msg += `${flat}\n`;
-      msg += `${street}, ${landmark}\n`;
-      msg += `${city}, ${state} - ${zipcode}\n`;
-      msg += `${country}\n\n`;
-
-      msg += `────────────────────────\n\n`;
-      msg += `*🧴 Order Details:*\n`;
-
+      let msg = `*🧾 ORDER CONFIRMATION*\n\n*Order Number:* ${orderNumber}\n\n*👤 Customer:* ${name}\n*📞 Phone:* ${phone}\n*✉️ Email:* ${email}\n\n*🏠 Address:*\n${flat}\n${street}, ${landmark}\n${city}, ${state} - ${zipcode}\n${country}\n\n────────────────────────\n\n*🧴 Order Details:*\n`;
       cart.forEach(item => {
         const discounted = Math.round(item.price * (1 - DISCOUNT_RATE));
         msg += `• ${item.qty} × ${item.name} — ₹${discounted * item.qty}\n`;
       });
+      msg += `\n────────────────────────\n*💵 Total Payable:* ₹${finalTotal}\n\n🙏 Thank you for shopping with *Fawaz Fragrance*`;
 
-      msg += `\n────────────────────────\n`;
-      msg += `*💵 Total Payable:* ₹${finalTotal}\n\n`;
-      msg += `🙏 Thank you for shopping with *Fawaz Fragrance*`;
-
-      window.open(
-        `https://wa.me/919004263544?text=${encodeURIComponent(msg)}`,
-        "_blank"
-      );
+      window.open(`https://wa.me/919004263544?text=${encodeURIComponent(msg)}`, "_blank");
     });
   }
 
-  // ==========================================
-  // [NEW FIX] CLICK OUTSIDE TO CLOSE MOBILE MENU
-  // ==========================================
   document.addEventListener('click', function(e) {
     if (navLinks && navLinks.classList.contains('open')) {
       const clickedInsideMenu = navLinks.contains(e.target);
       const clickedOnHam = hamburgerBtn && hamburgerBtn.contains(e.target);
-      
       if (!clickedInsideMenu && !clickedOnHam) {
         navLinks.classList.remove('open');
       }
     }
   });
 
-  // nav hamburger
   if (hamburgerBtn && navLinks){
     hamburgerBtn.addEventListener('click', (e)=> {
-      e.stopPropagation(); // prevent immediate close by document listener
+      e.stopPropagation();
       navLinks.classList.toggle('open');
     });
   }
 
-  // initial render and URL category check
   document.addEventListener('DOMContentLoaded', function(){
     renderCart();
-    initializeCategoryFromURL(); // Check URL for category filtering
-    checkAutoOpenCart(); // Check if cart should auto-open
-  });
+    initializeCategoryFromURL(); 
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('openCart') === 'true') {
+      setTimeout(() => {
+        if (cartPanel) {
+          cartPanel.classList.add('open');
+          cartPanel.setAttribute('aria-hidden','false');
+          if (cartForm) cartForm.style.display = 'none';
+        }
+        window.history.replaceState({}, '', window.location.pathname);
+      }, 500);
+    }
 
-  // expose simple API (optional)
-  window.__alabwa_cart = {
-    getCart: ()=> JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'),
-    clearCart: ()=> { cart = []; renderCart(); }
-  };
+    const categoryButtons = qsa('.categories button');
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filterProductsByCategory(btn.dataset.category);
+      });
+    });
+
+    // ==== [FIX] RENDER MINUS PRICING ====
+    // Calculates 12.5% discount automatically based on data-price
+    qsa('.pp-price').forEach(el => {
+        const originalPrice = parseFloat(el.parentElement.querySelector('.pp-price') ? el.parentElement.querySelector('.pp-price').getAttribute('data-price') : 0) || parseFloat(el.getAttribute('data-price'));
+        
+        if(!originalPrice) return;
+        
+        const discountedPrice = Math.round(originalPrice * (1 - DISCOUNT_RATE));
+        el.innerHTML = `<span class="old-price">₹${originalPrice}</span> <span class="new-price">₹${discountedPrice}</span>`;
+    });
+  });
 
 })();
 
 window.addEventListener('scroll', handleStickyCheckoutVisibility);
 window.addEventListener('resize', handleStickyCheckoutVisibility);
 
-// ====== HEADER LOGIC (Search Toggle) ======
-const searchTrigger = document.getElementById('searchTriggerBtn');
-const searchOverlay = document.getElementById('searchOverlay');
-const closeSearch = document.getElementById('closeSearchBtn');
-const sInput = document.getElementById('searchInput');
+// ====== SEARCH LOGIC ======
+(function() {
+    const qs = (s) => document.querySelector(s);
+    const searchTrigger = qs('#searchTriggerBtn');
+    const searchOverlay = qs('#searchOverlay');
+    const closeSearch = qs('#closeSearchBtn');
+    const sInput = qs('#searchInput');
+    const productsSection = qs('#allProducts'); 
+    const suggestionsBox = qs('#searchSuggestions');
+    let isAutoScrolling = false; 
 
-if (searchTrigger) {
-  searchTrigger.addEventListener('click', () => {
-    searchOverlay.classList.add('active');
-    setTimeout(() => sInput.focus(), 100); 
-  });
-}
-if (closeSearch) {
-  closeSearch.addEventListener('click', () => {
-    searchOverlay.classList.remove('active');
-  });
-}
-// Enter key support for search (filter products on page)
-if (sInput) {
-  sInput.addEventListener('input', ()=> {
-    const q = sInput.value.toLowerCase().trim();
-    document.querySelectorAll('.product').forEach(p => {
-      p.style.display = p.textContent.toLowerCase().includes(q) ? '' : 'none';
+    function scrollToGrid() {
+      if (!productsSection) return;
+      isAutoScrolling = true; 
+      const nav = qs('.ff-header');
+      const navH = nav ? nav.offsetHeight : 0;
+      const top = productsSection.getBoundingClientRect().top + window.pageYOffset - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+      setTimeout(() => { isAutoScrolling = false; }, 1000);
+    }
+
+    function closeTheSearch() {
+      if (!searchOverlay.classList.contains('active')) return;
+      searchOverlay.classList.remove('active');
+      suggestionsBox.classList.remove('active');
+      sInput.blur(); 
+    }
+
+    function filterProducts(searchTerm) {
+      const query = searchTerm.toLowerCase().trim();
+      const products = document.querySelectorAll('.product');
+      products.forEach(product => {
+        const name = (product.dataset.name || '').toLowerCase();
+        const desc = (product.dataset.desc || '').toLowerCase();
+        const tags = product.querySelector('.tags') ? product.querySelector('.tags').innerText.toLowerCase() : '';
+        if (name.includes(query) || desc.includes(query) || tags.includes(query)) {
+            product.style.display = 'flex';
+        } else {
+            product.style.display = 'none';
+        }
+      });
+    }
+
+    function showSuggestions(query) {
+      if (!query || query.length < 1) {
+        suggestionsBox.classList.remove('active');
+        return;
+      }
+      const cleanQuery = query.toLowerCase().trim();
+      const products = document.querySelectorAll('.product');
+      let matches = [];
+      products.forEach(p => {
+        const name = p.dataset.name;
+        if (name && name.toLowerCase().includes(cleanQuery)) {
+           if(!matches.includes(name)) matches.push(name);
+        }
+      });
+
+      if (matches.length > 0) {
+        suggestionsBox.innerHTML = matches.map(name => `
+          <div class="suggestion-item" data-val="${name.replace(/"/g, '&quot;')}">
+            <i class="fas fa-search"></i> <span>${name}</span>
+          </div>
+        `).join('');
+        suggestionsBox.classList.add('active');
+        document.querySelectorAll('.suggestion-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const val = this.getAttribute('data-val');
+                sInput.value = val;
+                filterProducts(val);
+                closeTheSearch(); 
+                scrollToGrid();
+            });
+        });
+      } else {
+        suggestionsBox.classList.remove('active');
+      }
+    }
+
+    if (searchTrigger) {
+      searchTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        searchOverlay.classList.add('active');
+        scrollToGrid(); 
+        setTimeout(() => sInput.focus(), 100); 
+      });
+    }
+    if (closeSearch) {
+      closeSearch.addEventListener('click', closeTheSearch);
+    }
+    if (sInput) {
+      sInput.addEventListener('input', (e) => {
+         filterProducts(e.target.value);
+         showSuggestions(e.target.value);
+      });
+      sInput.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter') {
+           e.preventDefault();
+           closeTheSearch();
+        }
+      });
+      sInput.addEventListener('click', (e) => e.stopPropagation());
+    }
+    document.addEventListener('click', (e) => {
+      if (searchOverlay.classList.contains('active')) {
+         if (!searchOverlay.contains(e.target) && e.target !== searchTrigger) {
+            closeTheSearch();
+         }
+      }
     });
-  });
-}
+    window.addEventListener('scroll', () => {
+      if (searchOverlay.classList.contains('active') && !isAutoScrolling) {
+         closeTheSearch();
+      }
+    });
+})();
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Target ONLY product listing page prices (pp-price)
-  const cards = document.querySelectorAll(".pp-price[data-price]");
-
-  cards.forEach(priceEl => {
-    const price = parseInt(priceEl.dataset.price, 10);
-    const oldPrice = price + 40;
-
-    priceEl.innerHTML = `
-      <span class="old-price">₹${oldPrice}</span>
-      <span class="new-price">₹${price}</span>
-    `;
-  });
-});
-
-// ====== FOOTER NEWSLETTER WHATSAPP LOGIC ======
 const footerNewsBtn = document.getElementById('footerNewsBtn');
 if (footerNewsBtn) {
   footerNewsBtn.addEventListener('click', function() {
     const emailInput = document.getElementById('footerNewsInput');
     const email = emailInput.value.trim();
-
-    if (!email) {
-      alert('Please enter your email address.');
-      return;
-    }
-
-    // Construct Message
+    if (!email) { alert('Please enter your email address.'); return; }
     const msg = `*🔔 NEWSLETTER SIGNUP*\n\nHello, I would like to stay in the loop!\n\n*My Email:* ${email}`;
-    
-    // Open WhatsApp
     window.open(`https://wa.me/919004263544?text=${encodeURIComponent(msg)}`, '_blank');
-    
-    // Clear input
     emailInput.value = '';
   });
 }
