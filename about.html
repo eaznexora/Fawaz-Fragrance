@@ -3,9 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fawaz Fragrance</title>
+  <title>Fawaz Fragrance | About & Contact</title>
 
-  <!-- Favicon -->
   <link rel="icon" href="Favicon.png" type="image/png">
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -16,43 +15,165 @@
       --bg:#fff; --text:#111; --muted:#6b6b6b;
       --gold:#b99056; --accent:#0b0b0b; --beige:#f5efe8;
       --card-shadow:0 8px 24px rgba(12,12,12,0.12);
-      --max-width:1200px; /* same as index page */
+      --max-width:1200px; 
     }
 
     *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:Lato,sans-serif;background:var(--beige);color:var(--text);}
+    body{font-family:Lato,Arial,sans-serif;background:var(--beige);color:var(--text);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
     a{text-decoration:none;color:inherit;}
     img{max-width:100%;border-radius:14px;display:block;}
- :root{
-  --bg:#fff; --text:#111; --muted:#6b6b6b; --gold:#b99056; --accent:#0b0b0b;
-  --beige:#f5efe8; --card-shadow:0 8px 24px rgba(12,12,12,0.12); --max-width:1200px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Lato,Arial,sans-serif;background:var(--beige);color:var(--text);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-img{max-width:100%;display:block}
-a{color:inherit;text-decoration:none}
 
-/* Navbar */
-.navbar{position:sticky;top:0;background:rgba(255,255,255,0.95);border-bottom:1px solid rgba(0,0,0,0.06);z-index:-1;padding:10px 16px}
-.nav-top{display:flex;align-items:center;justify-content:space-between;max-width:var(--max-width);margin:auto}
-.logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent)}
-.hamburger{display:none;flex-direction:column;cursor:pointer;gap:4px}
-.hamburger span{width:24px;height:3px;background:var(--accent);border-radius:2px}
-.search-mobile{margin:10px 0;display:flex;justify-content:center}
-.search-mobile input{width:100%;max-width:400px;padding:8px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.1)}
-.nav-links{display:flex;justify-content:center;gap:16px;transition:max-height .25s ease,opacity .25s ease}
-.nav-links a{color:var(--muted);font-weight:600}
+    /* ======================
+       FAWAZ HEADER (DIZSOL STYLE)
+       ====================== */
 
-    /* Section */
+    .ff-header {
+      width: 100%;
+      background: #FFFCE9;
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .ff-header-inner {
+      max-width: 1200px;
+      height: 60px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Pushes items to edges */
+      padding: 0 16px;
+      position: relative;
+    }
+
+    /* ------- 1. Left: Hamburger ------- */
+    .ff-ham {
+      width: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 302;
+    }
+
+    .ff-ham span {
+      width: 100%;
+      height: 2px;
+      background: #111;
+      border-radius: 2px;
+    }
+
+    /* ------- 2. Center: Logo ------- */
+    .ff-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 301;
+    }
+
+    .ff-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+      border-radius: 0; /* Logo shouldn't have border radius */
+    }
+
+    /* ------- 3. Right: Search Icon ------- */
+    .ff-search-trigger {
+      cursor: pointer;
+      font-size: 20px;
+      color: #111;
+      z-index: 302;
+      width: 24px;
+      text-align: right;
+    }
+
+    /* ------- HIDDEN SEARCH BAR OVERLAY ------- */
+    .ff-search-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #FFFCE9;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      z-index: 305;
+      
+      /* Animation Setup */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .ff-search-bar.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .ff-search-bar input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      color: #111;
+      outline: none;
+      padding: 0 10px;
+    }
+
+    .ff-search-close {
+      font-size: 20px;
+      color: #666;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* =======================
+       MOBILE MENU (Drawer)
+       ======================= */
+    .ff-mobile-menu {
+      position: fixed;
+      top: 60px; /* matches header height */
+      right: -280px;
+      width: 260px;
+      height: 100vh;
+      background: #FFFCE9;
+      border-left: 2px solid #fffce9;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      font-weight: 600;
+      transition: right .3s ease-in-out;
+      z-index: 500;
+    }
+
+    .ff-mobile-menu a {
+      color: #664136;
+      font-size: 16px;
+    }
+
+    .ff-mobile-menu.open {
+      right: 0;
+      box-shadow: -12px 0 32px rgba(0,0,0,0.2);
+    }
+
+    /* ================= PAGE CONTENT ================= */
     .section{padding:48px 16px;max-width:var(--max-width);margin:auto;}
     .section-title{font-family:'Playfair Display',serif;font-size:30px;margin-bottom:20px;text-align:center;}
+    
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
     .about-grid img{box-shadow:var(--card-shadow);}
     .about-text p{margin-bottom:16px;color:var(--muted);line-height:1.6;}
     .highlight{color:var(--gold);font-weight:600;}
 
-    /* Contact (page body – renamed to avoid footer clash) */
-    .contact{margin-top:50px;}
+    /* Contact */
+    .contact{margin-top:20px;}
     .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
     .info-box{background:#fff;padding:20px;border-radius:12px;box-shadow:var(--card-shadow);}
     .info-box h3{font-family:'Playfair Display',serif;margin-bottom:10px;}
@@ -64,15 +185,11 @@ a{color:inherit;text-decoration:none}
     .contact-form button:hover{background:#a67c44;}
 
     @media(max-width:900px){
-      .hamburger{display:flex;}
-      .nav-links{flex-direction:column;align-items:center;max-height:0;overflow:hidden;opacity:0;}
-      .nav-links.open{max-height:400px;opacity:1;margin-top:10px;}
       .about-grid{grid-template-columns:1fr;}
       .contact-layout{grid-template-columns:1fr;}
     }
 
-    /* ================= FOOTER (same as index) ================= */
-
+    /* ================= FOOTER ================= */
     .main-footer {
       background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
       color: #fff;
@@ -103,13 +220,8 @@ a{color:inherit;text-decoration:none}
       color: var(--gold);
     }
 
-    .footer-column ul {
-      list-style: none;
-    }
-
-    .footer-column ul li {
-      margin-bottom: 10px !important;
-    }
+    .footer-column ul { list-style: none; }
+    .footer-column ul li { margin-bottom: 10px !important; }
 
     .footer-column ul li a {
       color: rgba(255, 255, 255, 0.8);
@@ -118,9 +230,7 @@ a{color:inherit;text-decoration:none}
       font-size: 15px;
     }
 
-    .footer-column ul li a:hover {
-      color: var(--gold);
-    }
+    .footer-column ul li a:hover { color: var(--gold); }
 
     /* Social links */
     .social-link {
@@ -141,11 +251,9 @@ a{color:inherit;text-decoration:none}
       font-size: 18px;
     }
 
-    .social-link:hover {
-      color: var(--gold);
-    }
+    .social-link:hover { color: var(--gold); }
 
-    /* Customer service text inside footer ONLY */
+    /* Customer service text */
     .contact-info p {
       margin-bottom: 12px !important;
       margin-top: 0 !important;
@@ -184,10 +292,6 @@ a{color:inherit;text-decoration:none}
       height: 48px !important;
     }
 
-    .newsletter-input::placeholder {
-      color: rgba(0, 0, 0, 0.5);
-    }
-
     .newsletter-btn {
       padding: 14px 22px;
       background: var(--gold);
@@ -201,9 +305,7 @@ a{color:inherit;text-decoration:none}
       font-size: 15px !important;
     }
 
-    .newsletter-btn:hover {
-      background: #a67c44;
-    }
+    .newsletter-btn:hover { background: #a67c44; }
 
     /* Footer bottom */
     .footer-bottom {
@@ -252,9 +354,7 @@ a{color:inherit;text-decoration:none}
       transition: color 0.3s;
     }
 
-    .legal-links a:hover {
-      color: var(--gold);
-    }
+    .legal-links a:hover { color: var(--gold); }
 
     .footer-badges {
       display: flex;
@@ -277,9 +377,7 @@ a{color:inherit;text-decoration:none}
     }
 
     /* Prevent horizontal scroll */
-    footer, .footer-links, .footer-content {
-      overflow-x: hidden !important;
-    }
+    footer, .footer-links, .footer-content { overflow-x: hidden !important; }
 
     /* Responsive footer */
     @media(max-width:780px){
@@ -287,210 +385,82 @@ a{color:inherit;text-decoration:none}
         grid-template-columns: 1fr !important;
         text-align: center;
       }
-
-      .footer-column {
-        text-align: center !important;
-      }
-
-      .social-link {
-        justify-content: center !important;
-      }
-
-      .contact-info p {
-        justify-content: center !important;
-      }
-
+      .footer-column { text-align: center !important; }
+      .social-link { justify-content: center !important; }
+      .contact-info p { justify-content: center !important; }
       .footer-column .newsletter-form {
         flex-direction: column !important;
         max-width: 320px !important;
         margin: 0 auto;
       }
-
       .footer-column .newsletter-input {
         border-radius: 8px;
         margin-bottom: 10px;
       }
-
-      .footer-column .newsletter-btn {
-        border-radius: 8px;
-      }
-
-      .footer-legal,
-      .legal-links,
-      .footer-badges {
+      .footer-column .newsletter-btn { border-radius: 8px; }
+      .footer-legal, .legal-links, .footer-badges {
         flex-direction: column !important;
         gap: 10px !important;
       }
     }
 
-
-    
-.ff-header {
+  /* New Full-Width Bottom Row */
+.bulk-wholesale-row {
   width: 100%;
-  background: #FFFCE9;
-  position: sticky;
-  top: 0;
-  z-index: 300;
-}
-
-.ff-header-inner {
-  max-width: 1200px;
-  height: 62px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 14px;
-}
-
-/* ------- Logo ------- */
-.ff-logo img {
-  height: 40px;
-  width: auto;
-  display: block;
-}
-
-/* ------- Search Bar ------- */
-.ff-search {
-  flex: 1;
-  max-width: 420px;
-  position: relative;
-  margin: 0 18px;
-}
-
-.ff-search input {
-  width: 100%;
-  background: #FFFFFF;
-  border: 1px solid #C2BAB7;
-  border-radius: 50px;
-  height: 34px;
-  padding: 0 40px 0 15px;
-  outline: none;
+  text-align: center;         /* Centralized for Phone & Desktop */
+  margin-top: 40px;           /* Space above it */
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1); /* Nice divider line */
+  color: rgba(255,255,255,0.6);
   font-size: 15px;
-  color: #6b6b6b;
+  clear: both;                /* Ensures it stays below everything */
 }
-
-.ff-search i {
-  position: absolute;
-  right: 14px;
-  top: 8px;
-  font-size: 18px;
-  color: #6b4b3e;
-  cursor: pointer;
+.bulk-wholesale-row a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 4px;
 }
-
-/* ------- Hamburger ------- */
-.ff-ham {
-  width: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
+.bulk-wholesale-row a:hover {
+  text-decoration: underline;
 }
-
-.ff-ham span {
-  width: 100%;
-  height: 3px;
-  background: #6b4b3e;
-  border-radius: 2px;
-}
-
-/* ------- Bottom line ------- */
-.ff-bottom-line {
-  width: 100%;
-  height: 5px;
-  background: #fffce9;
-}
-
-@media(max-width:600px){
-  .ff-search input {
-    height: 32px;
-    font-size: 13px;
-  }
-
-  .ff-search i {
-    top: 7px;
-  }
-
-  .ff-logo img {
-    height: 32px;
-  }
-}
-
-
-/* =======================
-   MOBILE MENU (Drawer)
-   ======================= */
-.ff-mobile-menu {
-  position: fixed;
-  top: 62px; /* exactly below header */
-  right: -280px;
-  width: 260px;
-  height: 100vh;
-  background: #FFFCE9;
-  border-left: 2px solid #fffce9;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  font-weight: 600;
-  transition: right .3s ease-in-out;
-  z-index: 500;
-}
-
-.ff-mobile-menu a {
-  color: #664136;
-  font-size: 16px;
-}
-
-.ff-mobile-menu.open {
-  right: 0;
-  box-shadow: -12px 0 32px rgba(0,0,0,0.2);
-}
-
-
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <!-- NEW HEADER -->
-<header class="ff-header">
-  <div class="ff-header-inner">
+  <header class="ff-header">
+    <div class="ff-header-inner">
 
-    <!-- Left: Logo -->
-    <div class="ff-logo">
-      <img src="Logo.png" alt="Fawaz Fragrance">
+      <div class="ff-ham" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="ff-logo">
+        <a href="index.html"><img src="Logo.png" alt="Fawaz Fragrance"></a>
+      </div>
+
+      <div class="ff-search-trigger" id="searchTriggerBtn">
+        <i class="fas fa-search"></i>
+      </div>
+
+      <div class="ff-search-bar" id="searchOverlay">
+        <i class="fas fa-search" style="color:#aaa; font-size:16px;"></i>
+        <input id="searchInput" type="text" placeholder="Search for perfumes...">
+        <i class="fas fa-times ff-search-close" id="closeSearchBtn"></i>
+      </div>
+
     </div>
+  </header>
 
-    <!-- Center: Search -->
-    <div class="ff-search">
-      <input id="searchInput" type="text" placeholder="Search perfumes...">
-      <i class="fas fa-search" id="searchBtn"></i>
-    </div>
-
-    <!-- Right: Hamburger -->
-    <div class="ff-ham" id="hamburgerBtn">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
+  <div class="ff-mobile-menu" id="ffMobileMenu">
+    <a href="index.html">Home</a>
+    <a href="products.html">All Products</a>
+    <a href="journal.html">Journal</a>
   </div>
 
-  <!-- Bottom brown line -->
-  <div class="ff-bottom-line"></div>
-</header>
 
-<!-- MOBILE MENU -->
-<div class="ff-mobile-menu" id="ffMobileMenu">
-  <a href="index.html">Home</a>
-  <a href="products.html">All Products</a>
-  <a href="journal.html">Journal</a>
-</div>
-
-
-  <!-- About Section -->
   <section class="section">
     <h2 class="section-title">Our Story</h2>
     <div class="about-grid">
@@ -502,7 +472,6 @@ a{color:inherit;text-decoration:none}
     </div>
   </section>
 
-  <!-- Contact Section -->
   <section class="section contact">
     <h2 class="section-title">Contact Us</h2>
     <div class="contact-layout">
@@ -516,7 +485,7 @@ a{color:inherit;text-decoration:none}
         <p>Email: fawazfragnance@gmail.com</p>
       </div>
     </div>
- <div class="contact-form">
+    <div class="contact-form">
       <h3>Send a Message</h3>
       <form id="contactForm">
         <input type="text" id="contactName" placeholder="Your Name" required>
@@ -527,88 +496,127 @@ a{color:inherit;text-decoration:none}
     </div>
   </section>
 
-  <!-- FOOTER (identical structure to index) -->
   <footer class="main-footer">
     <div class="footer-content">
-      <div class="footer-links">
 
-        <div class="footer-column">
-          <h4>Shop</h4>
-          <ul>
-            <li><a href="products.html">All Perfumes</a></li>
-            <li><a href="products.html?category=Classic">Classic Collection</a></li>
-            <li><a href="products.html?category=Luxury">Luxury Collection</a></li>
-            <li><a href="products.html?category=Modern">Modern Collection</a></li>
-            <li><a href="#bestsellers">Best Sellers</a></li>
-          </ul>
-        </div>
+    <div class="footer-links">
 
-        <div class="footer-column">
-          <h4>Connect</h4>
-          <a class="social-link" href="https://www.facebook.com/profile.php?id=61578977254156"><i class="fab fa-facebook-f"></i> Facebook</a>
-          <a class="social-link" href="https://www.instagram.com/fawazfragrance/"><i class="fab fa-instagram"></i> Instagram</a>
-          <a class="social-link" href="https://in.pinterest.com/fawazfragrance/"><i class="fab fa-pinterest-p"></i> Pinterest</a>
-        </div>
+      <div class="footer-column">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="products.html">All Perfumes</a></li>
+          <li><a href="products.html?category=Classic">Classic Collection</a></li>
+          <li><a href="products.html?category=Luxury">Luxury Collection</a></li>
+          <li><a href="products.html?category=Modern">Modern Collection</a></li>
+          <li><a href="#bestsellers">Best Sellers</a></li>
+        </ul>
+      </div>
 
-        <div class="footer-column contact-info">
-          <h4>Customer Service</h4>
-          <p><i class="fas fa-phone"></i> +91 9004263544</p>
-          <p><i class="fas fa-envelope"></i> fawazfragnance@gmail.com</p>
-          <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
-        </div>
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <a class="social-link" href="https://www.facebook.com/profile.php?id=61578977254156"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a class="social-link" href="https://www.instagram.com/fawazfragrance/"><i class="fab fa-instagram"></i> Instagram</a>
+        <a class="social-link" href="https://in.pinterest.com/fawazfragrance/"><i class="fab fa-pinterest-p"></i> Pinterest</a>
+      </div>
 
-       <div class="footer-column">
+      <div class="footer-column">
+        <h4>Customer Service</h4>
+        <p><i class="fas fa-phone"></i> +91 9004263544</p>
+        <p><i class="fas fa-envelope"></i> fawazfragnance@gmail.com</p>
+        <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
+      </div>
+
+      <div class="footer-column">
           <h4>Stay In The Loop</h4>
           <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
             Subscribe to get special offers, exclusive launches, and fragrance tips.
           </p>
-          <div class="newsletter-form">
-            <input type="email" id="newsletterEmail" placeholder="Enter your email" class="newsletter-input">
-            <button id="newsletterBtn" class="newsletter-btn">Subscribe</button>
+          <div class="newsletter-form" style="display:flex;gap:0;">
+            <input id="footerNewsInput" type="email" placeholder="Enter your email" class="newsletter-input" style="border-radius:6px 0 0 6px;">
+            <button id="footerNewsBtn" class="newsletter-btn" style="border-radius:0 6px 6px 0;">Subscribe</button>
           </div>
         </div>
 
-      </div>
+    </div> 
+    <div class="bulk-wholesale-row">
+      For Bulk and Wholesale enquiry please drop an email <strong>fawazfragnance@gmail.com</strong>.
     </div>
+
+</div>
 
     <div class="footer-bottom">
       <div class="footer-bottom-content">
         <div class="footer-legal">
           <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
           <div class="legal-links">
-            <a href="privacy.html">Privacy Policy</a>
+            <a href="privacy.html">policies</a>
             <a href="terms.html">Terms of Service</a>
           </div>
         </div>
         <div class="footer-badges">
           <div class="badge">🔒 Secure Shopping</div>
-          <div class="badge">🚚 Free Shipping ₹999+</div>
-          <div class="badge">↩️ Easy Returns</div>
+          <div class="badge">🚚 Free Shipping ₹599+</div>
         </div>
       </div>
     </div>
   </footer>
+<script>
+    const PHONE_NUMBER = "919004263544"; 
 
- <script>
-    // ====== HAMBURGER MOBILE MENU ======
+    // ====== 1. HAMBURGER MOBILE MENU (Fixed) ======
     const ffHam = document.getElementById("hamburgerBtn");
     const ffMenu = document.getElementById("ffMobileMenu");
 
     if (ffHam && ffMenu) {
-      ffHam.addEventListener("click", () => {
+      // Toggle menu on button click
+      ffHam.addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevents the document listener from firing immediately
         ffMenu.classList.toggle("open");
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (ffMenu.classList.contains("open")) {
+          // If the click is NOT inside the menu AND NOT on the hamburger button
+          if (!ffMenu.contains(e.target) && !ffHam.contains(e.target)) {
+            ffMenu.classList.remove("open");
+          }
+        }
       });
     }
 
-    // ====== WHATSAPP FUNCTIONALITY ======
-    const PHONE_NUMBER = "919004263544"; // Your WhatsApp Number
+    // ====== 2. SEARCH BAR ANIMATION ======
+    const searchTrigger = document.getElementById('searchTriggerBtn');
+    const searchOverlay = document.getElementById('searchOverlay');
+    const closeSearch = document.getElementById('closeSearchBtn');
+    const sInput = document.getElementById('searchInput');
 
-    // 1. CONTACT FORM LOGIC
+    if (searchTrigger) {
+      searchTrigger.addEventListener('click', () => {
+        searchOverlay.classList.add('active');
+        setTimeout(() => sInput.focus(), 100); 
+      });
+    }
+    if (closeSearch) {
+      closeSearch.addEventListener('click', () => {
+        searchOverlay.classList.remove('active');
+      });
+    }
+    // Enter key support for search
+    if (sInput) {
+      sInput.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter') {
+           e.preventDefault();
+           window.location.href = "products.html?search=" + encodeURIComponent(sInput.value);
+        }
+      });
+    }
+
+    // ====== 3. CONTACT FORM LOGIC (WhatsApp) ======
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevents page reload
-
+        e.preventDefault(); 
         const name = document.getElementById('contactName').value;
         const email = document.getElementById('contactEmail').value;
         const msg = document.getElementById('contactMessage').value;
@@ -619,29 +627,29 @@ a{color:inherit;text-decoration:none}
         whatsappText += `*Email:* ${email}\n`;
         whatsappText += `*Message:* ${msg}`;
 
-        // Open WhatsApp
         window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(whatsappText)}`, '_blank');
       });
     }
 
-    // 2. NEWSLETTER LOGIC
-    const newsletterBtn = document.getElementById('newsletterBtn');
-    if (newsletterBtn) {
-      newsletterBtn.addEventListener('click', function() {
-        const email = document.getElementById('newsletterEmail').value;
+    // ====== 4. FOOTER NEWSLETTER LOGIC (Fixed IDs) ======
+    // I corrected the IDs here to match your HTML (footerNewsBtn instead of newsletterBtn)
+    const footerNewsBtn = document.getElementById('footerNewsBtn');
+    if (footerNewsBtn) {
+      footerNewsBtn.addEventListener('click', function() {
+        const emailInput = document.getElementById('footerNewsInput');
+        const email = emailInput.value.trim();
 
         if (!email) {
           alert("Please enter your email address first.");
           return;
         }
-
-        // Construct Message
         let whatsappText = `*📧 NEWSLETTER SIGNUP*\n\n`;
         whatsappText += `Hello, I would like to subscribe to the Fawaz Fragrance newsletter.\n`;
         whatsappText += `*My Email:* ${email}`;
 
-        // Open WhatsApp
         window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(whatsappText)}`, '_blank');
+        
+        emailInput.value = ''; // Clear input after sending
       });
     }
   </script>
