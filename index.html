@@ -660,6 +660,11 @@ footer, .footer-links, .footer-content {
   max-width: 420px !important;
 }
 
+.footer-column p {
+  text-align: center;
+  transform: translateX(80px);
+}
+
 .footer-column .newsletter-input {
   flex: 1;
   border-radius: 8px 0 0 8px;
@@ -1063,6 +1068,47 @@ footer, .footer-links, .footer-content {
 .bulk-wholesale-row a:hover {
   text-decoration: underline;
 }
+
+/* Suggestion Dropdown Styles */
+.search-suggestions {
+  position: absolute;
+  top: 60px; /* Matches header height */
+  left: 0;
+  width: 100%;
+  background: #fff;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1); /* Nice drop shadow */
+  border-top: 1px solid #f0f0f0;
+  display: none; /* Hidden by default */
+  z-index: 999;
+  max-height: 60vh; /* Scroll if too many items */
+  overflow-y: auto;
+}
+
+.search-suggestions.active {
+  display: block;
+}
+
+.suggestion-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid #f5f5f5;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: #333;
+  transition: background 0.2s;
+}
+
+.suggestion-item:hover {
+  background-color: #f9f4ea; /* Light beige hover matching your theme */
+  color: #000;
+}
+
+.suggestion-item i {
+  color: #b99056; /* Gold icon */
+  margin-right: 12px;
+  font-size: 14px;
+}
   </style>
 </head>
 <body>
@@ -1084,11 +1130,13 @@ footer, .footer-links, .footer-content {
       <i class="fas fa-search"></i>
     </div>
 
-    <div class="ff-search-bar" id="searchOverlay">
-      <i class="fas fa-search" style="color:#aaa; font-size:16px;"></i>
-      <input id="searchInput" type="text" placeholder="Search for perfumes...">
-      <i class="fas fa-times ff-search-close" id="closeSearchBtn"></i>
-    </div>
+<div class="ff-search-bar" id="searchOverlay">
+    <i class="fas fa-search" style="color:#aaa; font-size:16px;"></i>
+    <input id="searchInput" type="text" placeholder="Search for perfumes..." autocomplete="off">
+    <i class="fas fa-times ff-search-close" id="closeSearchBtn"></i>
+    
+    <div class="search-suggestions" id="searchSuggestions"></div>
+</div>
 
   </div>
 </header>
@@ -1321,7 +1369,7 @@ footer, .footer-links, .footer-content {
 
       <div class="footer-column">
           <h4>Stay In The Loop</h4>
-          <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
+          <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;transform: translateX(-10px);">
             Subscribe to get special offers, exclusive launches, and fragrance tips.
           </p>
           <div class="newsletter-form" style="display:flex;gap:0;">
@@ -1342,7 +1390,7 @@ footer, .footer-links, .footer-content {
       <div class="footer-legal">
         <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
         <div class="legal-links">
-          <a href="privacy.html">policies</a>
+          <a href="privacy.html">Policies</a>
           <a href="terms.html">Terms of Service</a>
         </div>
       </div>
@@ -1860,47 +1908,149 @@ function goToDetails(img) {
       });
     }
     
-    // 🔥 NEW SEARCH LOGIC (Dizsol Style)
+  // 🔥 FINAL SEARCH LOGIC (Auto-Close on Scroll/Click + Dropdown)
     const searchTrigger = qs('#searchTriggerBtn');
     const searchOverlay = qs('#searchOverlay');
     const closeSearch = qs('#closeSearchBtn');
     const sInput = qs('#searchInput');
     const shopSection = qs('#shop');
+    const suggestionsBox = qs('#searchSuggestions');
+    
+    // Flag to prevent the initial "jump to shop" scroll from closing the search immediately
+    let isAutoScrolling = false; 
 
-    // Toggle Search Bar
+    // 1. Helper: Scroll to Shop
+    function scrollToShop() {
+      if (!shopSection) return;
+      isAutoScrolling = true; // Tell the system we are auto-scrolling
+      
+      const nav = qs('.ff-header');
+      const navH = nav ? nav.offsetHeight : 0;
+      const top = shopSection.getBoundingClientRect().top + window.pageYOffset - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+
+      // Re-enable "Close on Scroll" after 1 second (enough time for smooth scroll to finish)
+      setTimeout(() => {
+        isAutoScrolling = false;
+      }, 1000);
+    }
+
+    // 2. Helper: Close the Search Completely
+    function closeTheSearch() {
+      if (!searchOverlay.classList.contains('active')) return;
+      
+      searchOverlay.classList.remove('active');
+      suggestionsBox.classList.remove('active');
+      sInput.blur(); // Remove focus
+      
+      // Optional: Clear search when closing? 
+      // Uncomment next line if you want to reset results when closing:
+      // sInput.value = ''; filterProducts('');
+    }
+
+    // 3. Helper: Filter Logic
+    function filterProducts(searchTerm) {
+      const query = searchTerm.toLowerCase().trim();
+      const products = document.querySelectorAll('.product');
+
+      products.forEach(product => {
+        const name = (product.dataset.name || '').toLowerCase();
+        const desc = (product.dataset.desc || '').toLowerCase();
+        const tags = product.querySelector('.tags') ? product.querySelector('.tags').innerText.toLowerCase() : '';
+
+        if (name.includes(query) || desc.includes(query) || tags.includes(query)) {
+            product.style.display = 'flex';
+        } else {
+            product.style.display = 'none';
+        }
+      });
+    }
+
+    // 4. Helper: Dropdown Suggestions
+    function showSuggestions(query) {
+      if (!query || query.length < 1) {
+        suggestionsBox.classList.remove('active');
+        return;
+      }
+      const cleanQuery = query.toLowerCase().trim();
+      const products = document.querySelectorAll('.product');
+      let matches = [];
+
+      products.forEach(p => {
+        const name = p.dataset.name;
+        if (name.toLowerCase().includes(cleanQuery)) {
+           if(!matches.includes(name)) matches.push(name);
+        }
+      });
+
+      if (matches.length > 0) {
+        suggestionsBox.innerHTML = matches.map(name => `
+          <div class="suggestion-item" onclick="selectSuggestion('${name.replace(/'/g, "\\'")}')">
+            <i class="fas fa-search"></i> <span>${name}</span>
+          </div>
+        `).join('');
+        suggestionsBox.classList.add('active');
+      } else {
+        suggestionsBox.classList.remove('active');
+      }
+    }
+
+    // 5. Global Selection Function
+    window.selectSuggestion = function(name) {
+       sInput.value = name;
+       filterProducts(name);
+       closeTheSearch(); // Close search UI after selection so user sees product
+       scrollToShop();
+    };
+
+    // 6. EVENT: Open Search
     if (searchTrigger) {
-      searchTrigger.addEventListener('click', () => {
+      searchTrigger.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent "click outside" from triggering immediately
         searchOverlay.classList.add('active');
+        scrollToShop(); 
         setTimeout(() => sInput.focus(), 100); 
       });
     }
 
-    // Close Search Bar
+    // 7. EVENT: Close Button Click
     if (closeSearch) {
-      closeSearch.addEventListener('click', () => {
-        searchOverlay.classList.remove('active');
-      });
+      closeSearch.addEventListener('click', closeTheSearch);
     }
 
-    // Handle "Enter" key in search
-    function scrollToShop(){
-      if (!shopSection) return;
-      const nav = qs('.ff-header');
-      const navH = nav ? nav.offsetHeight : 0;
-      const top = shopSection.getBoundingClientRect().top + window.pageYOffset - navH;
-      window.scrollTo({ top, behavior:'smooth' });
-    }
-    
+    // 8. EVENT: Input Typing
     if (sInput) {
+      sInput.addEventListener('input', (e) => {
+         filterProducts(e.target.value);
+         showSuggestions(e.target.value);
+      });
       sInput.addEventListener('keydown', (e)=>{
         if (e.key === 'Enter') {
            e.preventDefault();
-           scrollToShop();
-           sInput.blur();
-           searchOverlay.classList.remove('active'); 
+           closeTheSearch(); // Close on Enter to see results
         }
       });
+      // Prevent clicks inside input from closing the search
+      sInput.addEventListener('click', (e) => e.stopPropagation());
     }
+
+    // 9. EVENT: Click Outside to Close
+    document.addEventListener('click', (e) => {
+      // If search is open AND click is NOT inside the search bar
+      if (searchOverlay.classList.contains('active')) {
+         if (!searchOverlay.contains(e.target) && e.target !== searchTrigger) {
+            closeTheSearch();
+         }
+      }
+    });
+
+    // 10. EVENT: Scroll to Close
+    window.addEventListener('scroll', () => {
+      // Only close if we are NOT currently auto-scrolling to the shop
+      if (searchOverlay.classList.contains('active') && !isAutoScrolling) {
+         closeTheSearch();
+      }
+    });
 
     // Footer Newsletter WhatsApp Logic
     const footerNewsBtn = document.getElementById('footerNewsBtn');
