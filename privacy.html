@@ -3,34 +3,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fawaz Fragrance | Journal</title>
+  <title>Privacy & Store Policy | Fawaz Fragrance</title>
 
   <link rel="icon" href="Favicon.png" type="image/png">
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root {
-      --bg:#fff; --text:#111; --muted:#6b6b6b;
-      --gold:#b99056; --accent:#0b0b0b; --beige:#f5efe8;
-      --card-shadow:0 8px 24px rgba(12,12,12,0.12);
-      --max-width:1200px;
+    :root{
+      --bg:#fff; --text:#111; --muted:#6b6b6b; --gold:#b99056; --accent:#0b0b0b;
+      --beige:#f5efe8; --card-shadow:0 8px 24px rgba(12,12,12,0.12); --max-width:1200px;
     }
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:Lato,sans-serif;background:var(--beige);color:var(--text);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-    a{text-decoration:none;color:inherit;}
-    img{max-width:100%;border-radius:12px;display:block;}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Lato,Arial,sans-serif;background:var(--beige);color:var(--text);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
 
     /* ======================
-       FAWAZ HEADER (STICKY)
+       FAWAZ HEADER (DIZSOL STYLE)
        ====================== */
 
     .ff-header {
       width: 100%;
       background: #FFFCE9;
-      position: sticky; /* Sticky positioning */
-      top: 0;           /* Stays at top */
-      z-index: 300;     /* layers above content */
+      position: sticky;
+      top: 0;
+      z-index: 300;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
@@ -40,12 +38,12 @@
       margin: auto;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-between; /* Pushes items to edges */
       padding: 0 16px;
       position: relative;
     }
 
-    /* Left: Hamburger */
+    /* ------- 1. Left: Hamburger ------- */
     .ff-ham {
       width: 24px;
       display: flex;
@@ -54,18 +52,30 @@
       cursor: pointer;
       z-index: 302;
     }
-    .ff-ham span { width: 100%; height: 2px; background: #111; border-radius: 2px; }
 
-    /* Center: Logo */
+    .ff-ham span {
+      width: 100%;
+      height: 2px;
+      background: #111;
+      border-radius: 2px;
+    }
+
+    /* ------- 2. Center: Logo ------- */
     .ff-logo {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
       z-index: 301;
     }
-    .ff-logo img { height: 36px; width: auto; display: block; border-radius: 0; }
 
-    /* Right: Search Icon */
+    .ff-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+      border-radius: 0;
+    }
+
+    /* ------- 3. Right: Search Icon ------- */
     .ff-search-trigger {
       cursor: pointer;
       font-size: 20px;
@@ -75,7 +85,7 @@
       text-align: right;
     }
 
-    /* Search Bar Overlay */
+    /* ------- HIDDEN SEARCH BAR OVERLAY ------- */
     .ff-search-bar {
       position: absolute;
       top: 0;
@@ -87,12 +97,20 @@
       align-items: center;
       padding: 0 16px;
       z-index: 305;
+      
+      /* Animation Setup */
       opacity: 0;
       visibility: hidden;
       transform: translateY(-10px);
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
-    .ff-search-bar.active { opacity: 1; visibility: visible; transform: translateY(0); }
+
+    .ff-search-bar.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
     .ff-search-bar input {
       flex: 1;
       border: none;
@@ -103,12 +121,20 @@
       outline: none;
       padding: 0 10px;
     }
-    .ff-search-close { font-size: 20px; color: #666; cursor: pointer; padding: 5px; }
 
-    /* Mobile Menu */
+    .ff-search-close {
+      font-size: 20px;
+      color: #666;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* =======================
+       MOBILE MENU (Drawer)
+       ======================= */
     .ff-mobile-menu {
       position: fixed;
-      top: 60px;
+      top: 60px; /* matches header height */
       right: -280px;
       width: 260px;
       height: 100vh;
@@ -122,73 +148,312 @@
       transition: right .3s ease-in-out;
       z-index: 500;
     }
-    .ff-mobile-menu a { color: #664136; font-size: 16px; }
-    .ff-mobile-menu.open { right: 0; box-shadow: -12px 0 32px rgba(0,0,0,0.2); }
 
-    /* ================= PAGE CONTENT ================= */
-    .section{padding:48px 16px;max-width:var(--max-width);margin:auto;}
-    .section-title{font-family:'Playfair Display',serif;font-size:30px;margin-bottom:20px;text-align:center;}
-    
-    .journal-grid{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
-    .article{background:#fff;padding:18px;border-radius:14px;box-shadow:var(--card-shadow);transition:0.3s;}
-    .article:hover{transform:translateY(-6px);}
-    .article img{margin-bottom:14px;}
-    .article h3{font-family:'Playfair Display',serif;margin-bottom:8px;font-size:20px;}
-    .article p{color:var(--muted);font-size:14px;margin-bottom:10px;line-height:1.6;}
-    .read-more{display:inline-block;padding:8px 12px;border:1px solid var(--gold);border-radius:8px;color:var(--gold);transition:0.3s;}
-    .read-more:hover{background:var(--gold);color:#fff;}
+    .ff-mobile-menu a {
+      color: #664136;
+      font-size: 16px;
+    }
 
-    /* ================= FOOTER (MATCHING PRODUCTS PAGE) ================= */
-    .main-footer { background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%); color: #fff; margin-top: 60px; font-family: Lato, Arial, sans-serif; }
-    .footer-content { max-width: var(--max-width); margin: 0 auto; padding: 50px 16px 30px; }
-    .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; align-items: start; }
-    .footer-column h4 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 20px; color: var(--gold); }
+    .ff-mobile-menu.open {
+      right: 0;
+      box-shadow: -12px 0 32px rgba(0,0,0,0.2);
+    }
+
+    /* Privacy Policy Specific Styles */
+    .policy-container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 16px;
+    }
+    .policy-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: var(--card-shadow);
+        padding: 48px;
+    }
+    .policy-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 42px;
+        color: var(--accent);
+        margin-bottom: 8px;
+        text-align: center;
+    }
+    .policy-meta {
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .policy-content h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 24px;
+        color: var(--gold);
+        margin-top: 32px;
+        margin-bottom: 16px;
+    }
+    .policy-content p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin-bottom: 16px;
+        font-size: 16px;
+    }
+    .policy-content ul {
+        margin-bottom: 16px;
+        padding-left: 20px;
+        color: var(--muted);
+    }
+    .policy-content li {
+        margin-bottom: 8px;
+        line-height: 1.6;
+    }
+    .policy-content strong {
+        color: var(--accent);
+    }
+    .contact-highlight {
+        background: var(--beige);
+        padding: 20px;
+        border-radius: 8px;
+        border-left: 4px solid var(--gold);
+        margin-top: 20px;
+    }
+
+    /* Footer Styles */
+    .main-footer {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+      color: #fff;
+      margin-top: 60px;
+      font-family: Lato, Arial, sans-serif;
+    }
+
+    .footer-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 50px 16px 30px;
+    }
+
+    .footer-links {
+      display: grid !important;
+      grid-template-columns: repeat(4, minmax(200px, 1fr)) !important;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: left;
+      align-items: start;
+    }
+
+    .footer-column h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px !important;
+      margin-bottom: 16px !important;
+      color: var(--gold);
+    }
+
     .footer-column ul { list-style: none; }
-    .footer-column ul li { margin-bottom: 12px; }
-    .footer-column ul li a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s; font-size: 15px; }
-    .footer-column ul li a:hover { color: var(--gold); }
-    .social-link { display: flex; align-items: center; gap: 10px; color: rgba(255, 255, 255, 0.8); text-decoration: none; margin-bottom: 10px; transition: color 0.3s; font-size: 15px; }
-    .social-link:hover { color: var(--gold); }
-    .social-link i { color: var(--gold); width: 20px; text-align: center; font-size: 18px; }
-    .contact-info p { color: rgba(255, 255, 255, 0.8); margin-bottom: 12px; font-size: 15px; display: flex; align-items: center; gap: 10px; }
-    .contact-info i { color: var(--gold); font-size: 18px; width: 24px; text-align: center; }
-    
-    .newsletter-form { display: flex; width: 100%; max-width: 420px; gap: 0; }
-    .newsletter-input { flex: 1; padding: 14px 18px; border: none; border-radius: 8px 0 0 8px; font-size: 16px; background: rgba(255, 255, 255, 0.9); color: var(--accent); }
-    .newsletter-btn { padding: 14px 24px; background: var(--gold); color: #fff; border: none; border-radius: 0 8px 8px 0; font-weight: 700; cursor: pointer; transition: background 0.3s; }
+    .footer-column ul li { margin-bottom: 10px !important; }
 
-    .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); background: transparent; padding: 20px 0;}
-    .footer-bottom-content { max-width: var(--max-width); margin: 0 auto; padding: 0 16px; display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center; }
-    .footer-legal, .legal-links, .footer-badges { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
-    .legal-links a { color: rgba(255, 255, 255, 0.6); text-decoration: none; font-size: 14px; }
-    .badge { background: rgba(185, 144, 86, 0.2); color: var(--gold); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; border: 1px solid rgba(185, 144, 86, 0.3); }
-
-    @media (max-width: 800px) {
-      .footer-links { grid-template-columns: repeat(2, 1fr); text-align: center; }
-      .footer-column { margin-bottom: 30px; }
-      .newsletter-form { margin: 0 auto; }
-      .social-link, .contact-info p { justify-content: center; }
-    }
-    @media (max-width: 600px) {
-      .footer-links { grid-template-columns: 1fr; }
-      .newsletter-form { flex-direction: column; }
-      .newsletter-input { border-radius: 8px; margin-bottom: 10px; }
-      .newsletter-btn { border-radius: 8px; }
-    }
-
-    /* Bulk Row */
-    .bulk-wholesale-row {
-      width: 100%;
-      text-align: center; 
-      margin-top: 40px; 
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.6);
+    .footer-column ul li a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color 0.3s;
       font-size: 15px;
-      clear: both;
     }
-    .bulk-wholesale-row a { color: var(--gold); font-weight: 700; text-decoration: none; margin-left: 4px; }
-    .bulk-wholesale-row a:hover { text-decoration: underline; }
+
+    .footer-column ul li a:hover { color: var(--gold); }
+
+    /* Social links */
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px !important;
+      color: rgba(255,255,255,0.85) !important;
+      font-size: 15px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-link i {
+      color: var(--gold) !important;
+      width: 20px;
+      text-align: center;
+      font-size: 18px;
+    }
+
+    .social-link:hover { color: var(--gold); }
+
+    /* Customer service text */
+    .contact-info p {
+      margin-bottom: 12px !important;
+      margin-top: 0 !important;
+      display: flex;
+      align-items: center;
+      gap: 10px !important;
+      line-height: 1.4;
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .contact-info i {
+      color: var(--gold) !important;
+      font-size: 18px;
+      width: 24px;
+      text-align: center;
+      margin-right: 0;
+    }
+
+    /* Newsletter */
+    .newsletter-form {
+      display: flex !important;
+      width: 100% !important;
+      max-width: 420px !important;
+      gap: 0;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 8px 0 0 8px;
+      font-size: 15px !important;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--accent);
+      height: 48px !important;
+    }
+
+    .newsletter-btn {
+      padding: 14px 22px;
+      background: var(--gold);
+      color: #fff;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s;
+      height: 48px !important;
+      font-size: 15px !important;
+    }
+
+    .newsletter-btn:hover { background: #a67c44; }
+
+    /* Footer bottom */
+    .footer-bottom {
+      background: transparent !important;
+      border-top: 1px solid rgba(255,255,255,0.08) !important;
+    }
+
+    .footer-bottom-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 25px 16px;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      gap: 15px !important;
+    }
+
+    .footer-legal {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center !important;
+      text-align: center !important;
+    }
+
+    .footer-legal p {
+      width: 100%;
+      text-align: center !important;
+      margin-bottom: 8px;
+    }
+
+    .legal-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center !important;
+      text-align: center !important;
+    }
+
+    .legal-links a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 14px !important;
+      transition: color 0.3s;
+    }
+
+    .legal-links a:hover { color: var(--gold); }
+
+    .footer-badges {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center !important;
+      text-align: center !important;
+    }
+
+    .badge {
+      background: rgba(185, 144, 86, 0.2);
+      color: var(--gold);
+      padding: 6px 14px !important;
+      border-radius: 20px;
+      font-size: 13px !important;
+      font-weight: 600;
+      border: 1px solid rgba(185, 144, 86, 0.3);
+      display: inline-block;
+      text-align: center;
+    }
+
+    /* Prevent horizontal scroll */
+    footer, .footer-links, .footer-content { overflow-x: hidden !important; }
+
+    /* Responsive footer */
+    @media(max-width:780px){
+      .footer-links {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+      }
+      .footer-column { text-align: center !important; }
+      .social-link { justify-content: center !important; }
+      .contact-info p { justify-content: center !important; }
+      .footer-column .newsletter-form {
+        flex-direction: column !important;
+        max-width: 320px !important;
+        margin: 0 auto;
+      }
+      .footer-column .newsletter-input {
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+      .footer-column .newsletter-btn { border-radius: 8px; }
+      .footer-legal, .legal-links, .footer-badges {
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+    }
+
+   /* New Full-Width Bottom Row */
+.bulk-wholesale-row {
+  width: 100%;
+  text-align: center;         /* Centralized for Phone & Desktop */
+  margin-top: 40px;           /* Space above it */
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1); /* Nice divider line */
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  clear: both;                /* Ensures it stays below everything */
+}
+.bulk-wholesale-row a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 4px;
+}
+.bulk-wholesale-row a:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
@@ -197,7 +462,9 @@
     <div class="ff-header-inner">
 
       <div class="ff-ham" id="hamburgerBtn">
-        <span></span><span></span><span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
 
       <div class="ff-logo">
@@ -220,36 +487,72 @@
   <div class="ff-mobile-menu" id="ffMobileMenu">
     <a href="index.html">Home</a>
     <a href="products.html">All Products</a>
+    <a href="journal.html">Journal</a>
     <a href="about.html">About</a>
   </div>
 
-  <section class="section">
-    <h2 class="section-title">Our Journal</h2>
-    <div class="journal-grid" id="journalGrid">
-      <div class="article">
-        <img src="hawas.jpeg" alt="Perfume History">
-        <h3>The History of Perfume</h3>
-        <p>Perfume has been a symbol of luxury and status since ancient Egypt. Discover the fascinating journey of fragrance through time.</p>
-        <a href="#" class="read-more">Read More</a>
-      </div>
-      <div class="article">
-        <img src="kayali-apple.jpeg" alt="Luxury Scents">
-        <h3>Choosing Your Signature Scent</h3>
-        <p>Finding a fragrance that defines you is an art. Here’s how you can select a signature perfume that resonates with your personality.</p>
-        <a href="#" class="read-more">Read More</a>
-      </div>
-      <div class="article">
-        <img src="polo-blue.jpeg" alt="Seasonal Fragrance">
-        <h3>Fragrances for Every Season</h3>
-        <p>From fresh citrus in summer to warm oud in winter, learn which perfumes are best suited for each season.</p>
-        <a href="#" class="read-more">Read More</a>
-      </div>
+  <section class="policy-container">
+    <div class="policy-card">
+        <h1 class="policy-title">Privacy & Store Policy</h1>
+        <div class="policy-meta">Last Updated: November 2025</div>
+
+        <div class="policy-content">
+            <p>Welcome to Fawaz Fragrance. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you as to how we look after your personal data when you visit our website and tell you about your privacy rights and how the law protects you.</p>
+
+            <h2>1. Information We Collect</h2>
+            <p>We may collect, use, store and transfer different kinds of personal data about you which we have grouped together follows:</p>
+            <ul>
+                <li><strong>Identity Data:</strong> includes first name, last name, username or similar identifier.</li>
+                <li><strong>Contact Data:</strong> includes billing address, delivery address, email address and telephone numbers.</li>
+                <li><strong>Transaction Data:</strong> includes details about payments to and from you and other details of products you have purchased from us.</li>
+                <li><strong>Technical Data:</strong> includes internet protocol (IP) address, browser type and version, time zone setting and location, and operating system.</li>
+            </ul>
+
+            <h2>2. How We Use Your Information</h2>
+            <p>We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:</p>
+            <ul>
+                <li>To register you as a new customer.</li>
+                <li>To process and deliver your order including managing payments, fees and charges.</li>
+                <li>To manage our relationship with you which will include notifying you about changes to our terms or privacy policy.</li>
+                <li>To improve our website, products/services, marketing, customer relationships and experiences.</li>
+            </ul>
+
+            <h2>3. Data Security</h2>
+            <p>We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors and other third parties who have a business need to know.</p>
+
+            <h2>4. Cookies</h2>
+            <p>Our website uses cookies to distinguish you from other users of our website. This helps us to provide you with a good experience when you browse our website and also allows us to improve our site. You can set your browser to refuse all or some browser cookies, or to alert you when websites set or access cookies.</p>
+
+            <h2>5. Third-Party Links</h2>
+            <p>This website may include links to third-party websites, plug-ins and applications. Clicking on those links or enabling those connections may allow third parties to collect or share data about you. We do not control these third-party websites and are not responsible for their privacy statements.</p>
+
+            <h2>6. Shipping Policy</h2>
+            <p>The product will be delivered to you within 10 days working days.</p>
+
+            <h2>7. Return Policy</h2>
+            <p>Return the product within 10 days. We will deliver the replacement within 10 days.</p>
+
+            <h2>8. Refund Policy</h2>
+            <p>Once the refund is approved, the amount will be credited to the original payment method within 7-10 business days.</p>
+
+            <h2>9. Contact Us</h2>
+            <p>If you have any questions about this privacy policy or our privacy practices, please contact us:</p>
+            
+            <div class="contact-highlight">
+                <p><strong>Fawaz Fragrance</strong><br>
+                Email: fawazfragnance@gmail.com<br>
+                Phone: +91 9004263544<br>
+                Address: Navi Mumbai, Maharashtra, India</p>
+            </div>
+        </div>
     </div>
   </section>
 
-  <footer class="main-footer">
-    <div class="footer-content">
+ <footer class="main-footer">
+  <div class="footer-content">
+
     <div class="footer-links">
+
       <div class="footer-column">
         <h4>Shop</h4>
         <ul>
@@ -260,20 +563,21 @@
           <li><a href="#bestsellers">Best Sellers</a></li>
         </ul>
       </div>
+
       <div class="footer-column">
         <h4>Connect</h4>
         <a class="social-link" href="https://www.facebook.com/profile.php?id=61578977254156"><i class="fab fa-facebook-f"></i> Facebook</a>
         <a class="social-link" href="https://www.instagram.com/fawazfragrance/"><i class="fab fa-instagram"></i> Instagram</a>
         <a class="social-link" href="https://in.pinterest.com/fawazfragrance/"><i class="fab fa-pinterest-p"></i> Pinterest</a>
       </div>
+
       <div class="footer-column">
         <h4>Customer Service</h4>
         <p><i class="fas fa-phone"></i> +91 9004263544</p>
-        <br>
         <p><i class="fas fa-envelope"></i> fawazfragnance@gmail.com</p>
-        <br>
         <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
       </div>
+
       <div class="footer-column">
           <h4>Stay In The Loop</h4>
           <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
@@ -284,43 +588,48 @@
             <button id="footerNewsBtn" class="newsletter-btn" style="border-radius:0 6px 6px 0;">Subscribe</button>
           </div>
         </div>
+
     </div> 
     <div class="bulk-wholesale-row">
-      For Bulk and Wholesale enquiry please drop an email <a href="mailto:fawazfragnance@gmail.com">fawazfragnance@gmail.com</a>.
+     For Bulk and Wholesale enquiry please drop an email <strong>fawazfragnance@gmail.com</strong>.
     </div>
+
 </div>
-    <div class="footer-bottom">
-      <div class="footer-bottom-content">
-        <div class="footer-legal">
-          <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
-          <div class="legal-links">
-            <a href="privacy.html">policies</a>
-            <a href="terms.html">Terms of Service</a>
-          </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <div class="footer-legal">
+        <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
+        <div class="legal-links">
+          <a href="privacy.html">Policies</a>
+          <a href="terms.html">Terms of Service</a>
         </div>
-        <div class="footer-badges">
-          <div class="badge">🔒 Secure Shopping</div>
-          <div class="badge">🚚 Free Shipping ₹999+</div>
-          </div>
       </div>
+      <div class="footer-badges">
+        <div class="badge">🔒 Secure Shopping</div>
+        <div class="badge">🚚 Free Shipping ₹999+</div>
+        </div>
     </div>
-  </footer>
+  </div>
+
+</footer>  
 
  <script>
-    // ====== 1. HAMBURGER MOBILE MENU ======
+    // ====== 1. HAMBURGER MOBILE MENU (Fixed) ======
     const ffHam = document.getElementById("hamburgerBtn");
     const ffMenu = document.getElementById("ffMobileMenu");
 
     if (ffHam && ffMenu) {
       // Toggle menu on button click
       ffHam.addEventListener("click", (e) => {
-        e.stopPropagation(); 
+        e.stopPropagation(); // Stop click from immediately triggering the document listener
         ffMenu.classList.toggle("open");
       });
 
       // Close menu when clicking outside
       document.addEventListener("click", (e) => {
         if (ffMenu.classList.contains("open")) {
+          // If the click is NOT inside the menu AND NOT on the hamburger button
           if (!ffMenu.contains(e.target) && !ffHam.contains(e.target)) {
             ffMenu.classList.remove("open");
           }
@@ -350,6 +659,7 @@
       sInput.addEventListener('keydown', (e)=>{
         if (e.key === 'Enter') {
            e.preventDefault();
+           // Redirect to shop/products page with query
            window.location.href = "products.html?search=" + encodeURIComponent(sInput.value);
         }
       });
@@ -374,5 +684,6 @@
       });
     }
   </script>
+
 </body>
 </html>
