@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Fawaz Fragrance | Where Elegance Meets Essence</title>
 
-  <!-- Favicon -->
   <link rel="icon" href="Favicon.png" type="image/png">
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
@@ -513,10 +512,6 @@ footer{background:#111;color:#eee;text-align:center;padding:40px 16px;margin-top
 }
 
 
-
-
-
-
 /* ========================= */
 /* FIX FOOTER 4 COLUMN LAYOUT */
 /* ========================= */
@@ -908,99 +903,113 @@ footer, .footer-links, .footer-content {
 }
 
 /* ======================
-   FAWAZ HEADER (FIGMA STYLE)
+   FAWAZ HEADER (DIZSOL STYLE)
    ====================== */
 
 .ff-header {
   width: 100%;
-  background: #FFFCE9;
+  background: #FFFCE9; /* Or white if you prefer */
   position: sticky;
   top: 0;
   z-index: 300;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .ff-header-inner {
   max-width: 1200px;
-  height: 62px;
+  height: 60px;
   margin: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 14px;
-}
-
-/* ------- Logo ------- */
-.ff-logo img {
-  height: 40px;
-  width: auto;
-  display: block;
-}
-
-/* ------- Search Bar ------- */
-.ff-search {
-  flex: 1;
-  max-width: 420px;
+  justify-content: space-between; /* Pushes items to edges */
+  padding: 0 16px;
   position: relative;
-  margin: 0 18px;
 }
 
-.ff-search input {
-  width: 100%;
-  background: #FFFFFF;
-  border: 1px solid #C2BAB7;
-  border-radius: 50px;
-  height: 34px;
-  padding: 0 40px 0 15px;
-  outline: none;
-  font-size: 15px;
-  color: #6b6b6b;
-}
-
-.ff-search i {
-  position: absolute;
-  right: 14px;
-  top: 8px;
-  font-size: 18px;
-  color: #6b4b3e;
-  cursor: pointer;
-}
-
-/* ------- Hamburger ------- */
+/* ------- 1. Left: Hamburger ------- */
 .ff-ham {
-  width: 22px;
+  width: 24px;
   display: flex;
   flex-direction: column;
   gap: 5px;
   cursor: pointer;
+  z-index: 302; /* Above logo */
 }
 
 .ff-ham span {
   width: 100%;
-  height: 3px;
-  background: #6b4b3e;
+  height: 2px;
+  background: #111;
   border-radius: 2px;
+  transition: 0.3s;
 }
 
-/* ------- Bottom line ------- */
-.ff-bottom-line {
+/* ------- 2. Center: Logo ------- */
+.ff-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 301;
+}
+
+.ff-logo img {
+  height: 36px; /* Adjust based on your logo file */
+  width: auto;
+  display: block;
+}
+
+/* ------- 3. Right: Search Icon ------- */
+.ff-search-trigger {
+  cursor: pointer;
+  font-size: 20px;
+  color: #111;
+  z-index: 302;
+  width: 24px;
+  text-align: right;
+}
+
+/* ------- HIDDEN SEARCH BAR OVERLAY ------- */
+.ff-search-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 5px;
-  background: #fffce9;
+  height: 100%;
+  background: #FFFCE9;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 305; /* Covers everything */
+  
+  /* Animation Setup */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-@media(max-width:600px){
-  .ff-search input {
-    height: 32px;
-    font-size: 13px;
-  }
+.ff-search-bar.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
 
-  .ff-search i {
-    top: 7px;
-  }
+.ff-search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+  color: #111;
+  outline: none;
+  padding: 0 10px;
+}
 
-  .ff-logo img {
-    height: 32px;
-  }
+.ff-search-close {
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  padding: 5px;
 }
 
 
@@ -1009,7 +1018,7 @@ footer, .footer-links, .footer-content {
    ======================= */
 .ff-mobile-menu {
   position: fixed;
-  top: 62px; /* exactly below header */
+  top: 60px; /* matches header height */
   right: -280px;
   width: 260px;
   height: 100vh;
@@ -1034,43 +1043,56 @@ footer, .footer-links, .footer-content {
   box-shadow: -12px 0 32px rgba(0,0,0,0.2);
 }
 
-
-
-
+/* New Full-Width Bottom Row */
+.bulk-wholesale-row {
+  width: 100%;
+  text-align: center;         /* Centralized for Phone & Desktop */
+  margin-top: 40px;           /* Space above it */
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1); /* Nice divider line */
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  clear: both;                /* Ensures it stays below everything */
+}
+.bulk-wholesale-row a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 4px;
+}
+.bulk-wholesale-row a:hover {
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <!-- NEW HEADER -->
-<header class="ff-header">
+  <header class="ff-header">
   <div class="ff-header-inner">
 
-    <!-- Left: Logo -->
-    <div class="ff-logo">
-      <img src="Logo.png" alt="Fawaz Fragrance">
-    </div>
-
-    <!-- Center: Search -->
-    <div class="ff-search">
-      <input id="searchInput" type="text" placeholder="Search perfumes...">
-      <i class="fas fa-search" id="searchBtn"></i>
-    </div>
-
-    <!-- Right: Hamburger -->
     <div class="ff-ham" id="hamburgerBtn">
       <span></span>
       <span></span>
       <span></span>
     </div>
 
-  </div>
+    <div class="ff-logo">
+      <img src="Logo.png" alt="Fawaz Fragrance">
+    </div>
 
-  <!-- Bottom brown line -->
-  <div class="ff-bottom-line"></div>
+    <div class="ff-search-trigger" id="searchTriggerBtn">
+      <i class="fas fa-search"></i>
+    </div>
+
+    <div class="ff-search-bar" id="searchOverlay">
+      <i class="fas fa-search" style="color:#aaa; font-size:16px;"></i>
+      <input id="searchInput" type="text" placeholder="Search for perfumes...">
+      <i class="fas fa-times ff-search-close" id="closeSearchBtn"></i>
+    </div>
+
+  </div>
 </header>
 
-<!-- MOBILE MENU -->
 <div class="ff-mobile-menu" id="ffMobileMenu">
   <a href="#collections">Collections</a>
   <a href="#shop">Shop</a>
@@ -1081,8 +1103,7 @@ footer, .footer-links, .footer-content {
 
 
 
-  <!-- 🔥 Sliding Offer Banner -->
-<div class="offer-banner">
+  <div class="offer-banner">
   <div class="offer-track">
     Limited-Time Launch Offer: Flat 12.5% OFF. Live Now! ✨ &nbsp; • &nbsp;
     Limited-Time Launch Offer: Flat 12.5% OFF. Live Now! ✨ &nbsp; • &nbsp;
@@ -1097,7 +1118,6 @@ footer, .footer-links, .footer-content {
 </div>
 
 
-  <!-- Hero -->
   <section class="hero">
     <div class="hero-left">
       <h1>Where Elegance Meets Essence</h1>
@@ -1109,24 +1129,20 @@ footer, .footer-links, .footer-content {
     </div>
   </section>
 
-  <!-- Collections -->
   <section class="section" id="collections">
     <h2 class="section-title">Our Collections</h2>
     <div class="collections-slider">
       <div class="slider-track" id="sliderTrack">
-        <!-- original items -->
-        <div class="card collection-card" data-category="Classic"><img src="perfume1.jpeg" alt=""><h3>Classic</h3><p>Elegant timeless scents.</p></div>
-        <div class="card collection-card" data-category="Luxury"><img src="perfume2.jpeg" alt=""><h3>Luxury</h3><p>Exclusive premium blends.</p></div>
-        <div class="card collection-card" data-category="Modern"><img src="perfume3.jpeg" alt=""><h3>Modern</h3><p>Fresh contemporary notes.</p></div>
-        <!-- duplicates (seamless loop) - keep these duplicates -->
-        <div class="card collection-card" data-category="Classic"><img src="perfume1.jpeg" alt=""><h3>Classic</h3><p>Elegant timeless scents.</p></div>
-        <div class="card collection-card" data-category="Luxury"><img src="perfume2.jpeg" alt=""><h3>Luxury</h3><p>Exclusive premium blends.</p></div>
-        <div class="card collection-card" data-category="Modern"><img src="perfume3.jpeg" alt=""><h3>Modern</h3><p>Fresh contemporary notes.</p></div>
-      </div>
+        <div class="card collection-card" data-category="Classic"><img src="hawas.jpeg" alt=""><h3>Classic</h3><p>Elegant timeless scents.</p></div>
+        <div class="card collection-card" data-category="Luxury"><img src="oud-marcuja.jpeg" alt=""><h3>Luxury</h3><p>Exclusive premium blends.</p></div>
+        <div class="card collection-card" data-category="Modern"><img src="only-mine.jpeg" alt=""><h3>Modern</h3><p>Fresh contemporary notes.</p></div>
+        <div class="card collection-card" data-category="Classic"><img src="kayali-apple.jpeg" alt=""><h3>Classic</h3><p>Elegant timeless scents.</p></div>
+        <div class="card collection-card" data-category="Luxury"><img src="polo-blue.jpeg" alt=""><h3>Luxury</h3><p>Exclusive premium blends.</p></div>
+        <div class="card collection-card" data-category="Modern"><img src="ameer-al-oud.jpeg" alt=""><h3>Modern</h3><p>Fresh contemporary notes.</p></div>
+
     </div>
   </section>
 
-  <!-- Shop -->
   <section class="section" id="shop">
   <h2 class="section-title">Shop Perfumes</h2>
   <div class="products-grid homeProducts">
@@ -1247,7 +1263,6 @@ footer, .footer-links, .footer-content {
   </div>
 </section>
 
-  <!-- Cart Button & Panel -->
   <div class="cart-btn" id="cartBtn">🛒<div class="cart-count" id="cartCount">0</div></div>
 
   <div class="cart-panel" id="cartPanel" aria-hidden="true">
@@ -1257,7 +1272,6 @@ footer, .footer-links, .footer-content {
     <div class="cart-total" id="cartTotal">Total: ₹0</div>
     <button class="pay-btn" id="checkoutBtn">Checkout</button>
 
-<!-- Checkout Form -->
 <div class="cart-form" id="cartForm">
   <h3>Checkout Details</h3>
   <input type="text" id="customerName" placeholder="Full Name" required/>
@@ -1278,10 +1292,8 @@ footer, .footer-links, .footer-content {
 <footer class="main-footer">
   <div class="footer-content">
 
-    <!-- Footer Links (4 columns) -->
     <div class="footer-links">
 
-      <!-- COLUMN 1 -->
       <div class="footer-column">
         <h4>Shop</h4>
         <ul>
@@ -1293,7 +1305,6 @@ footer, .footer-links, .footer-content {
         </ul>
       </div>
 
-      <!-- COLUMN 2 -->
       <div class="footer-column">
         <h4>Connect</h4>
         <a class="social-link" href="https://www.facebook.com/profile.php?id=61578977254156"><i class="fab fa-facebook-f"></i> Facebook</a>
@@ -1301,7 +1312,6 @@ footer, .footer-links, .footer-content {
         <a class="social-link" href="https://in.pinterest.com/fawazfragrance/"><i class="fab fa-pinterest-p"></i> Pinterest</a>
       </div>
 
-      <!-- COLUMN 3 -->
       <div class="footer-column">
         <h4>Customer Service</h4>
         <p><i class="fas fa-phone"></i> +91 9004263544</p>
@@ -1309,8 +1319,7 @@ footer, .footer-links, .footer-content {
         <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
       </div>
 
-      <!-- COLUMN 4 (NEWSLETTER MOVED HERE) -->
-     <div class="footer-column">
+      <div class="footer-column">
           <h4>Stay In The Loop</h4>
           <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
             Subscribe to get special offers, exclusive launches, and fragrance tips.
@@ -1321,28 +1330,29 @@ footer, .footer-links, .footer-content {
           </div>
         </div>
 
+    </div> 
+    <div class="bulk-wholesale-row">
+      For Bulk and Wholesale enquiry please drop an email <strong>fawazfragnance@gmail.com</strong>.
     </div>
-  </div>
 
-  <!-- Footer Bottom -->
+</div>
+
   <div class="footer-bottom">
     <div class="footer-bottom-content">
       <div class="footer-legal">
         <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
         <div class="legal-links">
-          <a href="privacy.html">Privacy Policy</a>
+          <a href="privacy.html">policies</a>
           <a href="terms.html">Terms of Service</a>
         </div>
       </div>
       <div class="footer-badges">
         <div class="badge">🔒 Secure Shopping</div>
         <div class="badge">🚚 Free Shipping ₹599+</div>
-        <div class="badge">↩️ Easy Returns</div>
       </div>
     </div>
   </div>
 </footer>
-
 
 <button id="stickyCheckout" class="sticky-checkout">Checkout (₹0)</button>
 
@@ -1379,7 +1389,6 @@ function handleStickyCheckoutVisibility() {
   stickyCheckout.style.display = 'block';
 }
 
-// ====== FIXED: Now sends Details and Notes to the next page ======
 function goToDetails(img) {
   const productCard = img.closest('.product');
   
@@ -1398,8 +1407,8 @@ function goToDetails(img) {
     price: price,
     desc: description,
     img: image,
-    details: details, // sending this now
-    notes: notes      // sending this now
+    details: details, 
+    notes: notes      
   });
 
   window.location.href = `product-details.html?${params.toString()}`;
@@ -1466,9 +1475,8 @@ function goToDetails(img) {
       originalSubtotal += item.price * item.qty;
     });
 
-    // --- FIX: Strict Shipping Logic ---
+    // Strict Shipping Logic
     let shipping = 0;
-    // Only apply shipping if cart has items AND is under threshold
     if (cart.length > 0 && originalSubtotal < FREE_SHIPPING_THRESHOLD) {
         shipping = SHIPPING_CHARGE;
     }
@@ -1611,6 +1619,16 @@ function goToDetails(img) {
       } else {
         stickyCheckout.style.display = 'none';
       }
+    }
+
+    // ==== [FIX] HIDE CHECKOUT BTN IF EMPTY ====
+    if (checkoutBtn) {
+        if(cart.length === 0) {
+            checkoutBtn.style.display = 'none';
+            if(cartForm) cartForm.style.display = 'none'; // Close form if cart emptied
+        } else {
+            checkoutBtn.style.display = 'block';
+        }
     }
     
     saveCart();
@@ -1795,7 +1813,18 @@ function goToDetails(img) {
 
     if (cartBtn) cartBtn.addEventListener('click', openCart);
     if (closeCart) closeCart.addEventListener('click', closeCartPanel);
-    if (checkoutBtn && cartForm) checkoutBtn.addEventListener('click', () => cartForm.style.display = 'flex');
+
+    // [FIX] Checkout Button Safety Check
+    if (checkoutBtn && cartForm) {
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            cartForm.style.display = 'flex';
+        });
+    }
+
     if (backBtn && cartForm) backBtn.addEventListener('click', () => cartForm.style.display = 'none');
 
     document.addEventListener('click', function(e){
@@ -1807,13 +1836,71 @@ function goToDetails(img) {
     const confirmPayBtn = qs('#confirmPayBtn');
     if (confirmPayBtn) confirmPayBtn.addEventListener('click', handleWhatsAppCheckout);
 
+    // ==========================================
+    // [NEW FIX] HAMBURGER MENU (Click Outside)
+    // ==========================================
+    
+    // 1. Listen for clicks on document to close menu
+    document.addEventListener('click', function(e) {
+      if (navLinks && navLinks.classList.contains('open')) {
+        const clickedInsideMenu = navLinks.contains(e.target);
+        const clickedOnHam = hamburgerBtn && hamburgerBtn.contains(e.target);
+        
+        if (!clickedInsideMenu && !clickedOnHam) {
+          navLinks.classList.remove('open');
+        }
+      }
+    });
+
+    // 2. Toggle menu on button click (stop bubbling)
     if (hamburgerBtn && navLinks) {
-      hamburgerBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+      hamburgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent immediate closing
+        navLinks.classList.toggle('open');
+      });
     }
     
-    initSearchFunctionality();
+    // 🔥 NEW SEARCH LOGIC (Dizsol Style)
+    const searchTrigger = qs('#searchTriggerBtn');
+    const searchOverlay = qs('#searchOverlay');
+    const closeSearch = qs('#closeSearchBtn');
+    const sInput = qs('#searchInput');
+    const shopSection = qs('#shop');
 
-    // ... inside initEventHandlers() ...
+    // Toggle Search Bar
+    if (searchTrigger) {
+      searchTrigger.addEventListener('click', () => {
+        searchOverlay.classList.add('active');
+        setTimeout(() => sInput.focus(), 100); 
+      });
+    }
+
+    // Close Search Bar
+    if (closeSearch) {
+      closeSearch.addEventListener('click', () => {
+        searchOverlay.classList.remove('active');
+      });
+    }
+
+    // Handle "Enter" key in search
+    function scrollToShop(){
+      if (!shopSection) return;
+      const nav = qs('.ff-header');
+      const navH = nav ? nav.offsetHeight : 0;
+      const top = shopSection.getBoundingClientRect().top + window.pageYOffset - navH;
+      window.scrollTo({ top, behavior:'smooth' });
+    }
+    
+    if (sInput) {
+      sInput.addEventListener('keydown', (e)=>{
+        if (e.key === 'Enter') {
+           e.preventDefault();
+           scrollToShop();
+           sInput.blur();
+           searchOverlay.classList.remove('active'); 
+        }
+      });
+    }
 
     // Footer Newsletter WhatsApp Logic
     const footerNewsBtn = document.getElementById('footerNewsBtn');
@@ -1899,29 +1986,6 @@ function goToDetails(img) {
     window.open(`https://wa.me/919004263544?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
-  function initSearchFunctionality() {
-    const shopSection = qs('#shop');
-    function scrollToShop(){
-      if (!shopSection) return;
-      const nav = qs('.ff-header');
-      const navH = nav ? nav.offsetHeight : 0;
-      const top = shopSection.getBoundingClientRect().top + window.pageYOffset - navH;
-      window.scrollTo({ top, behavior:'smooth' });
-    }
-    
-    if (searchInput) {
-      searchInput.addEventListener('keydown', (e)=>{
-        if (e.key === 'Enter') {
-           e.preventDefault();
-           scrollToShop();
-           searchInput.blur();
-        }
-      });
-    }
-    const sBtn = qs('#searchBtn');
-    if (sBtn) sBtn.addEventListener('click', scrollToShop);
-  }
-
   function init() {
     renderCart();
     initCollectionsSlider();
@@ -1952,7 +2016,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+
 </body>
 </html>
-
-
