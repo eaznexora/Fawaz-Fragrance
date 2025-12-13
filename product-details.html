@@ -3,89 +3,204 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fawaz Fragrance</title>
+  <title>Fawaz Fragrance | Product Details</title>
 
-    <link rel="icon" href="Favicon.png" type="image/png">
+  <link rel="icon" href="Favicon.png" type="image/png">
 
   <link rel="stylesheet" href="style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  
   <style>
     :root{
       --bg:#fff; --text:#111; --muted:#6b6b6b; --gold:#b99056; --accent:#0b0b0b;
       --beige:#f5efe8; --card-shadow:0 8px 24px rgba(12,12,12,0.12);
+      --max-width:1200px;
     }
     
-/* 1. Universal Reset: ensures padding doesn't affect width */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    /* Universal Reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* 2. Body Reset: Removes the white gap around the edges */
-body { 
-  font-family: Arial, sans-serif; 
-  background: var(--beige); 
-  color: var(--text);
-  margin: 0;       /* Removes the gap */
-  padding: 0;      /* Removes extra internal spacing */
-  overflow-x: hidden; /* Prevents horizontal scrolling */
-}
+    body { 
+      font-family: 'Lato', Arial, sans-serif; 
+      background: var(--beige); 
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-    header { background: #222; color: #fff; padding: 15px; }
-    header nav a { color: #fff; margin-right: 15px; text-decoration: none; }
+    /* ======================
+       FAWAZ HEADER (DIZSOL STYLE)
+       ====================== */
+    .ff-header {
+      width: 100%;
+      background: #FFFCE9;
+      position: sticky;
+      top: 0;
+      z-index: 300;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
 
+    .ff-header-inner {
+      max-width: 1200px;
+      height: 60px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      position: relative;
+    }
+
+    /* Left: Hamburger */
+    .ff-ham {
+      width: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 302;
+    }
+    .ff-ham span {
+      width: 100%;
+      height: 2px;
+      background: #111;
+      border-radius: 2px;
+    }
+
+    /* Center: Logo */
+    .ff-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 301;
+    }
+    .ff-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+
+    /* Right: Search Icon */
+    .ff-search-trigger {
+      cursor: pointer;
+      font-size: 20px;
+      color: #111;
+      z-index: 302;
+      width: 24px;
+      text-align: right;
+    }
+
+    /* Hidden Search Overlay */
+    .ff-search-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #FFFCE9;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      z-index: 305;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    .ff-search-bar.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .ff-search-bar input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      color: #111;
+      outline: none;
+      padding: 0 10px;
+    }
+    .ff-search-close {
+      font-size: 20px;
+      color: #666;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    /* Mobile Menu Drawer */
+    .ff-mobile-menu {
+      position: fixed;
+      top: 60px;
+      right: -280px;
+      width: 260px;
+      height: 100vh;
+      background: #FFFCE9;
+      border-left: 2px solid #fffce9;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      font-weight: 600;
+      transition: right .3s ease-in-out;
+      z-index: 500;
+    }
+    .ff-mobile-menu a { color: #664136; font-size: 16px; text-decoration: none; }
+    .ff-mobile-menu.open { right: 0; box-shadow: -12px 0 32px rgba(0,0,0,0.2); }
+
+    /* ================= PRODUCT DETAILS ================= */
     .container { max-width: 1100px; margin: 30px auto; padding: 20px; display: flex; flex-wrap: wrap; gap: 40px; }
 
     .product-image { flex: 1 1 400px; }
     .product-image img { width: 100%; border-radius: 10px; box-shadow: var(--card-shadow); }
 
     .product-info { flex: 1 1 500px; }
-    .product-info h1 { margin: 0 0 15px; font-size: 2rem; color: var(--accent); }
-    .product-price { font-size: 1.4rem; font-weight: bold; margin-bottom: 20px; color: var(--accent); }
-    .product-desc { font-size: 1rem; color: #444; margin-bottom: 20px; }
+    .product-info h1 { margin: 0 0 15px; font-size: 2rem; color: var(--accent); font-family: 'Playfair Display', serif; }
+    
+    .product-price { font-size: 1.4rem; font-weight: bold; margin-bottom: 20px; color: var(--accent); display: flex; align-items: center;}
+    .old-price { text-decoration: line-through; color: #b87a7a; margin-right: 10px; font-size: 1.2rem; opacity: 0.8; }
+    
+    .product-desc { font-size: 1rem; color: #444; margin-bottom: 20px; line-height: 1.6; }
 
-    /* New product details */
     .product-details { margin-bottom: 20px; }
     .product-category { display: inline-block; background: var(--gold); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 10px; font-weight: 600; }
+    
     .volume-selector { margin-bottom: 15px; }
     .volume-selector label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--accent); }
     .volume-options { display: flex; gap: 8px; flex-wrap: wrap; }
     .volume-option { padding: 8px 16px; border: 2px solid #ddd; border-radius: 6px; cursor: pointer; transition: 0.3s; background: #fff; }
     .volume-option:hover { border-color: var(--gold); }
     .volume-option.selected { border-color: var(--gold); background: var(--beige); color: var(--accent); }
+    
     .detailed-desc { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid var(--gold); box-shadow: var(--card-shadow); }
-    .detailed-desc h3 { margin: 0 0 8px; font-size: 1.1rem; color: var(--accent); }
+    .detailed-desc h3 { margin: 0 0 8px; font-size: 1.1rem; color: var(--accent); font-family: 'Playfair Display', serif;}
     .detailed-desc p { margin: 0; line-height: 1.5; color: #555; }
 
-    .actions { display: flex; align-items: center; gap: 15px; }
+    .actions { display: flex; align-items: center; gap: 15px; margin-bottom: 40px; }
     .quantity-box { display: flex; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; background: #fff; }
     .quantity-box button { background: #f5f5f5; border: none; padding: 8px 14px; cursor: pointer; font-size: 1.2rem; }
     .quantity-box input { width: 50px; text-align: center; border: none; font-size: 1rem; }
     .add-to-cart-btn { background: var(--gold); color: #fff; padding: 10px 22px; border: none; border-radius: 25px; cursor: pointer; transition: 0.3s; font-weight: 700; }
     .add-to-cart-btn:hover { background: #a67c44; }
 
-    /* Cart */
+    /* ================= CART STYLES ================= */
     .cart-btn{position:fixed;right:16px;bottom:16px;background:var(--gold);border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;box-shadow:var(--card-shadow);cursor:pointer;z-index:200}
     .cart-count{position:absolute;top:6px;right:6px;background:#111;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px}
     
-    /* UPDATED: Cart Panel Width Fix for Mobile */
-    .cart-panel{position:fixed;right:0;top:0;height:100vh;width:400px;max-width:100vw;background:#fff;box-shadow:-20px 0 40px rgba(0,0,0,0.08);transform:translateX(100%);transition:transform .3s;padding:20px;z-index:200;display:flex;flex-direction:column;overflow-y:auto; box-sizing: border-box;}
+    .cart-panel{position:fixed;right:0;top:0;height:100vh;width:400px;max-width:100vw;background:#fff;box-shadow:-20px 0 40px rgba(0,0,0,0.08);transform:translateX(100%);transition:transform .3s;padding:20px;z-index:2000;display:flex;flex-direction:column;overflow-y:auto; box-sizing: border-box;}
+    .cart-panel.open{transform:translateX(0); z-index: 2000;}
     
-    .cart-panel.open{transform:translateX(0)}
     .cart-item{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:6px;background:#f5f5f5;border-radius:6px}
     .cart-item img{width:50px;height:50px;object-fit:cover;border-radius:6px;margin-right:8px}
     .qty-controls{display:flex;gap:4px;align-items:center}
     .qty-controls button{padding:2px 6px;cursor:pointer;border-radius:4px;border:none;background:#ccc}
     
-    /* UPDATED: Cart Total Layout for Side-by-Side Shipping */
-    .cart-total {
-        margin-top: 12px;
-        font-weight: 700;
-        display: flex;
-        justify-content: space-between; /* Pushes content to edges */
-        align-items: center;
-    }
+    .cart-total { margin-top: 12px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .cart-discount-note { margin: 12px 0 8px; color: #777; font-size: 0.92rem; font-weight: 600; }
+    .cart-shipping-note { margin-top: 6px; color: #777; font-size: 0.85rem; }
+    .discounted-total { margin-top: 8px; font-weight: 800; color: var(--gold); font-size: 1.05rem; }
+    .free-shipping-progress { margin-top: 14px; color: #666; font-size: 0.95rem; text-align: center; }
 
     .cart-form{display:none;flex-direction:column;gap:6px;margin-top:12px}
     .cart-form input,.cart-form select{padding:8px;border-radius:6px;border:1px solid rgba(0,0,0,0.2)}
@@ -93,922 +208,104 @@ body {
     .pay-btn:hover{background:#a67c44}
     .close-cart{position:absolute;top:10px;right:10px;cursor:pointer;font-size:24px}
 
-    /* Custom Alert Modal */
-    .alert-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    .alert-overlay.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .alert-modal {
-      background: #fff;
-      border-radius: 16px;
-      padding: 30px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-      box-shadow: var(--card-shadow);
-      transform: scale(0.7);
-      transition: transform 0.3s ease;
-      position: relative;
-    }
-
-    .alert-overlay.show .alert-modal {
-      transform: scale(1);
-    }
-
-    .alert-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--gold);
-      border-radius: 50%;
-      margin: 0 auto 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      color: #fff;
-    }
-
-    .alert-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 10px;
-      font-family: 'Playfair Display', serif;
-    }
-
-    .alert-message {
-      color: var(--muted);
-      margin-bottom: 25px;
-      line-height: 1.5;
-    }
-
-    .alert-product-info {
-      background: var(--beige);
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 20px;
-      border-left: 4px solid var(--gold);
-    }
-
-    .alert-product-name {
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 5px;
-    }
-
-    .alert-product-details {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .alert-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    .alert-btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-
-    .alert-btn-primary {
-      background: var(--gold);
-      color: #fff;
-    }
-
-    .alert-btn-primary:hover {
-      background: #a67c44;
-      transform: translateY(-1px);
-    }
-
-    .alert-btn-secondary {
-      background: #f0f0f0;
-      color: var(--accent);
-    }
-
-    .alert-btn-secondary:hover {
-      background: #e0e0e0;
-    }
-
-    /* Reviews */
-    .reviews { max-width: 1100px; margin: 0 auto 40px; padding: 0 20px; }
-    .reviews h2 { margin: 10px 0 12px; font-size: 1.4rem; color: var(--accent); }
-    .rating-summary { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
-    .stars { color:#f5a623; font-size:18px; letter-spacing:1px; }
-    .review-list { display:flex; flex-direction:column; gap:12px; margin-bottom:16px; }
-    .review-item { border:1px solid #eee; border-radius:10px; padding:12px 14px; background:#fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-    .review-item .meta { display:flex; align-items:center; gap:10px; font-size:.9rem; color:#555; margin-bottom:6px; }
-    .review-item .meta .stars { font-size:16px; }
-    .review-item p { margin:0; color:#333; line-height:1.45; }
-
-    footer { text-align: center; padding: 20px; margin-top: 40px; background: #111; color: #eee; }
-
-    @media (max-width: 600px) {
-      .volume-options { flex-direction: column; }
-      .volume-option { text-align: center; }
-      .alert-modal { padding: 20px; }
-      .alert-actions { flex-direction: column; }
-      .alert-btn { width: 100%; }
-      .cart-panel{width:100%}
-    }
+    /* Sticky Checkout Button */
+    .sticky-checkout { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--gold); color: #fff; font-weight: 700; padding: 12px 20px; border-radius: 999px; box-shadow: var(--card-shadow); cursor: pointer; z-index: 300; display: none; }
 
     /* Footer Styles */
-.main-footer {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-  color: #fff;
-  margin-top: 60px;
-  font-family: Lato, Arial, sans-serif;
-}
-
-.footer-content {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 50px 16px 30px;
-}
-
-/* Newsletter Section */
-.footer-newsletter {
-  text-align: center;
-  margin-bottom: 50px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-newsletter h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
-  margin-bottom: 12px;
-  color: var(--gold);
-}
-
-.footer-newsletter p {
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 25px;
-  font-size: 16px;
-}
-
-.newsletter-form {
-  display: flex;
-  max-width: 400px;
-  margin: 0 auto;
-  gap: 0;
-}
-
-.newsletter-input {
-  flex: 1;
-  padding: 14px 18px;
-  border: none;
-  border-radius: 8px 0 0 8px;
-  font-size: 16px;
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--accent);
-}
-
-.newsletter-input::placeholder {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.newsletter-btn {
-  padding: 14px 24px;
-  background: var(--gold);
-  color: #fff;
-  border: none;
-  border-radius: 0 8px 8px 0;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.newsletter-btn:hover {
-  background: #a67c44;
-}
-
-/* Footer Links */
-.footer-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-}
-
-.footer-column h4 {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: var(--gold);
-}
-
-.footer-column ul {
-  list-style: none;
-}
-
-.footer-column ul li {
-  margin-bottom: 12px;
-}
-
-.footer-column ul li a {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  transition: color 0.3s;
-  font-size: 15px;
-}
-
-.footer-column ul li a:hover {
-  color: var(--gold);
-}
-
-/* Social Links */
-.social-links {
-  margin-bottom: 25px;
-}
-
-.social-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-  margin-bottom: 10px;
-  transition: color 0.3s;
-  font-size: 15px;
-}
-
-.social-link:hover {
-  color: var(--gold);
-}
-
-.social-link span {
-  font-size: 18px;
-  width: 24px;
-}
-
-/* Contact Info */
-.contact-info p {
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 8px;
-  font-size: 14px;
-}
-
-.contact-info p:first-child {
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: #fff;
-}
-
-/* Footer Bottom */
-.footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.footer-bottom-content {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 25px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-legal {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-
-.legal-links {
-  display: flex;
-  gap: 20px;
-}
-
-.legal-links a {
-  color: rgba(255, 255, 255, 0.6);
-  text-decoration: none;
-  font-size: 14px;
-  transition: color 0.3s;
-}
-
-.legal-links a:hover {
-  color: var(--gold);
-}
-
-.footer-badges {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.badge {
-  background: rgba(185, 144, 86, 0.2);
-  color: var(--gold);
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-  border: 1px solid rgba(185, 144, 86, 0.3);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .footer-content {
-    padding: 40px 16px 20px;
-  }
-  
-  .footer-newsletter h3 {
-    font-size: 24px;
-  }
-  
-  .newsletter-form {
-    flex-direction: column;
-    max-width: 300px;
-  }
-  
-  .newsletter-input {
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  .newsletter-btn {
-    border-radius: 8px;
-  }
-  
-  .footer-links {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  .footer-bottom-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
-  }
-  
-  .footer-legal {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .footer-badges {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-badges {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .legal-links {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-
-.social-link i {
-  width: 24px;
-  text-align: center;
-  font-size: 18px;
-}
-
-.contact-info i {
-  width: 20px;
-  margin-right: 6px;
-  color: var(--gold);
-}
-
-.old-price {
-  text-decoration: line-through;
-  color: #b87a7a;
-  margin-right: 10px;
-  font-size: 1.2rem;
-  opacity: 0.8;
-}
-
-/* ===== Cart Upgrade Visuals (Match Index & Products) ===== */
-
-/* Force same spacing as index/products */
-.cart-discount-note {
-  margin: 16px 0 6px !important;
-  font-size: 0.92rem !important;
-  color: #5f5f5f !important;
-  font-weight: 600 !important;
-}
-
-/* UPDATED: Shipping Note Style for Side Placement */
-.cart-shipping-note {
-  font-size: 0.75rem !important; 
-  color: #888 !important;
-  margin: 0 !important;
-  font-weight: normal;
-}
-
-.discounted-total {
-  margin-top: 6px;
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #b99056;
-}
-
-
-.pay-btn {
-  margin-top: 14px !important;
-  text-transform: none !important;
-}
-
-.free-shipping-progress {
-  margin-top: 10px;
-  text-align: center;
-  font-size: 0.95rem;
-  color: #666;
-  line-height: 1.4;
-  padding-top: 25px;
-}
-
-
-
-
-#stickyCheckout {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--gold);
-  color: #fff;
-  padding: 12px 28px;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  display: none;
-  z-index: 250;
-  border-radius: 999px;
-  border: 2px solid #000;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-
-
-
-/* ======================================================
-   FOOTER PRODUCT PAGE FIX — MATCH INDEX PERFECTLY
-   ====================================================== */
-
-/* Better top padding + bottom padding */
-.footer-content {
-  padding: 60px 16px 40px !important;
-}
-
-/* 4-column grid equal spacing */
-.footer-links {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(200px,1fr)) !important;
-  gap: 60px !important;
-  align-items: flex-start !important;
-}
-
-/* Column title consistency */
-.footer-column h4 {
-  font-size: 20px !important;
-  margin-bottom: 20px !important;
-  font-weight: 600 !important;
-  font-family: 'Playfair Display', serif !important;
-}
-
-/* Equal spacing in every list */
-.footer-column ul li,
-.social-link,
-.contact-info p {
-  margin-bottom: 12px !important;
-}
-
-/* Newsletter full width & aligned */
-.newsletter-form {
-  display: flex !important;
-  width: 100% !important;
-  max-width: 420px !important;
-}
-
-/* Bottom footer spacing & full center */
-.footer-bottom {
-  margin-top: 20px !important;
-  padding: 22px 16px !important;
-}
-
-/* Center bottom text + badges */
-.footer-bottom-content {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  text-align: center !important;
-  gap: 18px !important;
-}
-
-/* Legal & badges alignment */
-.footer-legal,
-.legal-links,
-.footer-badges {
-  justify-content: center !important;
-  text-align: center !important;
-}
-
-/* Badge styling match index */
-.footer-badges .badge {
-  font-size: 13px !important;
-  padding: 7px 18px !important;
-  border-radius: 30px !important;
-}
-
-/* Fix newsletter input overflow */
-.newsletter-input {
-  border-radius: 10px 0 0 10px !important;
-  font-size: 15px !important;
-}
-
-.newsletter-btn {
-  border-radius: 0 10px 10px 0 !important;
-  font-size: 15px !important;
-}
-
-/* Responsive (mobile like index) */
-@media(max-width: 800px) {
-
-  .footer-links {
-    grid-template-columns: 1fr 1fr !important;
-    text-align: center !important;
-  }
-
-  .footer-column {
-    margin-bottom: 30px !important;
-  }
-
-  .newsletter-form {
-    margin: 0 auto !important;
-  }
-}
-
-@media(max-width: 500px) {
-  .footer-links {
-    grid-template-columns: 1fr !important;
-  }
-
-  .newsletter-form {
-    flex-direction: column !important;
-    max-width: 300px !important;
-  }
-
-  .newsletter-input {
-    border-radius: 10px !important;
-    margin-bottom: 10px !important;
-  }
-
-  .newsletter-btn {
-    border-radius: 10px !important;
-  }
-}
-
-
-
-
-
-
-
-/* ========================= */
-/* FIX FOOTER 4 COLUMN LAYOUT */
-/* ========================= */
-
-/* 4 equal columns */
-.footer-links {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(200px, 1fr)) !important;
-  gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-/* Titles consistent */
-.footer-column h4 {
-  font-size: 18px !important;
-  margin-bottom: 16px !important;
-}
-
-/* Align newsletter input/buttons */
-.newsletter-form {
-  display: flex !important;
-  width: 100% !important;
-}
-
-/* Prevent horizontal phone slide */
-footer, .footer-links, .footer-content {
-  overflow-x: hidden !important;
-}
-
-/* Responsive */
-@media(max-width:850px) {
-  .footer-links {
-    grid-template-columns: repeat(2,1fr) !important;
-  }
-}
-
-@media(max-width:500px) {
-  .footer-links {
-    grid-template-columns: 1fr !important;
-    text-align: center !important;
-  }
-}
-
-
-
-
-/* ======== FINAL FOOTER FIXES ======== */
-
-/* Restore black bottom bar */
-.footer-bottom {
-  background: #000 !important;
-}
-
-/* Newsletter visibility fix */
-.newsletter-form {
-  display: flex !important;
-  width: 100% !important;
-}
-
-.newsletter-input,
-.newsletter-btn {
-  height: 48px !important;
-  font-size: 15px !important;
-}
-
-/* Social icons match gold style */
-.social-link i {
-  color: var(--gold) !important;
-  width: 20px;
-  text-align: center;
-  font-size: 18px;
-}
-
-/* Better alignment */
-.social-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-  color: rgba(255,255,255,0.85) !important;
-}
-
-/* Mobile alignment fixes */
-@media(max-width:600px) {
-  .footer-column {
-    text-align: center !important;
-  }
-
-  .social-link {
-    justify-content: center !important;
-  }
-
-  .contact-info p {
-    text-align: center !important;
-  }
-
-  .newsletter-form {
-    flex-direction: column !important;
-  }
-
-  .newsletter-input {
-    border-radius: 6px !important;
-    margin-bottom: 10px;
-  }
-
-  .newsletter-btn {
-    border-radius: 6px !important;
-  }
-}
-
-
-
-
-/* =============================
-   FINAL FOOTER FIXES (Stable)
-   ============================= */
-
-/* 1️⃣ Remove black background completely */
-.footer-bottom {
-  background: transparent !important;
-  border-top: 1px solid rgba(255,255,255,0.08) !important;
-}
-
-/* 2️⃣ Customer Service spacing & alignment */
-.contact-info p {
-  margin-bottom: 12px !important;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* 3️⃣ Make Customer Service icons gold like Connect */
-.contact-info i {
-  color: var(--gold) !important;
-  font-size: 18px;
-  width: 24px;
-  text-align: center;
-}
-
-/* 4️⃣ Newsletter input & button full width visible */
-.footer-column .newsletter-form {
-  display: flex !important;
-  width: 100% !important;
-  max-width: 420px !important;
-}
-
-.footer-column .newsletter-input {
-  flex: 1;
-  border-radius: 8px 0 0 8px;
-  padding: 14px 18px;
-  font-size: 15px;
-}
-
-.footer-column .newsletter-btn {
-  border-radius: 0 8px 8px 0;
-  padding: 14px 22px;
-  font-size: 15px;
-  background: var(--gold);
-  color: #fff;
-  border: none;
-}
-
-/* 5️⃣ Make entire fourth column align same height */
-.footer-links {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 60px;
-  align-items: start;
-}
-
-/* 6️⃣ Mobile fixes */
-@media(max-width:780px) {
-
-  .footer-links {
-    grid-template-columns: 1fr !important;
-    text-align: center;
-  }
-
-  .social-link {
-    justify-content: center;
-  }
-
-  .contact-info p {
-    justify-content: center;
-  }
-
-  .footer-column .newsletter-form {
-    flex-direction: column !important;
-    max-width: 320px !important;
-    margin: 0 auto;
-  }
-
-  .footer-column .newsletter-input {
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-
-  .footer-column .newsletter-btn {
-    border-radius: 8px;
-  }
-}
-
-
-/* =======================================
-   FOOTER FINAL SPACING + CENTERING FIXES
-   ======================================= */
-
-/* 1️⃣ Equal spacing for Customer Service items */
-.contact-info p {
-  margin: 10px 0 !important;
-  display: flex;
-  align-items: center;
-  gap: 12px !important; /* equal icon + text spacing */
-  font-size: 15px;
-}
-
-/* Same spacing as Shop/Connect list */
-.footer-column ul li,
-.social-link {
-  margin-bottom: 10px !important;
-}
-
-/* 2️⃣ Center bottom footer content */
-.footer-bottom-content {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  gap: 15px !important;
-}
-
-/* Center legal links text & badges */
-.footer-legal,
-.legal-links,
-.footer-badges {
-  justify-content: center !important;
-  text-align: center !important;
-}
-
-/* 3️⃣ Fix alignment of bottom text line */
-.footer-legal p {
+    .main-footer { background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%); color: #fff; margin-top: 60px; font-family: Lato, Arial, sans-serif; }
+    .footer-content { max-width: var(--max-width); margin: 0 auto; padding: 50px 16px 30px; }
+    .footer-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 60px; align-items: start; }
+    .footer-column h4 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 20px; color: var(--gold); }
+    .footer-column ul { list-style: none; }
+    .footer-column ul li { margin-bottom: 12px; }
+    .footer-column ul li a { color: rgba(255, 255, 255, 0.8); text-decoration: none; transition: color 0.3s; font-size: 15px; }
+    .footer-column ul li a:hover { color: var(--gold); }
+    .social-link { display: flex; align-items: center; gap: 10px; color: rgba(255, 255, 255, 0.8); text-decoration: none; margin-bottom: 10px; transition: color 0.3s; font-size: 15px; }
+    .social-link:hover { color: var(--gold); }
+    .social-link i { color: var(--gold); width: 20px; text-align: center; font-size: 18px; }
+    .contact-info p { color: rgba(255, 255, 255, 0.8); margin-bottom: 12px; font-size: 15px; display: flex; align-items: center; gap: 10px; }
+    .contact-info i { color: var(--gold); font-size: 18px; width: 24px; text-align: center; }
+    
+    .newsletter-form { display: flex; width: 100%; max-width: 420px; gap: 0; }
+    .newsletter-input { flex: 1; padding: 14px 18px; border: none; border-radius: 8px 0 0 8px; font-size: 16px; background: rgba(255, 255, 255, 0.9); color: var(--accent); }
+    .newsletter-btn { padding: 14px 24px; background: var(--gold); color: #fff; border: none; border-radius: 0 8px 8px 0; font-weight: 700; cursor: pointer; transition: background 0.3s; }
+
+    .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); background: transparent; padding: 20px 0;}
+    .footer-bottom-content { max-width: var(--max-width); margin: 0 auto; padding: 0 16px; display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center; }
+    .footer-legal, .legal-links, .footer-badges { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .legal-links a { color: rgba(255, 255, 255, 0.6); text-decoration: none; font-size: 14px; }
+    .badge { background: rgba(185, 144, 86, 0.2); color: var(--gold); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; border: 1px solid rgba(185, 144, 86, 0.3); }
+
+    @media (max-width: 800px) {
+      .footer-links { grid-template-columns: repeat(2, 1fr); text-align: center; }
+      .footer-column { margin-bottom: 30px; }
+      .newsletter-form { margin: 0 auto; }
+      .social-link, .contact-info p { justify-content: center; }
+    }
+    @media (max-width: 600px) {
+      .footer-links { grid-template-columns: 1fr; }
+      .cart-panel { width: 100%; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-input { border-radius: 8px; margin-bottom: 10px; }
+      .newsletter-btn { border-radius: 8px; }
+      .volume-options { flex-direction: column; }
+    }
+/* New Full-Width Bottom Row */
+.bulk-wholesale-row {
   width: 100%;
-  text-align: center !important;
-  margin-bottom: 8px;
+  text-align: center;         /* Centralized for Phone & Desktop */
+  margin-top: 40px;           /* Space above it */
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1); /* Nice divider line */
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  clear: both;                /* Ensures it stays below everything */
 }
-
-/* 4️⃣ Consistent font size in bottom links */
-.legal-links a {
-  font-size: 14px !important;
+.bulk-wholesale-row a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 4px;
 }
-
-/* 5️⃣ Make badges line centered and compact */
-.footer-badges .badge {
-  font-size: 13px !important;
-  padding: 6px 14px !important;
-  display: inline-block;
-  text-align: center;
+.bulk-wholesale-row a:hover {
+  text-decoration: underline;
 }
-
-/* 6️⃣ Mobile centering (force) */
-@media(max-width:780px) {
-
-  .footer-bottom-content {
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-  }
-
-  .footer-legal,
-  .legal-links,
-  .footer-badges {
-    flex-direction: column !important;
-    gap: 10px !important;
-  }
-}
-
-
-
-/* ===== FINAL CUSTOMER SERVICE SPACING FIX ===== */
-
-.contact-info p {
-  margin: 14px 0 !important;     /* equal spacing top & bottom */
-  line-height: 1.55 !important;  /* clean readable line height */
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-
-
-
-/* === MATCH CUSTOMER SERVICE SPACING TO SHOP LIST === */
-.contact-info p {
-  margin-bottom: 12px !important;   /* exactly like li item */
-  margin-top: 0 !important;
-  display: flex;
-  align-items: center;
-  gap: 10px !important;
-  line-height: 1.4;
-}
-
-
-
-
-
-
   </style>
 </head>
 <body>
+
+  <header class="ff-header">
+    <div class="ff-header-inner">
+
+      <div class="ff-ham" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="ff-logo">
+        <a href="index.html"><img src="Logo.png" alt="Fawaz Fragrance"></a>
+      </div>
+
+      <div class="ff-search-trigger" id="searchTriggerBtn">
+        <i class="fas fa-search"></i>
+      </div>
+
+      <div class="ff-search-bar" id="searchOverlay">
+        <i class="fas fa-search" style="color:#aaa; font-size:16px;"></i>
+        <input id="searchInput" type="text" placeholder="Search for perfumes...">
+        <i class="fas fa-times ff-search-close" id="closeSearchBtn"></i>
+      </div>
+
+    </div>
+  </header>
+
+  <div class="ff-mobile-menu" id="ffMobileMenu">
+    <a href="index.html">Home</a>
+    <a href="products.html">All Products</a>
+    <a href="journal.html">Journal</a>
+    <a href="about.html">About</a>
+  </div>
 
   <div class="container">
     <div class="product-image">
@@ -1018,9 +315,9 @@ footer, .footer-links, .footer-content {
       <div class="product-category" id="productCategory">Luxury Collection</div>
       <h1 id="productName"></h1>
       <div class="product-price">
-  <span id="oldPrice" class="old-price"></span>
-  <span id="productPrice"></span>
-</div>
+        <span id="oldPrice" class="old-price"></span>
+        <span id="productPrice"></span>
+      </div>
 
       <p class="product-desc" id="productDesc"></p>
 
@@ -1055,61 +352,37 @@ footer, .footer-links, .footer-content {
     </div>
   </div>
 
-  <!--<section class="reviews">
-    <h2>Customer Reviews</h2>
-    <div class="rating-summary">
-      <div id="avgStars" class="stars" aria-label="Average rating">★★★★★</div>
-      <div id="avgText">4.8 out of 5 · 0 reviews</div>
-    </div>
-    <div id="reviewList" class="review-list"></div>
-  </section>-->
-
   <div class="cart-btn" id="cartBtn">🛒<div class="cart-count" id="cartCount">0</div></div>
 
   <div class="cart-panel" id="cartPanel" aria-hidden="true">
-  <span class="close-cart" id="closeCart">&times;</span>
-  <h3>Your Cart</h3>
-  <div id="cartItems"></div>
-  <div class="cart-total" id="cartTotal">Total: ₹0</div>
-  <button class="pay-btn" id="checkoutBtn">Checkout</button>
+    <span class="close-cart" id="closeCart">&times;</span>
+    <h3>Your Cart</h3>
+    <div id="cartItems"></div>
+    <div class="cart-total" id="cartTotal">Total: ₹0</div>
+    <button class="pay-btn" id="checkoutBtn">Checkout</button>
 
-  <div class="cart-form" id="cartForm">
-    <h3>Checkout Details</h3>
-    <input type="text" id="customerName" placeholder="Full Name" required />
-    <input type="tel" id="customerPhone" placeholder="Phone Number" required />
-    <input type="email" id="customerEmail" placeholder="Email" required />
-    <input type="text" id="customerStreet" placeholder="Street Address" required />
-    <input type="text" id="customerCity" placeholder="City" required />
-    <input type="text" id="customerState" placeholder="State" required />
-    <input type="text" id="customerLandmark" placeholder="Landmark" required />
-    <input type="text" id="customerZip" placeholder="Zipcode" required />
-    <input type="text" id="customerFlat" placeholder="Flat / House / Room Number" required />
-    <input type="text" id="customerCountry" placeholder="Country" required />
-    <button class="pay-btn" id="confirmPayBtn">Confirm & Pay via WhatsApp</button>
-    <button class="pay-btn" id="backBtn" style="background:#ccc;color:#111;margin-top:6px;">Back</button>
-  </div>
-</div>
-
-  <div id="alertOverlay" class="alert-overlay">
-    <div class="alert-modal">
-      <div class="alert-icon">🛒</div>
-      <div class="alert-title">Added to Cart!</div>
-      <div class="alert-message">Your item has been successfully added to your cart.</div>
-      <div class="alert-product-info">
-        <div class="alert-product-name" id="alertProductName"></div>
-        <div class="alert-product-details" id="alertProductDetails"></div>
-      </div>
-      <div class="alert-actions">
-        <button class="alert-btn alert-btn-secondary" onclick="closeAlert()">Continue Shopping</button>
-        <button class="alert-btn alert-btn-primary" onclick="goToCart()">View Cart</button>
-      </div>
+    <div class="cart-form" id="cartForm">
+      <h3>Checkout Details</h3>
+      <input type="text" id="customerName" placeholder="Full Name" required />
+      <input type="tel" id="customerPhone" placeholder="Phone Number" required />
+      <input type="email" id="customerEmail" placeholder="Email" required />
+      <input type="text" id="customerStreet" placeholder="Street Address" required />
+      <input type="text" id="customerCity" placeholder="City" required />
+      <input type="text" id="customerState" placeholder="State" required />
+      <input type="text" id="customerLandmark" placeholder="Landmark" required />
+      <input type="text" id="customerZip" placeholder="Zipcode" required />
+      <input type="text" id="customerFlat" placeholder="Flat / House / Room Number" required />
+      <input type="text" id="customerCountry" placeholder="Country" required />
+      <button class="pay-btn" id="confirmPayBtn">Confirm & Pay via WhatsApp</button>
+      <button class="pay-btn" id="backBtn" style="background:#ccc;color:#111;margin-top:6px;">Back</button>
     </div>
-  </div> 
+  </div>
 
-<div class="sticky-checkout" id="stickyCheckout">Checkout (₹0)</div>
+  <div class="sticky-checkout" id="stickyCheckout">Checkout (₹0)</div>
 
   <footer class="main-footer">
-  <div class="footer-content">
+    <div class="footer-content">
+
     <div class="footer-links">
 
       <div class="footer-column">
@@ -1130,47 +403,47 @@ footer, .footer-links, .footer-content {
         <a class="social-link" href="https://in.pinterest.com/fawazfragrance/"><i class="fab fa-pinterest-p"></i> Pinterest</a>
       </div>
 
-      <div class="footer-column contact-info">
+      <div class="footer-column">
         <h4>Customer Service</h4>
         <p><i class="fas fa-phone"></i> +91 9004263544</p>
         <p><i class="fas fa-envelope"></i> fawazfragnance@gmail.com</p>
         <p><i class="fas fa-clock"></i> Mon–Fri: 9AM–6PM IST</p>
       </div>
 
-     <div class="footer-column">
+      <div class="footer-column">
           <h4>Stay In The Loop</h4>
           <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:12px;">
             Subscribe to get special offers, exclusive launches, and fragrance tips.
           </p>
-          <div class="newsletter-form">
-            <input id="footerNewsInput" type="email" placeholder="Enter your email" class="newsletter-input">
-            <button id="footerNewsBtn" class="newsletter-btn">Subscribe</button>
+          <div class="newsletter-form" style="display:flex;gap:0;">
+            <input id="footerNewsInput" type="email" placeholder="Enter your email" class="newsletter-input" style="border-radius:6px 0 0 6px;">
+            <button id="footerNewsBtn" class="newsletter-btn" style="border-radius:0 6px 6px 0;">Subscribe</button>
           </div>
         </div>
 
+    </div> 
+    <div class="bulk-wholesale-row">
+      For Bulk and Wholesale enquiry please drop an email <strong>fawazfragnance@gmail.com</strong>.
     </div>
-  </div>
 
-  <div class="footer-bottom">
-    <div class="footer-bottom-content">
-      <div class="footer-legal">
-        <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
-        <div class="legal-links">
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
+</div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <div class="footer-legal">
+          <p>&copy; 2025 Fawaz Fragrence. All rights reserved. Crafted by Eaz Nexora</p>
+          <div class="legal-links">
+            <a href="privacy.html">policies</a>
+            <a href="terms.html">Terms of Service</a>
+          </div>
         </div>
-      </div>
-      <div class="footer-badges">
-        <div class="badge">🔒 Secure Shopping</div>
-        <div class="badge">🚚 Free Shipping ₹999+</div>
-        <div class="badge">↩️ Easy Returns</div>
+        <div class="footer-badges">
+          <div class="badge">🔒 Secure Shopping</div>
+          <div class="badge">🚚 Free Shipping ₹999+</div>
+          </div>
       </div>
     </div>
-  </div>
-
-</footer>
-
-
+  </footer>
 
 <script>
 function generateOrderNumber() {
@@ -1190,7 +463,6 @@ function generateOrderNumber() {
 const DISCOUNT_RATE = 0.125;   // 12.5% discount
 const SHIPPING_CHARGE = 75;
 const FREE_SHIPPING_THRESHOLD = 599;
-
 const CART_KEY = 'alabwa_cart_v1';
 
 // ====== URL Parameters ======
@@ -1217,28 +489,27 @@ function saveCart() {
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
 
-// ====== RENDER CART (Fixed Shipping Logic) ======
+// ====== RENDER CART ======
 function renderCart() {
   const cartItemsEl = document.getElementById('cartItems');
   const cartTotalEl = document.getElementById('cartTotal');
   const cartCountEl = document.getElementById('cartCount');
   const stickyCheckout = document.getElementById('stickyCheckout');
   const cartBtn = document.getElementById('cartBtn');
+  const checkoutBtn = document.getElementById('checkoutBtn'); // Get checkout btn
+  const cartForm = document.getElementById('cartForm');       // Get form
 
   if (!cartItemsEl) return;
   cartItemsEl.innerHTML = '';
 
-  // 1. Subtotals
   let originalSubtotal = 0;
   cart.forEach(item => { originalSubtotal += item.price * item.qty; });
 
-  // 2. Shipping Rule (FIXED: 0 if empty)
   let shipping = 0;
   if (cart.length > 0 && originalSubtotal < FREE_SHIPPING_THRESHOLD) {
       shipping = SHIPPING_CHARGE;
   }
 
-  // 3. Discounted
   let discountedSubtotal = 0;
   cart.forEach(item => {
     const discountedUnit = Math.round(item.price * (1 - DISCOUNT_RATE));
@@ -1248,40 +519,43 @@ function renderCart() {
   const originalTotalWithShipping = originalSubtotal + shipping;
   const discountedTotalWithShipping = discountedSubtotal + shipping;
 
-  // 4. Render Items
-  cart.forEach((item, idx) => {
-    const row = document.createElement('div');
-    row.className = 'cart-item';
+  // Render Items
+  if (cart.length === 0) {
+      cartItemsEl.innerHTML = '<div style="text-align:center; padding:20px; color:#666;">Your cart is empty</div>';
+  } else {
+      cart.forEach((item, idx) => {
+        const row = document.createElement('div');
+        row.className = 'cart-item';
 
-    const imgEl = document.createElement('img');
-    imgEl.src = item.image;
-    imgEl.alt = item.name;
+        const imgEl = document.createElement('img');
+        imgEl.src = item.image;
+        imgEl.alt = item.name;
 
-    const nameSpan = document.createElement('span');
-    nameSpan.textContent = item.name;
-    nameSpan.style.flex = '1';
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = item.name;
+        nameSpan.style.flex = '1';
 
-    const qtyDiv = document.createElement('div');
-    qtyDiv.className = 'qty-controls';
-    const dec = document.createElement('button');
-    dec.textContent = '-';
-    dec.addEventListener('click', () => changeCartQty(idx, -1));
-    const qtyNum = document.createElement('span');
-    qtyNum.textContent = item.qty;
-    qtyNum.style.margin = '0 8px';
-    const inc = document.createElement('button');
-    inc.textContent = '+';
-    inc.addEventListener('click', () => changeCartQty(idx, +1));
-    qtyDiv.append(dec, qtyNum, inc);
+        const qtyDiv = document.createElement('div');
+        qtyDiv.className = 'qty-controls';
+        const dec = document.createElement('button');
+        dec.textContent = '-';
+        dec.addEventListener('click', () => changeCartQty(idx, -1));
+        const qtyNum = document.createElement('span');
+        qtyNum.textContent = item.qty;
+        qtyNum.style.margin = '0 8px';
+        const inc = document.createElement('button');
+        inc.textContent = '+';
+        inc.addEventListener('click', () => changeCartQty(idx, +1));
+        qtyDiv.append(dec, qtyNum, inc);
 
-    const priceSpan = document.createElement('span');
-    priceSpan.textContent = `₹${item.price * item.qty}`;
+        const priceSpan = document.createElement('span');
+        priceSpan.textContent = `₹${item.price * item.qty}`;
 
-    row.append(imgEl, nameSpan, qtyDiv, priceSpan);
-    cartItemsEl.appendChild(row);
-  });
+        row.append(imgEl, nameSpan, qtyDiv, priceSpan);
+        cartItemsEl.appendChild(row);
+      });
+  }
 
-  // 5. Discount Note
   if (cart.length > 0) {
     const dNote = document.createElement('div');
     dNote.className = 'cart-discount-note';
@@ -1289,9 +563,8 @@ function renderCart() {
     cartItemsEl.appendChild(dNote);
   }
 
-  // 6. Totals
   if (cartTotalEl) {
-    cartTotalEl.innerHTML = `<span>Total: ₹${originalTotalWithShipping}</span>`;
+    cartTotalEl.innerHTML = `<span>Total: ₹${cart.length > 0 ? originalTotalWithShipping : 0}</span>`;
     if (shipping > 0) {
       const sNote = document.createElement('span');
       sNote.className = 'cart-shipping-note';
@@ -1315,7 +588,6 @@ function renderCart() {
       discountedEl.style.display = 'none';
   }
 
-  // 7. Free Shipping Progress
   let progressEl = document.getElementById('freeShippingProgress');
   if (!progressEl) {
     progressEl = document.createElement('div');
@@ -1347,6 +619,17 @@ function renderCart() {
       stickyCheckout.style.display = 'none';
     }
   }
+
+  // [FIX] Hide Checkout Button if Empty
+  if (checkoutBtn) {
+      if(cart.length === 0) {
+          checkoutBtn.style.display = 'none';
+          if(cartForm) cartForm.style.display = 'none';
+      } else {
+          checkoutBtn.style.display = 'block';
+      }
+  }
+
   saveCart();
 }
 
@@ -1447,8 +730,14 @@ function addToCart() {
   openCartPanel();
 }
 
-// Checkout Logic
-document.getElementById('checkoutBtn').addEventListener('click', () => { document.getElementById('cartForm').style.display = 'flex'; });
+// Checkout Logic [FIXED]
+document.getElementById('checkoutBtn').addEventListener('click', () => { 
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    document.getElementById('cartForm').style.display = 'flex'; 
+});
 document.getElementById('backBtn').addEventListener('click', () => { document.getElementById('cartForm').style.display = 'none'; });
 
 document.getElementById('confirmPayBtn').addEventListener('click', () => {
@@ -1504,22 +793,61 @@ if (footerNewsBtn) {
       return;
     }
 
-    // Construct Message
     const msg = `*🔔 NEWSLETTER SIGNUP*\n\nHello, I would like to stay in the loop!\n\n*My Email:* ${email}`;
-    
-    // Open WhatsApp
     window.open(`https://wa.me/919004263544?text=${encodeURIComponent(msg)}`, '_blank');
-    
-    // Clear input
     emailInput.value = '';
   });
 }
 
-loadCart();
-function showAlert(productName, quantity, price) { return; }
-function closeAlert() { return; }
-function goToCart() { closeAlert(); openCartPanel(); }
-</script>
+// ====== HEADER LOGIC (Menu Fixed) ======
+const ffHam = document.getElementById("hamburgerBtn");
+const ffMenu = document.getElementById("ffMobileMenu");
 
+if (ffHam && ffMenu) {
+  ffHam.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent immediate closing
+    ffMenu.classList.toggle("open");
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(e) {
+    if (ffMenu.classList.contains('open')) {
+      const clickedInsideMenu = ffMenu.contains(e.target);
+      const clickedOnHam = ffHam.contains(e.target);
+      
+      if (!clickedInsideMenu && !clickedOnHam) {
+        ffMenu.classList.remove('open');
+      }
+    }
+  });
+}
+
+const searchTrigger = document.getElementById('searchTriggerBtn');
+const searchOverlay = document.getElementById('searchOverlay');
+const closeSearch = document.getElementById('closeSearchBtn');
+const sInput = document.getElementById('searchInput');
+
+if (searchTrigger) {
+  searchTrigger.addEventListener('click', () => {
+    searchOverlay.classList.add('active');
+    setTimeout(() => sInput.focus(), 100); 
+  });
+}
+if (closeSearch) {
+  closeSearch.addEventListener('click', () => {
+    searchOverlay.classList.remove('active');
+  });
+}
+if (sInput) {
+  sInput.addEventListener('keydown', (e)=>{
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        window.location.href = "products.html?search=" + encodeURIComponent(sInput.value);
+    }
+  });
+}
+
+loadCart();
+</script>
 </body>
 </html>
